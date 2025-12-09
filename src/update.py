@@ -10,6 +10,10 @@ RENDERING_UPDATE = """@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix iop:   <https://w3id.org/iadopt/ont/> .
 @prefix puv: <https://w3id.org/env/puv#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix schema: <http://schema.org/> .
+@prefix dwc: <http://rs.tdwg.org/dwc/terms/ .
+@prefix unit: <http://qudt.org/vocab/unit/ .
+@prefix qudt: <http://qudt.org/vocab/ .
 
 iop:constrains  a     owl:ObjectProperty ;
         rdfs:comment  "A Constraint constrains an Entity having a role in the Variable description." ;
@@ -76,7 +80,7 @@ sosa:madeBySensor
   schema:domainIncludes sosa:Observation ;
   schema:rangeIncludes sosa:Sensor ;
   owl:inverseOf sosa:madeObservation ;
-  rdfs:isDefinedBy sosa: .
+  rdfs:isDefinedBy sosa: .  
 """
 
 vocab_file = open(f"./{FILE_NAME}.ttl", "r")
