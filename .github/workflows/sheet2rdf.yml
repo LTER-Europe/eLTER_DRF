@@ -59,7 +59,7 @@ jobs:
         run: |
           curl -L https://github.com/sparna-git/xls2rdf/releases/download/2.1.1/xls2rdf-app-2.1.1-onejar.jar -o xls2rdf.jar
           java -jar xls2rdf.jar convert -i $FILE_NAME.xlsx -o $FILE_NAME.ttl -l en
-          mv xls2rdf.log ./logs/
+          mv xls2rdf.log ${GITHUB_WORKSPACE}/logs/
           python ./src/update.py
 
       - name: commit-artifacts
