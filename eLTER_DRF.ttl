@@ -1,0 +1,26 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://vocabs.lter-europe.net/elter_drf/> a skos:ConceptScheme;
+  <doap:repository> <https://ecoportal.lifewatch.eu/>;
+  dct:audience schema:Researcher;
+  dct:created "2025-12-04"@en;
+  dct:creator "Alessandro Oggioni"@en, "Allan Souza"@en, "Johannes Peterseil"@en, "Lisa Reiss"@en,
+    "Sarah Venier"@en;
+  dct:description "eLTER_DRF is..."@en;
+  dct:language "en"@en;
+  dct:license <https://creativecommons.org/licenses/by/4.0/>;
+  dct:modified "2025-12-04"@en;
+  dct:subject <http://semanticscience.org/resource/SIO_001080>;
+  dct:title "eLTER Data Reporting Format"@en;
+  owl:ontologyIRI <http://vocabs.lter-europe.net/elter_drf/>;
+  owl:versionInfo "1.3.0"@en;
+  skos:prefLabel "eLTER_DRF"@en;
+  <omv:acronym> "eLTER_DRF"@en;
+  <omv:keywords> <http://vocabs.lter-europe.net/EnvThes/21672>;
+  <omv:knownUsage> "terms for describe eLTER data reporting"@en;
+  <omv:resourceLocator> <https://raw.githubusercontent.com/LTER-Europe/eLTER_DRF/main/eLTER_DRF.ttl>;
+  <omv:usedOntologyEngineeringTool> <https://github.com/fair-data-collective/sheet2rdf> .
