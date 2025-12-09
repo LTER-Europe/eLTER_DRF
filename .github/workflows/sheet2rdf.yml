@@ -117,10 +117,45 @@ jobs:
             exit 0
           fi
 
-          # Extract RDF values (creators, contributors, license) from the isolated block
-          CREATORS=$(grep -oP '(?<=dct:creator\s)[^;]+' conceptscheme_block.ttl | tr -d '<>' | tr '\n' ',' | sed 's/,$//')
-          CONTRIBUTORS=$(grep -oP '(?<=dct:contributor\s)[^;]+' conceptscheme_block.ttl | tr -d '<>' | tr '\n' ',' | sed 's/,$//')
-          LICENSE=$(grep -oP '(?<=dct:license\s)[^;]+' conceptscheme_block.ttl | tr -d '<>' | head -n 1)
+          # Function to normalize ORCID: ensure https://orcid.org prefix
+          normalize_orcid() {
+            local v="$1"
+            # Match ORCID numeric pattern
+            if [[ "$v" =~ ^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9X]{4}$ ]]; then
+              echo "https://orcid.org/$v"
+            elif [[ "$v" =~ orcid\.org ]]; then
+              echo "$v"
+            else
+              # Not an ORCID → keep unchanged (name)
+              echo "$v"
+            fi
+          }
+          
+          # Extract raw creators (names + ORCID mixed)
+          RAW_CREATORS=$(grep -oP '(?<=dct:creator\s)[^;]+' conceptscheme_block.ttl \
+            | tr -d '<>' )
+          
+          # Normalize + Deduplicate
+          CREATORS=$(echo "$RAW_CREATORS" \
+            | while read -r line; do normalize_orcid "$line"; done \
+            | sort -u \
+            | tr '\n' ',' \
+            | sed 's/,$//')
+          
+          # Extract, normalize, deduplicate contributors (same logic)
+          RAW_CONTRIBUTORS=$(grep -oP '(?<=dct:contributor\s)[^;]+' conceptscheme_block.ttl \
+            | tr -d '<>' )
+          
+          CONTRIBUTORS=$(echo "$RAW_CONTRIBUTORS" \
+            | while read -r line; do normalize_orcid "$line"; done \
+            | sort -u \
+            | tr '\n' ',' \
+            | sed 's/,$//')
+          
+          # License: normally only one, keep first
+          LICENSE=$(grep -oP '(?<=dct:license\s)[^;]+' conceptscheme_block.ttl \
+            | tr -d '<>' \
+            | head -n 1)
 
           # Check if metadata values were found and print log feedback
           if [ -z "$CREATORS" ]; then
