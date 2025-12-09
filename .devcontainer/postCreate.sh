@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
 
-# Name of the TTL file in the repository (change if needed)
+# Name of the TTL file in the repo (change if needed)
 FILE_NAME="${FILE_NAME:-eLTER_DRF}"
 
 # Remove the "ready" flag
@@ -12,17 +12,27 @@ if [ ! -d "skosmos-src" ]; then
   git clone --depth 1 https://github.com/NatLibFi/Skosmos.git skosmos-src
 else
   git -C skosmos-src restore -- dockerfiles/config/config-docker-compose.ttl
-  rm -f skosmos-src/dockerfiles/config/config-docker-compose.ttl.bak
+  rm -f skosmos-src/dockerfiles/config/config-docker-compose.ttl.bak || true
 fi
 
 # --- Compute baseHref from Codespace name -------------------------------------
 BASEHREF="https://${CODESPACE_NAME//_/-}-9090.app.github.dev/"
 
-# Generate the vocabulary block for Skosmos
-# (use your custom script if present, otherwise comment this line)
-python src/generate_vocab_block.py "./${FILE_NAME}.ttl" > /tmp/vocab-block.ttl
+# --- Generate vocabulary block for Skosmos -----------------------------------
+# If generate_vocab_block.py OR the TTL is missing, use an empty block and continue
+VOCAB_BLOCK="/tmp/vocab-block.ttl"
+if [ -f "src/generate_vocab_block.py" ] && [ -f "${FILE_NAME}.ttl" ]; then
+  echo "[INFO] Using src/generate_vocab_block.py to build vocab block"
+  python src/generate_vocab_block.py "./${FILE_NAME}.ttl" > "$VOCAB_BLOCK"
+else
+  echo "[WARN] Either src/generate_vocab_block.py or ${FILE_NAME}.ttl is missing."
+  echo "[WARN] Writing a minimal empty vocab block."
+  cat > "$VOCAB_BLOCK" <<EOF
+# Empty vocab block – Skosmos will start, but vocab must be configured manually.
+EOF
+fi
 
-# Update the baseHref in Skosmos configuration
+# Update the baseHref in Skosmos config
 sed -i.bak \
   -e 's|^[[:space:]]*# *skosmos:baseHref "http://localhost/Skosmos/" ;|    skosmos:baseHref "'"${BASEHREF}"'" ;|' \
   skosmos-src/dockerfiles/config/config-docker-compose.ttl
@@ -31,7 +41,7 @@ sed -i.bak \
 sed -i.bak -e '/^:unesco /,/^ *\.$/d' -e '/^:stw /,/^ *\.$/d' skosmos-src/dockerfiles/config/config-docker-compose.ttl
 
 # Append your vocabulary block
-cat /tmp/vocab-block.ttl >> skosmos-src/dockerfiles/config/config-docker-compose.ttl
+cat "$VOCAB_BLOCK" >> skosmos-src/dockerfiles/config/config-docker-compose.ttl
 
 # --- Ensure Docker is ready ---------------------------------------------------
 ensure_docker() {
@@ -70,26 +80,25 @@ for i in {1..60}; do
   if curl -sS -G 'http://localhost:9030/skosmos/sparql' \
     --data-urlencode 'query=ASK{}' \
     -H 'Accept: text/boolean' -o /dev/null; then
+    echo "[INFO] SPARQL endpoint is ready."
     break
   fi
   echo "[INFO] Waiting for SPARQL endpoint…"
   sleep 1
 done
 
-# --- Load the TTL file into the graph ----------------------------------------
-if [ ! -f "${FILE_NAME}.ttl" ]; then
-  echo "[ERROR] TTL file not found: ${FILE_NAME}.ttl"
-  exit 1
+# --- Load the TTL file into the graph (if present) ---------------------------
+if [ -f "${FILE_NAME}.ttl" ]; then
+  echo "[INFO] Loading ${FILE_NAME}.ttl into Virtuoso graph…"
+  curl --retry 6 --retry-delay 2 --retry-connrefused -sSf \
+    -X PUT -H "Content-Type: text/turtle;charset=utf-8" \
+    --data-binary @"${FILE_NAME}.ttl" \
+    "http://localhost:9030/skosmos/data?graph=http://example.org/graph/dev"
+else
+  echo "[WARN] TTL file not found: ${FILE_NAME}.ttl – skipping graph load."
 fi
-
-curl --retry 6 --retry-delay 2 --retry-connrefused -sSf \
-  -X PUT -H "Content-Type: text/turtle;charset=utf-8" \
-  --data-binary @"${FILE_NAME}.ttl" \
-  "http://localhost:9030/skosmos/data?graph=http://example.org/graph/dev"
 
 # --- Signal successful completion ---------------------------------------------
 touch /workspaces/.postcreate_done
-echo "[OK] postCreate finished, Skosmos should be available."
-
-# Automatically run postAttach after creation
-bash /workspaces/.devcontainer/postAttach.sh || true
+echo "[OK] postCreate finished, Skosmos should be available at:"
+echo "     https://${CODESPACE_NAME//_/-}-9090.app.github.dev/"
