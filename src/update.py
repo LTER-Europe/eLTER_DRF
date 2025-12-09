@@ -11,9 +11,10 @@ RENDERING_UPDATE = """@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix puv: <https://w3id.org/env/puv#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix schema: <http://schema.org/> .
-@prefix dwc: <http://rs.tdwg.org/dwc/terms/ .
-@prefix unit: <http://qudt.org/vocab/unit/ .
-@prefix qudt: <http://qudt.org/vocab/ .
+@prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix qudt: <http://qudt.org/vocab/> .
+@prefix drf: <http://vocabs.lter-europe.net/elter_drf/> .
 
 iop:constrains  a     owl:ObjectProperty ;
         rdfs:comment  "A Constraint constrains an Entity having a role in the Variable description." ;
