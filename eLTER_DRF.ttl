@@ -1,11 +1,119 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix doap: <usefulinc.com/ns/doap#> .
+@prefix drf: <http://vocabs.lter-europe.net/elter_drf/> .
+@prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
+@prefix et: <http://vocabs.lter-europe.net/EnvThes/> .
+@prefix euvoc: <http://publications.europa.eu/ontology/euvoc#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix gen: <http://purl.org/zonmw/generic/> .
+@prefix iop: <https://w3id.org/iadopt/ont/> .
+@prefix omv: <http://omv.ontoware.org/2005/05/ontology> .
+@prefix org: <http://www.w3.org/ns/org#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix puv: <https://w3id.org/env/puv#> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix qudt: <http://qudt.org/vocab/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosthes: <http://purl.org/iso25964/skos-thes#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaof: <http://purl.org/vocommons/voaf#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix schema: <http://schema.org/>.
+@prefix iop:   <https://w3id.org/iadopt/ont/> .
+@prefix puv: <https://w3id.org/env/puv#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix schema: <http://schema.org/> .
+@prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix qudt: <http://qudt.org/vocab/> .
+@prefix drf: <http://vocabs.lter-europe.net/elter_drf/> .
+
+iop:constrains  a     owl:ObjectProperty ;
+        rdfs:comment  "A Constraint constrains an Entity having a role in the Variable description." ;
+        rdfs:domain   iop:Constraint ;
+        rdfs:label    "constrains" ;
+        rdfs:range    iop:Entity .
+
+iop:hasConstraint  a  owl:ObjectProperty ;
+        rdfs:comment  "A Variable has a Constraint, that confines an Entity involved in the observation." ;
+        rdfs:domain   iop:Variable ;
+        rdfs:label    "hasConstraint" ;
+        rdfs:range    iop:Constraint .
+
+iop:hasContextObject  a  owl:ObjectProperty ;
+        rdfs:comment  "A Variable has an Entity that provides additional background information regarding the ObjectOfInterest." ;
+        rdfs:domain   iop:Variable ;
+        rdfs:label    "hasContextObject" ;
+        rdfs:range    iop:Entity .
+
+iop:hasMatrix  a            owl:ObjectProperty ;
+        rdfs:comment        "A Variable might have an Entity in which the ObjectOfInterest is contained." ;
+        rdfs:domain         iop:Variable ;
+        rdfs:label          "hasMatrix" ;
+        rdfs:range          iop:Entity ;
+        rdfs:subPropertyOf  iop:hasContextObject .
+
+iop:hasObjectOfInterest
+        a             owl:ObjectProperty ;
+        rdfs:comment  "A Variable has an Entity whose Property is observed." ;
+        rdfs:domain   iop:Variable ;
+        rdfs:label    "hasObjectOfInterest" ;
+        rdfs:range    iop:Entity .
+
+iop:hasProperty  a    owl:ObjectProperty ;
+        rdfs:comment  "A Variable has a Property that characterizes an Entity." ;
+        rdfs:domain   iop:Variable ;
+        rdfs:label    "hasProperty" ;
+        rdfs:range    iop:Property .
+
+puv:uom
+  a owl:ObjectProperty ;
+  rdfs:comment "scale or unit of measurement" ;
+  rdfs:label "unit-of-measurement " ;
+  rdfs:range puv:UnitOfMeasurement .
+
+puv:statistic
+  a owl:ObjectProperty ;
+  rdfs:comment "statistical treatment" ;
+  rdfs:domain puv:Parameter ;
+  rdfs:label "statistic " ;
+  rdfs:range puv:ParameterStatistic .
+
+puv:method
+  a owl:ObjectProperty ;
+  rdfs:comment "method used to measure the value" ;
+  rdfs:label "method" ;
+  rdfs:range puv:Method .
+
+sosa:madeBySensor 
+  a owl:ObjectProperty ;
+  rdfs:label "made by sensor"@en ;
+  skos:definition "Relation between an Observation and the Sensor which made the Observation."@en ;
+  rdfs:comment "Relation between an Observation and the Sensor which made the Observation."@en ;
+  schema:domainIncludes sosa:Observation ;
+  schema:rangeIncludes sosa:Sensor ;
+  owl:inverseOf sosa:madeObservation ;
+  rdfs:isDefinedBy sosa: .  
+
 
 <http://vocabs.lter-europe.net/elter_drf/> a skos:ConceptScheme;
-  <doap:repository> <https://ecoportal.lifewatch.eu/>;
+  <http://omv.ontoware.org/2005/05/ontologyacronym> "eLTER_DRF"@en;
+  <http://omv.ontoware.org/2005/05/ontologykeywords> et:21672;
+  <http://omv.ontoware.org/2005/05/ontologyknownUsage> "terms for describe eLTER data reporting"@en;
+  <http://omv.ontoware.org/2005/05/ontologyresourceLocator> <https://raw.githubusercontent.com/LTER-Europe/eLTER_DRF/main/eLTER_DRF.ttl>;
+  <http://omv.ontoware.org/2005/05/ontologyusedOntologyEngineeringTool> <https://github.com/fair-data-collective/sheet2rdf>;
   dct:audience schema:Researcher;
   dct:created "2025-12-04"@en;
   dct:creator "Alessandro Oggioni"@en, "Allan Souza"@en, "Johannes Peterseil"@en, "Lisa Reiss"@en,
@@ -18,9 +126,1383 @@
   dct:title "eLTER Data Reporting Format"@en;
   owl:ontologyIRI <http://vocabs.lter-europe.net/elter_drf/>;
   owl:versionInfo "1.3.0"@en;
-  skos:prefLabel "eLTER_DRF"@en;
-  <omv:acronym> "eLTER_DRF"@en;
-  <omv:keywords> <http://vocabs.lter-europe.net/EnvThes/21672>;
-  <omv:knownUsage> "terms for describe eLTER data reporting"@en;
-  <omv:resourceLocator> <https://raw.githubusercontent.com/LTER-Europe/eLTER_DRF/main/eLTER_DRF.ttl>;
-  <omv:usedOntologyEngineeringTool> <https://github.com/fair-data-collective/sheet2rdf> .
+  skos:prefLabel "eLTER_DRF"@en .
+
+drf:10001 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "A Station is an observation entity within a site or platform. Station in this respect is synonym to plot, observation location, sensor location, etc. and is defined by a location, elevation and installation height (if relevant) which is located within a given LTER site or platform. The core Fields are part of this class."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10012, drf:10013, drf:10014, drf:10015, drf:10016, drf:10017, drf:10018,
+    drf:10019, drf:10020;
+  skos:prefLabel "Station Core Fields"@en .
+
+drf:10002 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "A Station is an observation entity within a site or platform. Station in this respect is synonym to plot, observation location, sensor location, etc. and is defined by a location, elevation and installation height (if relevant) which is located within a given LTER site or platform. The Extended Fields are part of this class."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10021, drf:10022, drf:10023, drf:10024, drf:10025, drf:10026, drf:10027,
+    drf:10028, drf:10029, drf:10030, drf:10031, drf:10032, drf:10033, drf:10034, drf:10035;
+  skos:prefLabel "Station Extended Fields"@en .
+
+drf:10003 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "A Method describes the procedure to generate and manipulate the data."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10036, drf:10037, drf:10038;
+  skos:prefLabel "Method Core Fields"@en .
+
+drf:10004 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "In the extended version detailed information on the different method steps and procedures (e.g. sampling, field method, lab methods, data aggregation methods)"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10039, drf:10040, drf:10041, drf:10042;
+  skos:prefLabel "Mpthod Extended fileds"@en .
+
+drf:10005 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "The Data are defined as the sum of observation values being observed at a station/plot either by sensor, measurement device or human observation. Environmental observation is defined as any measurement done by sensors or using devices observing a single measurable property of the ecosystem, e.g. temperature or water level. The value normally is expressed as decimal or integer value."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10043, drf:10044, drf:10045, drf:10046, drf:10047, drf:10048, drf:10049,
+    drf:10050, drf:10051, drf:10052, drf:10053, drf:10054, drf:10055;
+  skos:prefLabel "Data Measurements"@en .
+
+drf:10006 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "The Data are defined as the sum of observation values being observed at a station/plot either by sensor, measurement device or human observation. Mapping is defined as any observation done by a human or sensor where the occurrence, share or abundance of an entitiy (e.g. species or habitat type) in a given area is estimated or measured. The observed entity is normally described by a concept (e.g. species or habitat) and uses code lists or taxonomies (e.g. species or habitat lists) to describe them."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10056, drf:10057, drf:10058, drf:10059, drf:10060, drf:10061, drf:10062,
+    drf:10063, drf:10064, drf:10065, drf:10066, drf:10067, drf:10068, drf:10069;
+  skos:prefLabel "Data Mapping"@en .
+
+drf:10007 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "The Data are defined as the sum of observation values being observed at a station/plot either by sensor, measurement device or human observation. The Extended Fields are part of this class."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10070, drf:10071, drf:10072, drf:10073, drf:10074, drf:10075, drf:10076,
+    drf:10077, drf:10078, drf:10079, drf:10080, drf:10081, drf:10082, drf:10083, drf:10084,
+    drf:10085, drf:10086, drf:10087, drf:10088;
+  skos:prefLabel "Data Extended Fields"@en .
+
+drf:10008 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "The Reference is the listing and description of additional codes used in the data provision. In order to enhance the re-usability of the data, information on the coding used e.g. for variable names or taxa, is needed. This can either refer to existing vocabularies used (e.g. by referencing to an URL) or by user defined definitions."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10089, drf:10090, drf:10091, drf:10092, drf:10093, drf:10094;
+  skos:prefLabel "Reference Core Fields"@en .
+
+drf:10009 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "An Event is defined as activity to observe or collect information on the ecosystem characteristic of interest. This can be either e.g. a sampling event (e.g. soil water sample) or the recording of species abundance (e.g. vegetation relevee). Basic information on the event is given. The Core Fields are part of this class."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10095, drf:10096, drf:10097, drf:10098, drf:10099, drf:10100, drf:10101,
+    drf:10102, drf:10103, drf:10104;
+  skos:prefLabel "Event Core Fields"@en .
+
+drf:10010 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "An Event is defined as activity to observe or collect information on the ecosystem characteristic of interest. This can be either e.g. a sampling event (e.g. soil water sample) or the recording of species abundance (e.g. vegetation relevee). Basic information on the event is given. The Extended Fields are part of this class."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10105, drf:10106, drf:10107, drf:10108;
+  skos:prefLabel "Event Extended Fields"@en .
+
+drf:10011 a skos:Collection;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:definition "A Sample is the key observational units in environmental sciences, i.e. ecology, geosciences, biogeochemistry, and hydrobiology, and are essential to document and further analyse biological communities in laboratories (e.g., phytoplankton communities in water samples, benthic communities in sediments, etc.). In general, a sample is a limited quantity of something which is intended to be similar to and represent a larger amount of that thing(s). The things could be countable objects such as individual items available as units for sale, or an uncountable material. Even though the word \"sample\" implies a smaller quantity taken from a larger amount, sometimes full biological or mineralogical specimens are called samples if they are taken for analysis, testing, or investigation like other samples."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:narrower drf:10109, drf:10110, drf:10111, drf:10112, drf:10113, drf:10114, drf:10115,
+    drf:10116, drf:10117, drf:10118, drf:10119;
+  skos:prefLabel "Sample Event"@en .
+
+drf:10012 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10001;
+  skos:closeMatch dwc:institutionID;
+  skos:definition "Site code [URL] – reference to LTER site and LTSER Platform on DEIMS-SDR. Please provide the deims.id for the site or platform"@en;
+  skos:example <https://deims.org/site/0ce0d289-9ef9-4232-a981-8f34869db76d>;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SITE_CODE"@en .
+
+drf:10013 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10001;
+  skos:closeMatch dwc:locationID;
+  skos:definition """Station code or Station identifier (ID) [UTF-8 character encoding] - Code for the station within the site in UTF-8 character encoding for the text. Special characters should be avoided. 
+ A station is any measuring enitity, such as a sampling point, permanent plot, observation plot or a meteorological station, to name just a few. If the station equals the site, meaning that only one station is used within the site, only the site identifier is provided in the data recording sheet. If external identification systems (e.g. WMO Station ID) are existing, this identifier could be used to reference the station. If a DEIMS-SDR UUID for the station exists, this need to be used. Otherwise use the identification of the station within your site"""@en;
+  skos:example "IP2"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "STATION_CODE"@en .
+
+drf:10014 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10001;
+  skos:closeMatch dwc:footprintWKT;
+  skos:definition """Spatial type [UTF-8 character encoding] of the station/plot according to a fixed list of values: 
+- PT … single or multiple observation point 
+- AREA … areal plot 
+- VLN … vertical transect/profile 
+- HLN … horizontal transect/profile 
+ If additional codes are needed, this is defined by the data provider."""@en;
+  skos:example "AREA"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "STYPE"@en .
+
+drf:10015 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:DEG;
+  skos:broader drf:10001;
+  skos:closeMatch dwc:decimalLatitude;
+  skos:definition """Latitude for the reference point [decimal number] of the STATION expressed in decimal degree [dec °] WGS84 using at least 6-digits after the decimal separator. 
+ Note: The definition of the reference point depends on the STYPE: 
+ - PT (single/multiple point): is the location of the point itself; 
+ - AREA (areal plot): is the centroid of the area; 
+ - VLN (vertical profile): is the starting point of the vertical profile 
+ - HLN (horizontal transect): is the starting point of the horizontal transect."""@en;
+  skos:example "45.340805"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "LAT"@en;
+  puv:uom unit:DEG .
+
+drf:10016 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:DEG;
+  skos:broader drf:10001;
+  skos:closeMatch dwc:decimalLongitude;
+  skos:definition """Longitude of the reference point [decimal number] of the STATION expressed in decimal degree [dec °] WGS84 using at least 6-digits after the decimal separator. 
+Note: The definition of the reference point depends on the STYPE: 
+- PT (single/multiple point): is the location of the point itself;
+- AREA (areal plot): is the centroid of the area; 
+- VLN (vertical profile): is the starting point of the vertical profile 
+- HLN (horizontal transect): is the starting point of the horizontal transect."""@en;
+  skos:example "7.887495"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "LON"@en;
+  puv:uom unit:DEG .
+
+drf:10017 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:M;
+  skos:broader drf:10001;
+  skos:closeMatch dwc:verbatimElevation;
+  skos:definition """Altitude [decimal number] of the reference point of the STATION in meter above or below sea level [m a.s.l.]. In terrestrial systems it reflects the elevation of the land surface and in aquatic/marine systems the elevation of the water surface. 
+ Note: offsets from the surface (e.g. for sampling or sensor installations) can be provided by the extended field ‘installation height”"""@en;
+  skos:example "265"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "ALTITUDE"@en;
+  puv:uom unit:M .
+
+drf:10018 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:M2;
+  skos:broader drf:10001;
+  skos:closeMatch dwc:totalAreaSampledValue;
+  skos:definition "Plot size [integer] is defined as the size surface area covered by the station/plot in [m2]"@en;
+  skos:example "25"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "PLOTSIZE"@en;
+  puv:uom unit:M2 .
+
+drf:10019 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10001;
+  skos:closeMatch dwc:locationRemarks;
+  skos:definition "Comment [UTF-8 character encoding] include any other information related to the location of the station/plot."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "COMMENT"@en .
+
+drf:10020 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10001;
+  skos:closeMatch dwc:footprintWKT;
+  skos:definition "Geospatial feature [UTF-8 character encoding or URL/URI] is the (computable) geospatial representation of the \"station\". It could also be a WKT, a URI pointing to an online resource (WFS feature, GeoJson, …), or at least a textual description identifying the geometry/spatial feature (like in the case of rivers, roads, trails, toponyms, etc.)"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "GEOSPAT_FEATURE"@en .
+
+drf:10021 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10002;
+  skos:closeMatch dwc:locality;
+  skos:definition "Station name (UTF-8 character encoding, https://en.wikipedia.org/wiki/UTF-8) provides the name of the station if relevant"@en;
+  skos:example "IP1"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SNAME"@en .
+
+drf:10022 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:DEG;
+  skos:broader drf:10002;
+  skos:closeMatch dwc:decimalLongitude;
+  skos:definition "bounding box [decimal number] for a station in decimal degree [dec °] WGS84; if a point is represented east and west bounding coordinates are equal; equals to Longitude"@en;
+  skos:example "7.887490"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "westBoundingCoordinate"@en;
+  puv:uom unit:DEG .
+
+drf:10023 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:DEG;
+  skos:broader drf:10002;
+  skos:closeMatch dwc:decimalLongitude;
+  skos:definition "bounding box [decimal number] for a station in decimal degree [dec °] WGS84; if a point is represented east and west bounding coordinates are equal; equals to Longitude"@en;
+  skos:example "7.953720"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "eastBoundingCoordinate"@en;
+  puv:uom unit:DEG .
+
+drf:10024 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:DEG;
+  skos:broader drf:10002;
+  skos:closeMatch dwc:decimalLatitude;
+  skos:definition "bounding box [decimal number] for a station in decimal degree [dec °] WGS84; if a point is represented north and south bounding coordinates are equal; equals to Latitude"@en;
+  skos:example "45.340800"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "northBoundingCoordinate"@en;
+  puv:uom unit:DEG .
+
+drf:10025 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:DEG;
+  skos:broader drf:10002;
+  skos:closeMatch dwc:decimalLatitude;
+  skos:definition "bounding box [decimal number] for a station in decimal degree [dec °] WGS84; if a point is represented north and south bounding coordinates are equal; equals to Latitude"@en;
+  skos:example "45.300560"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "southBoundingCoordinate"@en;
+  puv:uom unit:DEG .
+
+drf:10026 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:M;
+  skos:broader drf:10002;
+  skos:closeMatch dwc:minimumElevationInMeters;
+  skos:definition "minimum altitude [decimal number] in meter above sea level [m a.s.l.] for the observed station, negative if below water level; if a single point is represented minimum and maximum are equal"@en;
+  skos:example "265"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "altitudeMin"@en;
+  puv:uom unit:M .
+
+drf:10027 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:M;
+  skos:broader drf:10002;
+  skos:closeMatch dwc:maximumElevationInMeters;
+  skos:definition "maximum altitude [decimal number] in meter above sea level [m a.s.l.] for the observed station, negative if below water level; if a single point is represented minimum and maximum are equal"@en;
+  skos:example "270"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "altitudeMax"@en;
+  puv:uom unit:M .
+
+drf:10028 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10002;
+  skos:closeMatch dwc:countryCode;
+  skos:definition "Country - country code: ISO 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), e.g. AT for Austria"@en;
+  skos:example "AT"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "Country"@en .
+
+drf:10029 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10002;
+  skos:definition """Operation period since [ISO date] is the time since the station/plot is operated or when the permanent plot first was established, see ISO 8601: calendar dates as YYYY-MM-DD, time as HH:MM:SS plus a time zone designator (as UTC plus offset) 
+Combined date and time: 2007-04-05T12:30:00-02:00 
+Any time information 
+- in UTC (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z), 
+- or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00)"""@en;
+  skos:example "1992-06-01T13:00+02:00"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "OperationPeriodSince"@en .
+
+drf:10030 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10002;
+  skos:definition "Plot dimension [UTF-8 character encoding] as the length and width in [m] of the STATION"@en;
+  skos:example "5x5"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "plotDimension"@en .
+
+drf:10031 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10002;
+  skos:definition "Number of sample units [integer] - number of elements (e.g. sub-plots) into which the plot is divided along the two dimensions (length x width)"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "numberOfSampleUnit"@en .
+
+drf:10032 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10002;
+  skos:closeMatch dwc:minimumDistanceAboveSurfaceInMeters;
+  skos:definition "Installation height [decimal number] – height of the installation of a sensor or device in [cm] measured from the soil surface. Positive and negative values are possible."@en;
+  skos:example "200"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "InstHeight"@en .
+
+drf:10033 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10002;
+  skos:closeMatch dwc:habitat;
+  skos:definition "Local habitat type [UTF-8 character encoding] using local classification (needs to be defined in the method metadata)"@en;
+  skos:example "Beech forest"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "Local_Habitat_Type"@en .
+
+drf:10034 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10002;
+  skos:definition "EUNIS habitat type [UTF-8 character encoding] using [EUNIS Habitat Classification] identifier"@en;
+  skos:example "G2.3"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "EUNIS_Habitat_Type"@en .
+
+drf:10035 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10002;
+  skos:definition "Potential natural vegetation [UTF-8 character encoding] using local syntaxonomic classification schema (needs to be defined in the method metadata)"@en;
+  skos:example "Fagetum"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "Potential_natural_vegetation"@en .
+
+drf:10036 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10003;
+  skos:definition """Variable [UTF-8 character encoding] – the observed phenomenon during the observation. The variable/parameter name normally is given as abbreviation e.g. LISTSUB VARIABLE Name 
+- DB ALK Alkalinity 
+- DB BOD Biochemical oxygen demand 
+- DB TC Total carbon
+If possible, use standard encodings for the variable names (e.g. ICP Integrated Monitoring). Additional variable codes can be defined, but need to be documented in the REFERENCE."""@en;
+  skos:example "COVE_F"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "VARIABLE"@en .
+
+drf:10037 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10003;
+  skos:definition "Method description [UTF-8 character encoding] - Reference to published methods (e.g. URL, DOI) OR textual description of method including information on spatial, temporal or thematic (e.g. taxonomic aggregation), code lists and taxonomies applied (e.g. taxonomic reference lists, habitat classification) as well as measurement units"@en;
+  skos:example "Analysis of ammonium concentration (measurement with spectrophotometry (SP)) in aqueous deposition samples (mg/l) …"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "METH_DESCR"@en .
+
+drf:10038 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10003;
+  skos:definition "Unit of variable observed [UTF-8 character encoding]. This information needs to be provided together with the methods, if not provided together with the DATA. For the units the SI units (https://physics.nist.gov/cuu/Units/units.html) are used."@en;
+  skos:example "mg/l"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "UNIT"@en .
+
+drf:10039 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10004;
+  skos:definition "Short method description [UTF-8 character encoding] on how the plots were selected from the total population (selection of plots, observation points, etc.)"@en;
+  skos:example "Random sampling of spruce stands in the entire area of the site; 5 regularly spaced (10 m) positions on a transect; etc."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SAMPLING_DESIGN"@en .
+
+drf:10040 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10004;
+  skos:definition "Short method description [UTF-8 character encoding] of the method used in the field either to collect the samples or to do the observation"@en;
+  skos:example "Volume weighted mixing from 5 bulk sampler, 2 weeks interval of sampling, cooled transportation of the samples"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "FIELD_METHOD"@en .
+
+drf:10041 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10004;
+  skos:definition "Short method description [UTF-8 character encoding] on the procedures and methods applied in the lab, e.g. filtering, analysis, etc."@en;
+  skos:example "45μm filtered; ICP-OES"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "LAB_METHOD"@en .
+
+drf:10042 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10004;
+  skos:definition "Short method description [UTF-8 character encoding] of the procedure how the values have been aggregated from primary values; for primary data the aggregation procedure is “NONE”."@en;
+  skos:example "Weighted mean value"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "AGG_METHOD"@en .
+
+drf:10043 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition "Site code [URL] –reference the LTER site or LTSER Platform in DEIMS-SDR. Please provide the deims.id issued by DEIMS-SDR (https://deims.org)."@en;
+  skos:example <https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d>;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SITE_CODE"@en .
+
+drf:10044 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition """Station code [UTF-8 character encoding] – as reference to the observation location (=station) defined in the table STATION. In case of nested plots, the identification of the subplot is provided separated by a dash, e.g. IP2_01. 
+- Condition 1: in case the data refer to the whole area of the SITE and no STATION is identified, the field STATION_CODE is left blank. 
+- Condition 2: in case no permanent plots are installed to be revisited and absolute location (e.g. by GPS device) is provided (see ABS_POSITION), the field STATION_CODE is left blank."""@en;
+  skos:example "IP2"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "STATION_CODE"@en .
+
+drf:10045 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition "Absolute 3D coordinates [decimal number] expressed in decimal degree [dec °] WGS84 using at least 6-digits after the decimal separator of a single observation within the site or station. When a specific location is available in the dataset record (e.g. if the STATION is an area and many observations/records are available within that area, the absolute position is that of the single record)."@en;
+  skos:example "45.234765, 12.783563, 1230"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "ABS_POSITION"@en .
+
+drf:10046 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:CentiM;
+  skos:broader drf:10005;
+  skos:definition "Height of measurement [decimal number] in [cm] as vertical offset from the surface level. For terrestrial ecosystems this is above the land surface. For aquatic or marine ecosystems this is the water surface. Values can be positive (offset above surface) or negative (offset below surface)."@en;
+  skos:example "-10"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "VERT_OFFSET"@en;
+  puv:uom unit:CentiM .
+
+drf:10047 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:M;
+  skos:broader drf:10005;
+  skos:definition "Horizontal offset [number] from the reference point of a transect in meter [m]."@en;
+  skos:example "20"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "HORI_OFFSET"@en;
+  puv:uom unit:M .
+
+drf:10048 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition """Code for Variable observed [UTF-8 character encoding] for the variable / parameter name as abbreviation 
+- LISTSUB VARIABLE Name 
+- DB ALK Alkalinity 
+- DB BOD Biochemical oxygen demand 
+- DB TC Total carbon 
+- DB DC Dissolved carbon 
+- DB DIC Dissolved inorganic carbon 
+- DB DOC Dissolved organic carbon 
+- DB DOD Direct oxygen demand 
+- DB NH3 Ammonia 
+- DB NH4 Ammonium 
+- DB NH4N Ammonium as nitrogen 
+ If possible, use standard encodings for the variable names (e.g. ICP Integrated Monitoring). Additional values can be defined, but need to be documented in the REFERENCE"""@en;
+  skos:example "NH4N"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "VARIABLE"@en .
+
+drf:10049 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition """timestamp of measurement [ISO date] (according to ISO 8601): calendar dates as YYYY-MM-DD, time as HH:MM:SS in UTC plus offset; combined date and time as YYYY-MM-DDTHH:MMOffset, e.g. 2007-04-05T12:30:00-02:00 Any time information in converted to UTC time (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z) or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00) 
+If aggregations are provided the timestamp is provided as the following 
+- annual aggregation – provide only the year as YYYY 
+- monthly aggregations – provide only the month as YYYY-MM 
+- daily aggregations – provide the day as YYYY-MM-DD 
+ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE, SECOND are omitted"""@en;
+  skos:example "2017-03-03T13:00+02:00 or 2017 or 2017-03 or 2017-03-03"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "TIME"@en .
+
+drf:10050 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition "Data value [[UTF-8 character encoding] or [decimal number]] of the observation. The comma separator needs to be consistently used in the data file either being ‘,’ or ‘.’"@en;
+  skos:example "25"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "VALUE"@en .
+
+drf:10051 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition """Unit [UTF-8 character encoding] of variable or parameter observed. This information can be provided together with the METHOD or with the DATA. 
+For the units the SI units (https://physics.nist.gov/cuu/Units/units.html) are used. Condition: provided if relevant"""@en;
+  skos:example "mg/l"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "UNIT"@en .
+
+drf:10052 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition """Quality flag [UTF-8 character encoding] for the data values based on the applied data quality control procedure as provided by the local system. 
+Examples:
+- Q quality controlled value 
+- L less than detection limit 
+- E estimated from measured value 
+Additional values can be defined or quality measures according to the local procedure (e.g. % of valid values for aggregation) can be used, but need to be documented in the REFERENCE."""@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "FLAGQUA"@en .
+
+drf:10053 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition """Status flag [UTF-8 character encoding] for the data defining the level of aggregation of the data value according to the attached list of possible values. If not relevant leave blank. 
+- A Minimum 
+- Z Maximum 
+- S Sum 
+- X Arithmetic average, mean; e.g. monthly average 
+- W Weighted mean 
+- XA average monthly minimum 
+- XZ average monthly maximum 
+- SZ maximum daily sum 
+- M Mode 
+Additional values can be defined, but need to be documented in the REFERENCE."""@en;
+  skos:example "X"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "FLAGSTA"@en .
+
+drf:10054 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition """Reference to the Sampling event [UTF-8 character encoding] as defined in EVENT 
+Condition: only used, if a sampling event is defined"""@en;
+  skos:example "P20200912-EA-456"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "EVENT_ID"@en .
+
+drf:10055 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10005;
+  skos:definition """Reference to the Sample-ID [UTF-8 character encoding] as defined in SAMPLE 
+Condition: only used, if a sample is taken and analysed and information on the sample is relevant and provided"""@en;
+  skos:example "S0001_2020_A"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SAMPLE_ID"@en .
+
+drf:10056 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition "Site code [URL] –reference the LTER site or LTSER Platform in DEIMS-SDR. Please provide the deims.id issued by DEIMS-SDR (https://deims.org)."@en;
+  skos:example <https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d>;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SITE_CODE"@en .
+
+drf:10057 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition """Station code [UTF-8 character encoding] – as reference to the observation location (=station) defined in the table STATION. In case of nested plots, the identification of the subplot is provided separated by a dash, e.g. IP2_01. 
+Condition 1: in case the data refer to the whole area of the SITE and no STATION is identified, the field STATION_CODE is left blank. 
+Condition 2: in case no permanent plots are installed to be revisited and absolute location (e.g. by GPS device) is provided (see ABS_POSITION), the field STATION_CODE is left blank."""@en;
+  skos:example "P0094"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "STATION_CODE"@en .
+
+drf:10058 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition """Absolute 3D coordinates [decimal number] expressed in decimal degree [dec °] WGS84 using at least 6-digits after the decimal separator of a single observation within the site or station. When a specific location is available in the dataset record (e.g. if the STATION is an area and many observations/records are available within that area, the absolute position is that of the single record). 
+Condition 1: if a ABSOLUTE_POSITION is provided the STATION normally is left empty. 
+Condition 2: if an ABSOLUTE POSITION is provided the HORIZONTAL OFFSET is left blank."""@en;
+  skos:example "45.234765, 12.783563, 1230"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "ABS_POSITION"@en .
+
+drf:10059 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:CentiM;
+  skos:broader drf:10006;
+  skos:definition "Height of measurement [decimal number] in [cm] as vertical offset from the surface level. For terrestrial ecosystems this is above the land surface. For aquatic or marine ecosystems this is the water surface. Values can be positive (offset above surface) or negative (offset below surface)."@en;
+  skos:example "-10"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "VERT_OFFSET"@en;
+  puv:uom unit:CentiM .
+
+drf:10060 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:M;
+  skos:broader drf:10006;
+  skos:definition "Horizontal offset [number] from the reference point of a transect in meter [m]."@en;
+  skos:example "20"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "HORI_OFFSET"@en;
+  puv:uom unit:M .
+
+drf:10061 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition """timestamp of measurement [ISO date] (according to ISO 8601): calendar dates as YYYY-MM-DD, time as HH:MM:SS in UTC plus offset; combined date and time as YYYY-MM-DDTHH:MMOffset, e.g. 2007-04-05T12:30:00-02:00 Any time information in converted to UTC time (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z) or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00) 
+Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE, SECOND are omitted"""@en;
+  skos:example "42797"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "TIME"@en .
+
+drf:10062 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition """Code for Variable observed [UTF-8 character encoding] described in the METHOD for the variable / parameter name as abbreviation 
+- LISTSUB VARIABLE Name 
+- IM ABUND Abundance of species 
+- IM COVE_T species cover tree layer 
+- IM COVE_S species cover shrub layer 
+- IM COVE_F species cover field layer 
+- IM COVE_B species cover bottom layer COVER cover in % AREA area (e.g. in ha – see unit) 
+If possible, use standard encodings for the variable names (e.g. ICP Integrated Monitoring). Additional values can be defined, but need to be documented in the REFERENCE"""@en;
+  skos:example "ABUND"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "VARIABLE"@en .
+
+drf:10063 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition """Code for the ecosystem layer addressed [UTF-8 character encoding] as letter code. 
+- LEVEL Name 
+- T Tree layer 
+- T1 Tree layer 1 
+- T2 Tree layer 2 
+- T3 Tree layer 3 
+- S Shrub layer 
+- F Field layer 
+- B Bottom layer 
+If alternative codings are used, this needs to be specified in the REFERENCE."""@en;
+  skos:example "T1"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "LAYER"@en .
+
+drf:10064 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition """Name of entity observed [UTF-8 character encoding] (e.g. species name or habitat type) either defined by a letter code (e.g. genus & species or abbreviation), a number code or the full name. 
+In case of using letter codes or number codes the definition needs to be provided in the REFERENCE."""@en;
+  skos:example "FAG SYLV"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "TAXA"@en .
+
+drf:10065 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition "Data value [[UTF-8 character encoding] or [number]] of the observation. The comma separator needs to be consistently used in the data file either being ‘,’ or ‘.’"@en;
+  skos:example "5"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "VALUE"@en .
+
+drf:10066 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition """Unit [UTF-8 character encoding] of variable or parameter observed. This information can be provided together with the METHOD or with the DATA. 
+For the units the SI units (https://physics.nist.gov/cuu/Units/units.html) are used. Condition: provided if relevant"""@en;
+  skos:example "dimles"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "UNIT"@en .
+
+drf:10067 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition """Quality flag [UTF-8 character encoding] for the data values based on the applied data quality control procedure as provided by the local system. 
+Additional values can be defined or quality measures according to the local procedure (e.g. % of valid values for aggregation) can be used, but need to be documented in the REFERENCE."""@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "FLAGQUA"@en .
+
+drf:10068 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition """Reference to the Sampling event [UTF-8 character encoding] as defined in EVENT 
+ Condition: only used, if a sampling event is defined"""@en;
+  skos:example "VegRel_45_20200912"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "EVENT_ID"@en .
+
+drf:10069 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10006;
+  skos:definition """Reference to the Sample-ID [UTF-8 character encoding] as defined in SAMPLE 
+ Condition: only used, if a sample is taken and analysed and information on the sample is relevant and provided"""@en;
+  skos:example "S0001_2020_A"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SAMPLE_ID"@en .
+
+drf:10070 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition "Abbreviation or name of the organisation [UTF-8 character encoding] providing the data"@en;
+  skos:example "EAA"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "ORG_NAME"@en .
+
+drf:10071 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition """Code for the sub programme [UTF-8 character encoding] for which the data are reported, e.g. BIOCHEM for “biogeochemical data” within the site. This refers to the parameter groups or thematic grouping of data. 
+ BIOCHEM biogeochemistry data 
+ STRUCTU Structure and function of ecosystems, communities and populations 
+ HUMANEC human population and economy 
+ SITECHA site characteristics (land use and land cover) 
+ Additional values can be defined, but need to be documented in the REFERENCE."""@en;
+  skos:example "BIOCHEM"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SUBPROG"@en .
+
+drf:10072 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition """Medium [UTF-8 character encoding] – as the code for the sampled medium (feature of interest) in the observation procedure, e.g. 
+ AIR air including meteorology 
+ SOIL soil 
+ SOILWAT soil water
+WATER runoff and groundwater
+SEDIMENT sediments in aquatic environments
+LITTER litter fall
+BIOCOM biological communities
+HUMPOP human population
+SITECHAR site characteristics (as habitat or landscape structure)
+Additional values need to be defined in the REFERENCE."""@en;
+  skos:example "AIR"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "MEDIUM"@en .
+
+drf:10073 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition "Reference list medium [UTF-8 character encoding] – as reference to the list used. Use the code ‘ADD’ if the code is defined by the user. Otherwise use reference to the reference list."@en;
+  skos:example "ELTER"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "LISTMED"@en .
+
+drf:10074 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:CentiM;
+  skos:broader drf:10007;
+  skos:definition "Upper measurement level [number] in [cm] if a range for the observation is provided; the land/water surface is the zero level; values below the surface are provided as negative values (e.g. -20), values above the surface are provided as positive values (e.g. 20)."@en;
+  skos:example "-15"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "MAX_LEVEL"@en;
+  puv:uom unit:CentiM .
+
+drf:10075 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:CentiM;
+  skos:broader drf:10007;
+  skos:definition "Lower measurement level [number] in [cm] if a range for the observation is provided; the land/water surface is the zero level; values below the surface are provided as negative values (e.g. -20), values above the surface are provided as positive values (e.g. 20)"@en;
+  skos:example "-5"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "MIN_LEVEL"@en;
+  puv:uom unit:CentiM .
+
+drf:10076 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  schema:unitCode unit:M2;
+  skos:broader drf:10007;
+  skos:definition "Size of the sampling plot [number] in [m²] where the observation takes place or the size of the area for which the aggregated values are representative (e.g. the site or part of the site such as the forested area)"@en;
+  skos:example "100"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SIZE"@en;
+  puv:uom unit:M2 .
+
+drf:10077 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition """Year [YYYY] of the measurement or the year for which the measurements were aggregated the year of an observation (e.g. plants) 
+Alternative: 
+Time stamp as [ISO date], see ISO 8601: calendar dates as YYYY-MM-DD, time as HH:MM:SS plus a time zone designator (as UTC plus offset), e.g. 2007-04-05T12:30:00-02:00 
+Any time information 
+- in UTC (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z), 
+- or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00)"""@en;
+  skos:example "2017 or 2017-03-03T13:00+02:00"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "YEAR"@en .
+
+drf:10078 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition "Month [MM] of the measurement or aggregation. Leave blank if not relevant -> see notes Year for aggregated time information"@en;
+  skos:example "8"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "MONTH"@en .
+
+drf:10079 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition "Day [DD] of the measurement or the aggregation. Leave blank if not relevant -> see notes Year for aggregated time information"@en;
+  skos:example "1"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "DAY"@en .
+
+drf:10080 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition "Hour [HH] of the measurement or the aggregation. Leave blank if not relevant -> see notes Year for aggregated time information"@en;
+  skos:example "12"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "HOUR"@en .
+
+drf:10081 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition "Minute [mm] of the measurement or the aggregation. Leave blank if not relevant -> see notes Year for aggregated time information"@en;
+  skos:example "30"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "MINUTE"@en .
+
+drf:10082 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition "Second [ss] of the measurement or the aggregation. Leave blank if not relevant -> see notes Year for aggregated time information"@en;
+  skos:example "5"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SECOND"@en .
+
+drf:10083 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition """Spatial pool [number] as the number of spatial entities (e.g. sensors, plots) used to calculate the data value 
+If not relevant or described in METHOD, leave blank."""@en;
+  skos:example "5"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SPOOL"@en .
+
+drf:10084 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition """Temporal pool [number] as the number of observations used to calculate the data value 
+If not relevant or described in METHOD, leave blank."""@en;
+  skos:example "10"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "TPOOL"@en .
+
+drf:10085 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition """Temporal level of aggregation or observation [UTF-8 character encoding] 
+- HOUR hourly values (60 min) 
+- DAY daily values (24 hrs) 
+- WEEK weekly values (7 days) 
+- MONTH monthly values 
+- SEASON seasonly values (e.g. spring) 
+- HYEAR half yearly values (6 month) 6 month 
+- YEAR yearly values (12 month) 
+Additional values can be defined, but need to be documented in the REFERENCE."""@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "TLEVEL"@en .
+
+drf:10086 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition "Reference to the taxonomic list [UTF-8 character encoding] used for the observations"@en;
+  skos:example "Flora of Austria (2005)"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "LISTTAXA"@en .
+
+drf:10087 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition "Reference to the code [UTF-8 character encoding] list of substances and parameter names, e.g. EnvThes or other vocabularies. Use ADD if defined by the user."@en;
+  skos:example "IM"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "LISTSUB"@en .
+
+drf:10088 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10007;
+  skos:definition """Status flag [UTF-8 character encoding] for the data defining the level of aggregation of the data value according to the attached list of possible values. If not relevant leave blank. 
+- A Minimum 
+- Z Maximum 
+- S Sum 
+- X Arithmetic average, mean; e.g. monthly average 
+- W Weighted mean 
+- XA average monthly minimum 
+- XZ average monthly maximum 
+- SZ maximum daily sum
+- M Mode
+Additional values need to be defined in the REFERENCE."""@en;
+  skos:example "X"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "FLAGSTA"@en .
+
+drf:10089 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10008;
+  skos:definition "Name of the field [UTF-8 character encoding] in the data reporting documents as reference"@en;
+  skos:example "TAXA"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "FIELD_NAME"@en .
+
+drf:10090 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10008;
+  skos:definition "Code of the entry [UTF-8 character encoding] defined as abbreviation of the term, e.g. parameter name"@en;
+  skos:example "FAG SYLV"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "CODE"@en .
+
+drf:10091 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10008;
+  skos:definition "Full name [UTF-8 character encoding] defined as the full name of the term,e.g. full species name"@en;
+  skos:example "Fagus sylvatica L."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "NAME"@en .
+
+drf:10092 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10008;
+  skos:definition "Definition [UTF-8 character encoding] of the term used, in order to allow the user to understand the data."@en;
+  skos:example "o"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "DEFINITON"@en .
+
+drf:10093 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10008;
+  skos:definition "Name or reference [URL] of the code list; if referring to an existing code list the name of the code list is provided (e.g. DB, EnvThes). If the code is defined by the user, use ‘ADD’ as identification"@en;
+  skos:example <http://www.catalogueoflife.org/col/>;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "LIST_CODE"@en .
+
+drf:10094 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10008;
+  skos:definition "Reference to the URL or persistent identifier"@en;
+  skos:example <http://www.catalogueoflife.org/\u0020col/details/species/id/\u00201f4cac67d34e7473fb5092f2fa66f4d2>;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "CODE_URL"@en .
+
+drf:10095 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10009;
+  skos:definition "Site code [URL] –reference the LTER site or LTSER Platform in DEIMS-SDR. Please provide the deims.id issued by DEIMS-SDR (https://deims.org)."@en;
+  skos:example <https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d>;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SITE_CODE"@en .
+
+drf:10096 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10009;
+  skos:definition "Station code [UTF-8 character encoding] – as reference to the observation location (=station) defined in the table STATION"@en;
+  skos:example "IP2"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "STATION_CODE"@en .
+
+drf:10097 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10009;
+  skos:definition """An identifier [UTF-8 character encoding] for the set of information associated with an Event (something that occurs at a place and time). May be a global unique identifier or an identifier specific to the data set. 
+ This either can be a sample number or the number of a vegetation relevee. 
+ Note: reference to the location (STATION_CODE) is given in the data and is not repeated in the EVENT."""@en;
+  skos:example "SW0045ZOE_20200912 or VegRel_45_20200912"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "EVENT_ID"@en .
+
+drf:10098 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10009;
+  skos:definition "timestamp of starting the event [ISO date] (according to ISO 8601): calendar dates as YYYY-MM-DD, time as HH:MM:SS in UTC plus offset; combined date and time as YYYY-MM-DDTHH:MMOffset, e.g. 2007-04-05T12:30:00-02:00 Any time information in converted to UTC time (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z) or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00)"@en;
+  skos:example "2017-03-03T13:00+02:00"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "TIME_FROM"@en .
+
+drf:10099 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10009;
+  skos:definition "timestamp of ending the event [ISO date] (according to ISO 8601): calendar dates as YYYY-MM-DD, time as HH:MM:SS in UTC plus offset; combined date and time as YYYY-MM-DDTHH:MMOffset, e.g. 2007-04-05T12:30:00-02:00 Any time information in converted to UTC time (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z) or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00)"@en;
+  skos:example "2017-03-03T13:00+02:00"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "TIME_TO"@en .
+
+drf:10100 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10009;
+  skos:definition """Short description of the method [UTF-8 character encoding] applied in the sampling campaign, e.g. on how the plots were selected from the total population (selection of plots, observation points, etc.) and the observation was done 
+ Condition: Please provide, if not contained in METHOD."""@en;
+  skos:example "Random sampling of spruce stands in the entire area of the site; 5 regularly spaced (10 m) positions on a transect; etc."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "METH_DESCR"@en .
+
+drf:10101 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10009;
+  skos:definition "A numeric value [number] for a measurement of the effort taken (time duration, length, area, or volume) in a sampling event."@en;
+  skos:example "25"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "EVENT_EFFORT"@en .
+
+drf:10102 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10009;
+  skos:definition "Unit [UTF-8 character encoding] of variable of the sampling effort. For the units the SI units (https://physics.nist.gov/cuu/Units/units.html) are used."@en;
+  skos:example "m2"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "UNIT"@en .
+
+drf:10103 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10009;
+  skos:definition """Physical sample [Boolean; 0/-1] taken and stored. A SAMPLE is the representative part or a single item from a larger whole or group. Please, provide a information if you have taken and stored a physical sample and you can provide details on 
+ Condition: if yes [-1] a description in SAMPLE needs to be provided."""@en;
+  skos:example "0"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "PHYS_SAMPLE"@en .
+
+drf:10104 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10009;
+  skos:definition "Notes [UTF-8 character encoding] on of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the Event."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "NOTES"@en .
+
+drf:10105 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10010;
+  skos:definition """An event identifier [UTF-8 character encoding] for the super event which is composed of one or more sub-sampling events. The value must refer to an existing EVENT_ID. If the identifier is local it must exist within the given dataset. May be a globally unique identifier or an identifier specific to the data set.
+This either can be a sample number or the number of a vegetation relevee.
+Note: reference to the location (STATION_CODE) is given in the data and is not repeated in the EVENT."""@en;
+  skos:example "SW0045ZOE_20200912 or VegRel_45_20200912"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "PARENT_EVENT_ID"@en .
+
+drf:10106 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10010;
+  skos:definition "The amount of effort [UTF-8 character encoding] expended during an Event."@en;
+  skos:example "\"40 trap-nights\", \"10 observer-hours; 10 km by foot; 30 km by car\""@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SAMP_EFFORT"@en .
+
+drf:10107 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10010;
+  skos:definition "Habitat type [UTF-8 character encoding] in which the Event occurred using local or existing classification or reference to a code list (as defined in REFERENCE)."@en;
+  skos:example "Beech forest"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "HABITAT_TYPE"@en .
+
+drf:10108 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10010;
+  skos:definition "Soil type [UTF-8 character encoding] in which the Event occurred using local or existing classification or reference to a code list (as defined in REFERENCE)."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SOIL_TYPE"@en .
+
+drf:10109 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition "Site code [URL] –reference the LTER site or LTSER Platform in DEIMS-SDR. Please provide the deims.id issued by DEIMS-SDR (https://deims.org)."@en;
+  skos:example <https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d>;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SITE_CODE"@en .
+
+drf:10110 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition "Station code [UTF-8 character encoding] – as reference to the observation location (=station) defined in the table STATION"@en;
+  skos:example "IP2_LYS01"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "STATION_CODE"@en .
+
+drf:10111 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition """An identifier [UTF-8 character encoding] for the set of information associated with an Event (something that occurs at a place and time). May be a global unique identifier or an identifier specific to the data set. 
+This either can be a sample number or the number of a vegetation relevee. 
+Note: reference to the location (STATION_CODE) is given in the data and is not repeated in the EVENT."""@en;
+  skos:example "SW0045ZOE_20200912"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "EVENT_ID"@en .
+
+drf:10112 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition "Sample identifier [UTF-8 character encoding or PID] as the reference to the sample taken and stored during a sampling campaign"@en;
+  skos:example "Z12A35"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SAMPLE_ID"@en .
+
+drf:10113 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition """Sampled medium [UTF-8 character encoding] – as the code for the sampled medium in the observation procedure 
+- AIR air including meteorology 
+- SOIL soil 
+- SOILWAT soil water 
+- WATER runoff and groundwater 
+- SEDIMENT sediments in aquatic environments 
+- LITTER litter fall 
+- BIOCOM biological communities 
+- HUMPOP human population 
+- SITECHAR site characteristics (as habitat or landscape structure) 
+Additional values need to be defined in the REFERENCE."""@en;
+  skos:example "SOILWAT"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "MEDIUM"@en .
+
+drf:10114 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition "timestamp start time when sample was taken [ISO date] (according to ISO 8601): calendar dates as YYYY-MM-DD, time as HH:MM:SS in UTC plus offset; combined date and time as YYYY-MM-DDTHH:MMOffset, e.g. 2007-04-05T12:30:00-02:00 Any time information in converted to UTC time (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z) or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00)"@en;
+  skos:example "2017-03-03T13:00+02:00"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "TIME_FROM"@en .
+
+drf:10115 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition "timestamp end time when sample was taken [ISO date] (according to ISO 8601): calendar dates as YYYY-MM-DD, time as HH:MM:SS in UTC plus offset; combined date and time as YYYY-MM-DDTHH:MMOffset, e.g. 2007-04-05T12:30:00-02:00 Any time information in converted to UTC time (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z) or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00)"@en;
+  skos:example "2017-03-03T13:00+02:00"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "TIME_TO"@en .
+
+drf:10116 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition """Short description of the method [UTF-8 character encoding] applied in the sampling campaign, e.g. on how the plots were selected from the total population (selection of plots, observation points, etc.) and the observation was done 
+Condition: Please provide, if not contained in METHOD."""@en;
+  skos:example "Lysimeter station …"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "METH_DESCR"@en .
+
+drf:10117 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition "A numeric value [number] for a measurement of the size (e.g. length, area, or volume) of a sample in a sampling event."@en;
+  skos:example "25"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "SAMP_SIZE"@en .
+
+drf:10118 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition """Unit [UTF-8 character encoding] of variable or parameter observed. This information can be provided together with the METHOD or with the DATA. 
+For the units the SI units (https://physics.nist.gov/cuu/Units/units.html) are used. Condition: provided if relevant"""@en;
+  skos:example "ml"@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "UNIT"@en .
+
+drf:10119 a skos:Concept;
+  dct:created "2025-12-04"^^xsd:date;
+  dct:creator "0000-0002-7997-219X"@en;
+  dct:modified "2025-12-04"^^xsd:date;
+  skos:broader drf:10011;
+  skos:definition "Notes on [UTF-8 character encoding] of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the Event."@en;
+  skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
+  skos:prefLabel "NOTES"@en .
