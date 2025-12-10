@@ -114,6 +114,26 @@ class_trees = {}
 for cls in top_concepts:
     class_trees[str(cls).split("/")[-1]] = build_tree(cls)
 
+# --- Build a mapping: class_id → list of its concepts ---
+class_map = {c["id"]: [] for c in classes}
+
+for concept in concepts:
+    breadcrumb = concept["breadcrumb"]
+    if not breadcrumb:
+        continue
+
+    # First item in breadcrumb = the top concept class
+    top = breadcrumb[0]["id"]
+
+    # If this class exists in the map, attach the concept
+    if top in class_map:
+        class_map[top].append(concept)
+
+# Attach each list of concepts to the class entries
+for c in classes:
+    c_id = c["id"]
+    c["concepts"] = class_map.get(c_id, [])
+
 # ----------------------------------------------------
 # Render HTML
 # ----------------------------------------------------
