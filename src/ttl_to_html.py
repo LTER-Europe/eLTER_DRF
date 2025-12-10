@@ -52,15 +52,55 @@ top_concepts = set()
 top_concepts.update(g.objects(scheme, SKOS.hasTopConcept))
 top_concepts.update(g.subjects(SKOS.topConceptOf, scheme))
 
-# --- Top concepts (classes) ---
+# ------------------------------------------
+# CLASSES (Top Concepts)
+# ------------------------------------------
 classes = []
 for cls in g.objects(scheme, SKOS.hasTopConcept):
     label = next(g.objects(cls, SKOS.prefLabel))
+    cls_id = str(cls).split("/")[-1]
+
+    # Collect all narrower concepts
+    narrower_terms = []
+    for term in g.objects(cls, SKOS.narrower):
+        term_label = next(g.objects(term, SKOS.prefLabel))
+        narrower_terms.append({
+            "id": str(term).split("/")[-1],
+            "uri": str(term),
+            "label": str(term_label)
+        })
+
     classes.append({
-        "id": str(cls).split("/")[-1],
+        "id": cls_id,
         "uri": str(cls),
         "label": str(label),
+        "terms": sorted(narrower_terms, key=lambda x: x["label"].lower())
     })
+
+
+# ------------------------------------------
+# ALL CONCEPTS – VOCABULARY SECTION
+# ------------------------------------------
+vocabulary = []
+for c in g.subjects(RDF.type, SKOS.Concept):
+    label = next(g.objects(c, SKOS.prefLabel))
+    definition = g.value(c, SKOS.definition)
+    example = g.value(c, SKOS.example)
+    broader = g.value(c, SKOS.broader)
+    unit = g.value(c, SCHEMA.unitText) or g.value(c, POV.unit)
+
+    vocabulary.append({
+        "id": str(c).split("/")[-1],
+        "uri": str(c),
+        "label": str(label),
+        "definition": str(definition or ""),
+        "example": str(example or ""),
+        "broader": str(broader) if broader else "",
+        "unit": str(unit or "")
+    })
+
+# Sort alphabetically
+vocabulary = sorted(vocabulary, key=lambda x: x["label"].lower())
 
 # --- Helper: breadcrumb ---
 def build_breadcrumb(concept):
