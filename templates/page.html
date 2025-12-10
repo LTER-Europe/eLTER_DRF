@@ -87,40 +87,39 @@ pre {
 <h2>📚 Vocabulary Classes & Concepts</h2>
 
 {% for cls in classes %}
-  <h3 id="{{ cls.id }}" class="class-title">{{ cls.label }}</h3>
+  <h2 id="{{ cls.id }}">{{ cls.label }}</h2>
+  <hr>
 
-  {% for concept in trees[cls.id] recursive %}
-    <div class="concept-block">
-      <div class="breadcrumb">
-          {% for b in concept.breadcrumb %}
-             {{ b.label }}{% if not loop.last %} › {% endif %}
+  {% if cls.concepts %}
+    {% for c in cls.concepts %}
+      <div class="concept-block">
+        <h3 id="{{ c.id }}">
+          {{ c.label }}
+          <a class="copy-btn" onclick="copyURI('{{ c.uri }}')">Copy URI</a>
+        </h3>
+
+        <p><strong>URI:</strong> <code>{{ c.uri }}</code></p>
+        {% if c.definition %}
+          <p><strong>Definition:</strong> {{ c.definition }}</p>
+        {% endif %}
+        {% if c.example %}
+          <p><strong>Example:</strong> {{ c.example }}</p>
+        {% endif %}
+        {% if c.unit %}
+          <p><strong>Unit:</strong> {{ c.unit }}</p>
+        {% endif %}
+
+        <p class="breadcrumb">
+          {% for b in c.breadcrumb %}
+            {{ b.label }}{% if not loop.last %} → {% endif %}
           {% endfor %}
+        </p>
       </div>
-
-      <h4>{{ concept.label }}  
-          <small><a href="{{ concept.uri }}" target="_blank">{{ concept.uri }}</a></small>
-      </h4>
-
-      {% if concept.definition %}
-      <p><strong>Definition:</strong><br>{{ concept.definition }}</p>
-      {% endif %}
-
-      {% if concept.example %}
-      <p><strong>Example:</strong> {{ concept.example }}</p>
-      {% endif %}
-
-      {% if concept.unit %}
-      <p><strong>Unit:</strong> <span class="unit">{{ concept.unit }}</span></p>
-      {% endif %}
-
-      {% if concept.children %}
-        <div style="margin-left:15px;">
-          {{ loop(concept.children) }}
-        </div>
-      {% endif %}
-    </div>
-  {% endfor %}
-
+      <hr>
+    {% endfor %}
+  {% else %}
+    <p>No concepts in this class.</p>
+  {% endif %}
 {% endfor %}
 </section>
 
