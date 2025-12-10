@@ -248,7 +248,12 @@ jobs:
         run: |
           pip3 install rdflib jinja2
           python3 ./src/ttl_to_html.py "${FILE_NAME}.ttl" "./docs/index.html"
-
+      
+      - name: Configure Git identity
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          
       - name: Commit HTML page
         run: |
           git add docs/index.html
