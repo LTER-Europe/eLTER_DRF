@@ -126,9 +126,11 @@ sosa:madeBySensor
   dct:title "eLTER Data Reporting Format"@en;
   owl:ontologyIRI <http://vocabs.lter-europe.net/elter_drf/>;
   owl:versionInfo "1.3.0"@en;
+  skos:hasTopConcept drf:10001, drf:10002, drf:10003, drf:10004, drf:10005, drf:10006,
+    drf:10007, drf:10008, drf:10009, drf:10010, drf:10011;
   skos:prefLabel "eLTER_DRF"@en .
 
-drf:10001 a skos:Collection;
+drf:10001 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
@@ -136,9 +138,10 @@ drf:10001 a skos:Collection;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10012, drf:10013, drf:10014, drf:10015, drf:10016, drf:10017, drf:10018,
     drf:10019, drf:10020;
-  skos:prefLabel "Station Core Fields"@en .
+  skos:prefLabel "StationCoreFields"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
-drf:10002 a skos:Collection;
+drf:10002 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
@@ -146,27 +149,30 @@ drf:10002 a skos:Collection;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10021, drf:10022, drf:10023, drf:10024, drf:10025, drf:10026, drf:10027,
     drf:10028, drf:10029, drf:10030, drf:10031, drf:10032, drf:10033, drf:10034, drf:10035;
-  skos:prefLabel "Station Extended Fields"@en .
+  skos:prefLabel "StationExtendedFields"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
-drf:10003 a skos:Collection;
+drf:10003 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
   skos:definition "A Method describes the procedure to generate and manipulate the data."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10036, drf:10037, drf:10038;
-  skos:prefLabel "Method Core Fields"@en .
+  skos:prefLabel "MethodCoreFields"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
-drf:10004 a skos:Collection;
+drf:10004 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
   skos:definition "In the extended version detailed information on the different method steps and procedures (e.g. sampling, field method, lab methods, data aggregation methods)"@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10039, drf:10040, drf:10041, drf:10042;
-  skos:prefLabel "Mpthod Extended fileds"@en .
+  skos:prefLabel "MpthodExtendedfileds"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
-drf:10005 a skos:Collection;
+drf:10005 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
@@ -174,9 +180,10 @@ drf:10005 a skos:Collection;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10043, drf:10044, drf:10045, drf:10046, drf:10047, drf:10048, drf:10049,
     drf:10050, drf:10051, drf:10052, drf:10053, drf:10054, drf:10055;
-  skos:prefLabel "Data Measurements"@en .
+  skos:prefLabel "DataMeasurements"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
-drf:10006 a skos:Collection;
+drf:10006 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
@@ -184,9 +191,10 @@ drf:10006 a skos:Collection;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10056, drf:10057, drf:10058, drf:10059, drf:10060, drf:10061, drf:10062,
     drf:10063, drf:10064, drf:10065, drf:10066, drf:10067, drf:10068, drf:10069;
-  skos:prefLabel "Data Mapping"@en .
+  skos:prefLabel "DataMapping"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
-drf:10007 a skos:Collection;
+drf:10007 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
@@ -195,18 +203,20 @@ drf:10007 a skos:Collection;
   skos:narrower drf:10070, drf:10071, drf:10072, drf:10073, drf:10074, drf:10075, drf:10076,
     drf:10077, drf:10078, drf:10079, drf:10080, drf:10081, drf:10082, drf:10083, drf:10084,
     drf:10085, drf:10086, drf:10087, drf:10088;
-  skos:prefLabel "Data Extended Fields"@en .
+  skos:prefLabel "DataExtendedFields"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
-drf:10008 a skos:Collection;
+drf:10008 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
   skos:definition "The Reference is the listing and description of additional codes used in the data provision. In order to enhance the re-usability of the data, information on the coding used e.g. for variable names or taxa, is needed. This can either refer to existing vocabularies used (e.g. by referencing to an URL) or by user defined definitions."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10089, drf:10090, drf:10091, drf:10092, drf:10093, drf:10094;
-  skos:prefLabel "Reference Core Fields"@en .
+  skos:prefLabel "ReferenceCoreFields"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
-drf:10009 a skos:Collection;
+drf:10009 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
@@ -214,18 +224,20 @@ drf:10009 a skos:Collection;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10095, drf:10096, drf:10097, drf:10098, drf:10099, drf:10100, drf:10101,
     drf:10102, drf:10103, drf:10104;
-  skos:prefLabel "Event Core Fields"@en .
+  skos:prefLabel "EventCoreFields"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
-drf:10010 a skos:Collection;
+drf:10010 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
   skos:definition "An Event is defined as activity to observe or collect information on the ecosystem characteristic of interest. This can be either e.g. a sampling event (e.g. soil water sample) or the recording of species abundance (e.g. vegetation relevee). Basic information on the event is given. The Extended Fields are part of this class."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10105, drf:10106, drf:10107, drf:10108;
-  skos:prefLabel "Event Extended Fields"@en .
+  skos:prefLabel "EventExtendedFields"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
-drf:10011 a skos:Collection;
+drf:10011 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
   dct:modified "2025-12-04"^^xsd:date;
@@ -233,7 +245,8 @@ drf:10011 a skos:Collection;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10109, drf:10110, drf:10111, drf:10112, drf:10113, drf:10114, drf:10115,
     drf:10116, drf:10117, drf:10118, drf:10119;
-  skos:prefLabel "Sample Event"@en .
+  skos:prefLabel "SampleEvent"@en;
+  skos:topConceptOf <http://vocabs.lter-europe.net/elter_drf/> .
 
 drf:10012 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
