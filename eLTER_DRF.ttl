@@ -34,78 +34,16 @@
 @prefix iop:   <https://w3id.org/iadopt/ont/> .
 @prefix puv: <https://w3id.org/env/puv#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
-@prefix schema: <http://schema.org/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix unit: <http://qudt.org/vocab/unit/> .
 @prefix qudt: <http://qudt.org/vocab/> .
 @prefix drf: <http://vocabs.lter-europe.net/elter_drf/> .
-
-iop:constrains  a     owl:ObjectProperty ;
-        rdfs:comment  "A Constraint constrains an Entity having a role in the Variable description." ;
-        rdfs:domain   iop:Constraint ;
-        rdfs:label    "constrains" ;
-        rdfs:range    iop:Entity .
-
-iop:hasConstraint  a  owl:ObjectProperty ;
-        rdfs:comment  "A Variable has a Constraint, that confines an Entity involved in the observation." ;
-        rdfs:domain   iop:Variable ;
-        rdfs:label    "hasConstraint" ;
-        rdfs:range    iop:Constraint .
-
-iop:hasContextObject  a  owl:ObjectProperty ;
-        rdfs:comment  "A Variable has an Entity that provides additional background information regarding the ObjectOfInterest." ;
-        rdfs:domain   iop:Variable ;
-        rdfs:label    "hasContextObject" ;
-        rdfs:range    iop:Entity .
-
-iop:hasMatrix  a            owl:ObjectProperty ;
-        rdfs:comment        "A Variable might have an Entity in which the ObjectOfInterest is contained." ;
-        rdfs:domain         iop:Variable ;
-        rdfs:label          "hasMatrix" ;
-        rdfs:range          iop:Entity ;
-        rdfs:subPropertyOf  iop:hasContextObject .
-
-iop:hasObjectOfInterest
-        a             owl:ObjectProperty ;
-        rdfs:comment  "A Variable has an Entity whose Property is observed." ;
-        rdfs:domain   iop:Variable ;
-        rdfs:label    "hasObjectOfInterest" ;
-        rdfs:range    iop:Entity .
-
-iop:hasProperty  a    owl:ObjectProperty ;
-        rdfs:comment  "A Variable has a Property that characterizes an Entity." ;
-        rdfs:domain   iop:Variable ;
-        rdfs:label    "hasProperty" ;
-        rdfs:range    iop:Property .
 
 puv:uom
   a owl:ObjectProperty ;
   rdfs:comment "scale or unit of measurement" ;
   rdfs:label "unit-of-measurement " ;
   rdfs:range puv:UnitOfMeasurement .
-
-puv:statistic
-  a owl:ObjectProperty ;
-  rdfs:comment "statistical treatment" ;
-  rdfs:domain puv:Parameter ;
-  rdfs:label "statistic " ;
-  rdfs:range puv:ParameterStatistic .
-
-puv:method
-  a owl:ObjectProperty ;
-  rdfs:comment "method used to measure the value" ;
-  rdfs:label "method" ;
-  rdfs:range puv:Method .
-
-sosa:madeBySensor 
-  a owl:ObjectProperty ;
-  rdfs:label "made by sensor"@en ;
-  skos:definition "Relation between an Observation and the Sensor which made the Observation."@en ;
-  rdfs:comment "Relation between an Observation and the Sensor which made the Observation."@en ;
-  schema:domainIncludes sosa:Observation ;
-  schema:rangeIncludes sosa:Sensor ;
-  owl:inverseOf sosa:madeObservation ;
-  rdfs:isDefinedBy sosa: .  
 
 
 <http://vocabs.lter-europe.net/elter_drf/> a skos:ConceptScheme;
@@ -133,7 +71,7 @@ sosa:madeBySensor
 drf:10001 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "A Station is an observation entity within a site or platform. Station in this respect is synonym to plot, observation location, sensor location, etc. and is defined by a location, elevation and installation height (if relevant) which is located within a given LTER site or platform. The core Fields are part of this class."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10012, drf:10013, drf:10014, drf:10015, drf:10016, drf:10017, drf:10018,
@@ -144,7 +82,7 @@ drf:10001 a skos:Concept;
 drf:10002 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "A Station is an observation entity within a site or platform. Station in this respect is synonym to plot, observation location, sensor location, etc. and is defined by a location, elevation and installation height (if relevant) which is located within a given LTER site or platform. The Extended Fields are part of this class."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10021, drf:10022, drf:10023, drf:10024, drf:10025, drf:10026, drf:10027,
@@ -155,7 +93,7 @@ drf:10002 a skos:Concept;
 drf:10003 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "A Method describes the procedure to generate and manipulate the data."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10036, drf:10037, drf:10038;
@@ -165,7 +103,7 @@ drf:10003 a skos:Concept;
 drf:10004 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "In the extended version detailed information on the different method steps and procedures (e.g. sampling, field method, lab methods, data aggregation methods)"@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10039, drf:10040, drf:10041, drf:10042;
@@ -175,7 +113,7 @@ drf:10004 a skos:Concept;
 drf:10005 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "The Data are defined as the sum of observation values being observed at a station/plot either by sensor, measurement device or human observation. Environmental observation is defined as any measurement done by sensors or using devices observing a single measurable property of the ecosystem, e.g. temperature or water level. The value normally is expressed as decimal or integer value."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10043, drf:10044, drf:10045, drf:10046, drf:10047, drf:10048, drf:10049,
@@ -186,7 +124,7 @@ drf:10005 a skos:Concept;
 drf:10006 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "The Data are defined as the sum of observation values being observed at a station/plot either by sensor, measurement device or human observation. Mapping is defined as any observation done by a human or sensor where the occurrence, share or abundance of an entitiy (e.g. species or habitat type) in a given area is estimated or measured. The observed entity is normally described by a concept (e.g. species or habitat) and uses code lists or taxonomies (e.g. species or habitat lists) to describe them."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10056, drf:10057, drf:10058, drf:10059, drf:10060, drf:10061, drf:10062,
@@ -197,7 +135,7 @@ drf:10006 a skos:Concept;
 drf:10007 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "The Data are defined as the sum of observation values being observed at a station/plot either by sensor, measurement device or human observation. The Extended Fields are part of this class."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10070, drf:10071, drf:10072, drf:10073, drf:10074, drf:10075, drf:10076,
@@ -209,7 +147,7 @@ drf:10007 a skos:Concept;
 drf:10008 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "The Reference is the listing and description of additional codes used in the data provision. In order to enhance the re-usability of the data, information on the coding used e.g. for variable names or taxa, is needed. This can either refer to existing vocabularies used (e.g. by referencing to an URL) or by user defined definitions."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10089, drf:10090, drf:10091, drf:10092, drf:10093, drf:10094;
@@ -219,7 +157,7 @@ drf:10008 a skos:Concept;
 drf:10009 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "An Event is defined as activity to observe or collect information on the ecosystem characteristic of interest. This can be either e.g. a sampling event (e.g. soil water sample) or the recording of species abundance (e.g. vegetation relevee). Basic information on the event is given. The Core Fields are part of this class."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10095, drf:10096, drf:10097, drf:10098, drf:10099, drf:10100, drf:10101,
@@ -230,7 +168,7 @@ drf:10009 a skos:Concept;
 drf:10010 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "An Event is defined as activity to observe or collect information on the ecosystem characteristic of interest. This can be either e.g. a sampling event (e.g. soil water sample) or the recording of species abundance (e.g. vegetation relevee). Basic information on the event is given. The Extended Fields are part of this class."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10105, drf:10106, drf:10107, drf:10108;
@@ -240,7 +178,7 @@ drf:10010 a skos:Concept;
 drf:10011 a skos:Concept;
   dct:created "2025-12-04"^^xsd:date;
   dct:creator "0000-0002-7997-219X"@en;
-  dct:modified "2025-12-04"^^xsd:date;
+  dct:modified "2025-12-10"^^xsd:date;
   skos:definition "A Sample is the key observational units in environmental sciences, i.e. ecology, geosciences, biogeochemistry, and hydrobiology, and are essential to document and further analyse biological communities in laboratories (e.g., phytoplankton communities in water samples, benthic communities in sediments, etc.). In general, a sample is a limited quantity of something which is intended to be similar to and represent a larger amount of that thing(s). The things could be countable objects such as individual items available as units for sale, or an uncountable material. Even though the word \"sample\" implies a smaller quantity taken from a larger amount, sometimes full biological or mineralogical specimens are called samples if they are taken for analysis, testing, or investigation like other samples."@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:narrower drf:10109, drf:10110, drf:10111, drf:10112, drf:10113, drf:10114, drf:10115,
@@ -255,7 +193,7 @@ drf:10012 a skos:Concept;
   skos:broader drf:10001;
   skos:closeMatch dwc:institutionID;
   skos:definition "Site code [URL] – reference to LTER site and LTSER Platform on DEIMS-SDR. Please provide the deims.id for the site or platform"@en;
-  skos:example <https://deims.org/site/0ce0d289-9ef9-4232-a981-8f34869db76d>;
+  skos:example "https://deims.org/site/0ce0d289-9ef9-4232-a981-8f34869db76d"@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:prefLabel "SITE_CODE"@en .
 
@@ -625,7 +563,7 @@ drf:10043 a skos:Concept;
   dct:modified "2025-12-04"^^xsd:date;
   skos:broader drf:10005;
   skos:definition "Site code [URL] –reference the LTER site or LTSER Platform in DEIMS-SDR. Please provide the deims.id issued by DEIMS-SDR (https://deims.org)."@en;
-  skos:example <https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d>;
+  skos:example "https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d"@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:prefLabel "SITE_CODE"@en .
 
@@ -795,7 +733,7 @@ drf:10056 a skos:Concept;
   dct:modified "2025-12-04"^^xsd:date;
   skos:broader drf:10006;
   skos:definition "Site code [URL] –reference the LTER site or LTSER Platform in DEIMS-SDR. Please provide the deims.id issued by DEIMS-SDR (https://deims.org)."@en;
-  skos:example <https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d>;
+  skos:example "https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d"@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:prefLabel "SITE_CODE"@en .
 
@@ -1239,7 +1177,7 @@ drf:10093 a skos:Concept;
   dct:modified "2025-12-04"^^xsd:date;
   skos:broader drf:10008;
   skos:definition "Name or reference [URL] of the code list; if referring to an existing code list the name of the code list is provided (e.g. DB, EnvThes). If the code is defined by the user, use ‘ADD’ as identification"@en;
-  skos:example <http://www.catalogueoflife.org/col/>;
+  skos:example "http://www.catalogueoflife.org/col/"@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:prefLabel "LIST_CODE"@en .
 
@@ -1249,7 +1187,7 @@ drf:10094 a skos:Concept;
   dct:modified "2025-12-04"^^xsd:date;
   skos:broader drf:10008;
   skos:definition "Reference to the URL or persistent identifier"@en;
-  skos:example <http://www.catalogueoflife.org/\u0020col/details/species/id/\u00201f4cac67d34e7473fb5092f2fa66f4d2>;
+  skos:example "http://www.catalogueoflife.org/ col/details/species/id/ 1f4cac67d34e7473fb5092f2fa66f4d2"@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:prefLabel "CODE_URL"@en .
 
@@ -1259,7 +1197,7 @@ drf:10095 a skos:Concept;
   dct:modified "2025-12-04"^^xsd:date;
   skos:broader drf:10009;
   skos:definition "Site code [URL] –reference the LTER site or LTSER Platform in DEIMS-SDR. Please provide the deims.id issued by DEIMS-SDR (https://deims.org)."@en;
-  skos:example <https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d>;
+  skos:example "https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d"@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:prefLabel "SITE_CODE"@en .
 
@@ -1403,7 +1341,7 @@ drf:10109 a skos:Concept;
   dct:modified "2025-12-04"^^xsd:date;
   skos:broader drf:10011;
   skos:definition "Site code [URL] –reference the LTER site or LTSER Platform in DEIMS-SDR. Please provide the deims.id issued by DEIMS-SDR (https://deims.org)."@en;
-  skos:example <https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d>;
+  skos:example "https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d"@en;
   skos:inScheme <http://vocabs.lter-europe.net/elter_drf/>;
   skos:prefLabel "SITE_CODE"@en .
 
