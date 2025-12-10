@@ -232,3 +232,44 @@ jobs:
           git add README.md
           git diff-index --quiet HEAD || git commit -m "docs: update README with version $VERSION"
           git push
+          
+  generate_html:
+    needs: sheet2rdf
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Python
+        run: sudo apt-get update && sudo apt-get install -y python3 python3-pip
+
+      - name: Generate HTML from TTL
+        env:
+          FILE_NAME: ${{ secrets.FILE_NAME }}
+        run: |
+          pip3 install rdflib jinja2
+          python3 ./src/ttl_to_html.py "${FILE_NAME}.ttl" "./docs/index.html"
+
+      - name: Commit HTML page
+        run: |
+          git add docs/index.html
+          git diff-index --quiet HEAD || git commit -m "Generate HTML documentation page"
+          git push
+
+  publish_pages:
+    needs: generate_html
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy GitHub Pages
+        uses: actions/deploy-pages@v4
