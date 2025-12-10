@@ -48,61 +48,17 @@ namespaces = {p: str(u) for p, u in g.namespaces()}
 # ----------------------------------------------------
 # Extract top concepts (classes)
 # ----------------------------------------------------
-top_concepts = set()
-top_concepts.update(g.objects(scheme, SKOS.hasTopConcept))
-top_concepts.update(g.subjects(SKOS.topConceptOf, scheme))
-
-# ------------------------------------------
-# CLASSES (Top Concepts)
-# ------------------------------------------
 classes = []
 for cls in g.objects(scheme, SKOS.hasTopConcept):
     label = next(g.objects(cls, SKOS.prefLabel))
-    cls_id = str(cls).split("/")[-1]
-
-    # Collect all narrower concepts
-    narrower_terms = []
-    for term in g.objects(cls, SKOS.narrower):
-        term_label = next(g.objects(term, SKOS.prefLabel))
-        narrower_terms.append({
-            "id": str(term).split("/")[-1],
-            "uri": str(term),
-            "label": str(term_label)
-        })
-
     classes.append({
-        "id": cls_id,
+        "id": str(cls).split("/")[-1],
         "uri": str(cls),
         "label": str(label),
-        "terms": sorted(narrower_terms, key=lambda x: x["label"].lower())
+        "concepts": []     # verrà riempito dopo
     })
 
-
-# ------------------------------------------
-# ALL CONCEPTS – VOCABULARY SECTION
-# ------------------------------------------
-vocabulary = []
-for c in g.subjects(RDF.type, SKOS.Concept):
-    label = next(g.objects(c, SKOS.prefLabel))
-    definition = g.value(c, SKOS.definition)
-    example = g.value(c, SKOS.example)
-    broader = g.value(c, SKOS.broader)
-    unit = g.value(c, SCHEMA.unitText) or g.value(c, POV.unit)
-
-    vocabulary.append({
-        "id": str(c).split("/")[-1],
-        "uri": str(c),
-        "label": str(label),
-        "definition": str(definition or ""),
-        "example": str(example or ""),
-        "broader": str(broader) if broader else "",
-        "unit": str(unit or "")
-    })
-
-# Sort alphabetically
-vocabulary = sorted(vocabulary, key=lambda x: x["label"].lower())
-
-# --- Helper: breadcrumb ---
+# Helper: build breadcrumb
 def build_breadcrumb(concept):
     breadcrumb = []
     current = concept
@@ -119,48 +75,50 @@ def build_breadcrumb(concept):
     breadcrumb.reverse()
     return breadcrumb
 
-# --- All concepts ---
-concepts = []
+# All concepts
+all_concepts = []
 for c in g.subjects(RDF.type, SKOS.Concept):
     label = next(g.objects(c, SKOS.prefLabel))
     definition = g.value(c, SKOS.definition)
     example = g.value(c, SKOS.example)
+    broader = g.value(c, SKOS.broader)
     unit = g.value(c, SCHEMA.unitCode) or g.value(c, POV.unit)
-    top = g.value(c, SKOS.topConceptOf)
 
     breadcrumb = build_breadcrumb(c)
 
-    concepts.append({
+    all_concepts.append({
         "id": str(c).split("/")[-1],
         "uri": str(c),
         "label": str(label),
         "definition": str(definition or ""),
         "example": str(example or ""),
+        "broader": str(broader) if broader else "",
         "unit": str(unit or ""),
-        "top": str(top) if top else None,
         "breadcrumb": breadcrumb
     })
 
-# --- Build mapping class → concepts ---
+# Map class → concepts using breadcrumb[0]
 class_map = {c["id"]: [] for c in classes}
 
-for concept in concepts:
-    breadcrumb = concept["breadcrumb"]
-    if not breadcrumb:
+for concept in all_concepts:
+    if not concept["breadcrumb"]:
         continue
 
-    # first breadcrumb element = class
-    top = breadcrumb[0]["id"]
-
+    top = concept["breadcrumb"][0]["id"]
     if top in class_map:
         class_map[top].append(concept)
 
-# attach concepts to class objects
-for c in classes:
-    cid = c["id"]
-    c["concepts"] = class_map.get(cid, [])
+# Attach mapped concepts to classes
+for cls in classes:
+    cls_id = cls["id"]
+    cls["concepts"] = sorted(class_map.get(cls_id, []), key=lambda x: x["label"].lower())
 
-# --- Render HTML ---
+# Full vocabulary sorted alphabetically
+vocabulary = sorted(all_concepts, key=lambda x: x["label"].lower())
+
+# ----------------------------------------------------
+# Render page
+# ----------------------------------------------------
 html = template.render(
     scheme_title=str(scheme_title),
     scheme_desc=str(scheme_desc or ""),
@@ -171,8 +129,8 @@ html = template.render(
     modified=str(modified or ""),
     languages=langs,
     namespaces=namespaces,
-    classes=classes,       # NEW
-    vocabulary=vocabulary  # NEW
+    classes=classes,
+    vocabulary=vocabulary
 )
 
 with open(OUTPUT, "w") as f:
