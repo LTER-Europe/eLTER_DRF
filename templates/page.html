@@ -1,127 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>{{ scheme_title }} — Vocabulary Documentation</title>
-
+<meta charset="UTF-8">
+<title>{{ scheme_title }}</title>
 <style>
-body {
-    font-family: system-ui, sans-serif;
-    margin: 0;
-    background: #f8fafc;
-    line-height: 1.6;
-}
-header {
-    background: #1e3a8a;
-    color: white;
-    padding: 25px;
-}
-section {
-    padding: 20px 40px;
-}
-h1 { font-size: 32px; }
-h2 { margin-top: 40px; border-bottom: 2px solid #93c5fd; padding-bottom: 6px; }
-h3 { margin-top: 20px; font-size: 20px; }
-.class-title {
-    font-size: 26px;
-    margin-top: 50px;
-    padding-bottom: 5px;
-    border-bottom: 3px solid #60a5fa;
-}
-.concept-block {
-    margin-left: 20px;
-    padding: 10px 0;
-    border-left: 3px solid #bfdbfe;
-    padding-left: 15px;
-}
-.breadcrumb {
-    font-size: 12px;
-    color: #4b5563;
-}
-.unit {
-    color: #1e3a8a;
-    font-weight: bold;
-}
-pre {
-    background: #e2e8f0;
-    padding: 10px;
-    border-radius: 6px;
-}
-.toc a {
-    color: #1e40af;
-}
+
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        background: #f8f9fa;
+    }
+
+    header {
+        background: #0b2e59;
+        color: white;
+        padding: 30px 40px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.2rem;
+    }
+
+    header p {
+        margin: 6px 0;
+        font-size: 1rem;
+    }
+
+    .lang-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-top: 10px;
+        background: #1e90ff;
+        color: white;
+        border-radius: 6px;
+    }
+
+    .container {
+        padding: 40px;
+        max-width: 1100px;
+        margin: auto;
+        background: white;
+    }
+
+    h2, h3 {
+        color: #0b2e59;
+    }
+
+    h2 {
+        margin-top: 50px;
+        border-bottom: 2px solid #0b2e59;
+        padding-bottom: 8px;
+    }
+
+    a {
+        color: #003d9e;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    ul {
+        margin-top: 5px;
+    }
+
+    .term-block {
+        margin-bottom: 40px;
+        padding: 20px;
+        background: #f1f4f7;
+        border-left: 4px solid #0b2e59;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+        background: white;
+    }
+
+    th {
+        background: #e9ecef;
+        text-align: left;
+        width: 180px;
+        padding: 8px;
+        border-bottom: 1px solid #cbd3da;
+    }
+
+    td {
+        padding: 8px;
+        border-bottom: 1px solid #cbd3da;
+    }
+
+    .toc ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .toc li {
+        margin-bottom: 4px;
+    }
+
+    .toc li ul {
+        margin-left: 20px;
+    }
+
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>{{ scheme_title }}</h1>
-  <p>{{ scheme_desc }}</p>
-  <p><strong>Version:</strong> {{ version }}  
-     — <strong>Created:</strong> {{ created }}  
-     — <strong>Modified:</strong> {{ modified }}</p>
-  <p><strong>Creators:</strong> {{ creators }}</p>
-  <p><strong>Contributors:</strong> {{ contributors }}</p>
+<header id="top">
+    <h1>{{ scheme_title }}</h1>
+    <p><strong>Description:</strong> {{ scheme_desc }}</p>
+    <p><strong>Version:</strong> {{ version }}</p>
+    <p><strong>Creators:</strong> {{ creators }}</p>
+    <p><strong>Contributors:</strong> {{ contributors }}</p>
+    <p><strong>Created:</strong> {{ created }}</p>
+    <p><strong>Last modified:</strong> {{ modified }}</p>
+
+    {% for lang in languages %}
+        <span class="lang-badge">{{ lang }}</span>
+    {% endfor %}
 </header>
 
-<section>
-<h2>📘 Table of Contents</h2>
-<ul class="toc">
-{% for cls in classes %}
-  <li><a href="#{{ cls.id }}">{{ cls.label }}</a></li>
-{% endfor %}
-</ul>
-</section>
 
-<section>
-<h2>📂 Namespaces Used</h2>
-<ul>
-{% for p, u in namespaces.items() %}
-  <li><code>{{ p }}:</code> {{ u }}</li>
-{% endfor %}
-</ul>
-</section>
+<div class="container">
 
-<section>
-<h2>📚 Vocabulary Classes & Concepts</h2>
+    <!-- ========================================================= -->
+    <!-- TABLE OF CONTENTS -->
+    <!-- ========================================================= -->
 
-{% for cls in classes %}
-  <h2 id="{{ cls.id }}">{{ cls.label }}</h2>
-  <hr>
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#metadata">1 Metadata</a></li>
 
-  {% if cls.concepts %}
-    {% for c in cls.concepts %}
-      <div class="concept-block">
-        <h3 id="{{ c.id }}">
-          {{ c.label }}
-          <a class="copy-btn" onclick="copyURI('{{ c.uri }}')">Copy URI</a>
-        </h3>
+            <li>
+                <a href="#classes">2 Classes</a>
+                <ul>
+                {% for cls in classes %}
+                    <li><a href="#class-{{ cls.id }}">2.{{ loop.index }} {{ cls.label }}</a></li>
+                {% endfor %}
+                </ul>
+            </li>
 
-        <p><strong>URI:</strong> <code>{{ c.uri }}</code></p>
-        {% if c.definition %}
-          <p><strong>Definition:</strong> {{ c.definition }}</p>
+            <li><a href="#vocabulary">3 Vocabulary</a></li>
+        </ul>
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- METADATA -->
+    <!-- ========================================================= -->
+
+    <h2 id="metadata">1 Metadata</h2>
+
+    <h3>Namespaces</h3>
+    <ul>
+        {% for prefix, ns in namespaces.items() %}
+            <li><strong>{{ prefix }}:</strong> {{ ns }}</li>
+        {% endfor %}
+    </ul>
+
+
+    <!-- ========================================================= -->
+    <!-- CLASSES -->
+    <!-- ========================================================= -->
+
+    <h2 id="classes">2 Classes</h2>
+
+    {% for cls in classes %}
+        <h3 id="class-{{ cls.id }}">{{ cls.label }}</h3>
+
+        {% if cls.terms %}
+            <ul>
+                {% for term in cls.terms %}
+                    <li>
+                        <a href="#term-{{ term.id }}">{{ term.label }}</a> ({{ term.id }})
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p><em>No terms listed for this class.</em></p>
         {% endif %}
-        {% if c.example %}
-          <p><strong>Example:</strong> {{ c.example }}</p>
-        {% endif %}
-        {% if c.unit %}
-          <p><strong>Unit:</strong> {{ c.unit }}</p>
-        {% endif %}
-
-        <p class="breadcrumb">
-          {% for b in c.breadcrumb %}
-            {{ b.label }}{% if not loop.last %} → {% endif %}
-          {% endfor %}
-        </p>
-      </div>
-      <hr>
     {% endfor %}
-  {% else %}
-    <p>No concepts in this class.</p>
-  {% endif %}
-{% endfor %}
-</section>
+
+
+    <!-- ========================================================= -->
+    <!-- VOCABULARY SECTION -->
+    <!-- ========================================================= -->
+
+    <h2 id="vocabulary">3 Vocabulary</h2>
+
+    {% for t in vocabulary %}
+    <div class="term-block" id="term-{{ t.id }}">
+        <h3>{{ t.label }} ({{ t.id }})</h3>
+
+        <table>
+            <tr><th>IRI</th><td>{{ t.uri }}</td></tr>
+            <tr><th>Definition</th><td>{{ t.definition }}</td></tr>
+            <tr><th>Example</th><td>{{ t.example }}</td></tr>
+            <tr><th>Unit</th><td>{{ t.unit }}</td></tr>
+            <tr><th>Broader</th><td>{{ t.broader }}</td></tr>
+        </table>
+
+        <p><a href="#top">↑ back to top</a></p>
+    </div>
+    {% endfor %}
+
+</div>
 
 </body>
 </html>
