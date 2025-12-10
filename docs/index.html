@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>eLTER_DRF</title>
+
+<style>
+  body {
+    font-family: "Inter", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f7fa;
+    color: #2b3c4d;
+    line-height: 1.6;
+  }
+
+  header {
+    background: #002e5d;
+    color: #fff;
+    padding: 40px;
+    border-bottom: 4px solid #00a0dc;
+  }
+
+  header h1 {
+    margin-top: 0;
+    font-size: 32px;
+  }
+
+  .metadata-block p { margin: 6px 0; }
+
+  .lang-switch button {
+    padding: 6px 12px;
+    margin-right: 6px;
+    border: 1px solid #00a0dc;
+    background: white;
+    color: #004b8d;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .lang-switch button.active {
+    background: #00a0dc;
+    color: white;
+  }
+
+  .toc {
+    background: #ffffff;
+    padding: 20px;
+    border-left: 4px solid #00a0dc;
+    margin: 20px;
+    border-radius: 6px;
+  }
+
+  .content { padding: 0 40px 60px; }
+
+  .namespace-box {
+    background: #eef3f8;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 6px;
+    border-left: 4px solid #00a0dc;
+  }
+
+  .concept-class h2 {
+    border-bottom: 3px solid #00a0dc;
+    padding-bottom: 5px;
+    margin-top: 50px;
+  }
+
+  .concept {
+    background: #ffffff;
+    padding: 15px;
+    border-left: 4px solid #002e5d;
+    margin-top: 20px;
+    border-radius: 6px;
+  }
+
+  .concept h3 { margin-top: 0; }
+
+  .copy-btn {
+    padding: 4px 8px;
+    margin-left: 10px;
+    font-size: 12px;
+    background: #00a0dc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: #008bbd; }
+
+  .breadcrumb {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 12px;
+  }
+
+  .breadcrumb a {
+    color: #0077cc;
+    text-decoration: none;
+  }
+
+</style>
+
+<script>
+// ====== LANGUAGE SWITCH ======
+function switchLang(lang) {
+  document.querySelectorAll("[data-label]").forEach(el => {
+    el.style.display = el.getAttribute("data-label") === lang ? "inline" : "none";
+  });
+  document.querySelectorAll(".lang-switch button").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.lang === lang);
+  });
+}
+
+// ====== COPY URI ======
+function copyURI(uri) {
+  navigator.clipboard.writeText(uri);
+  alert("Copied:\n" + uri);
+}
+</script>
+
+</head>
+<body>
+
+<header>
+  <h1>eLTER_DRF</h1>
+
+  <div class="metadata-block">
+    <p><strong>Description:</strong> eLTER_DRF is...</p>
+    <p><strong>Version:</strong> 1.3.0</p>
+    <p><strong>Creators:</strong> Alessandro Oggioni, Allan Souza, Johannes Peterseil, Lisa Reiss, Sarah Venier</p>
+    
+    <p><strong>Created:</strong> 2025-12-04</p>
+    <p><strong>Last modified:</strong> 2025-12-04</p>
+  </div>
+
+  
+  <div class="lang-switch">
+    
+      <button onclick="switchLang('en')" data-lang="en" class="active">
+        en
+      </button>
+    
+  </div>
+  
+</header>
+
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ul>
+    
+      <li><a href="#10001">StationCoreFields</a></li>
+    
+      <li><a href="#10002">StationExtendedFields</a></li>
+    
+      <li><a href="#10003">MethodCoreFields</a></li>
+    
+      <li><a href="#10004">MpthodExtendedfileds</a></li>
+    
+      <li><a href="#10005">DataMeasurements</a></li>
+    
+      <li><a href="#10006">DataMapping</a></li>
+    
+      <li><a href="#10007">DataExtendedFields</a></li>
+    
+      <li><a href="#10008">ReferenceCoreFields</a></li>
+    
+      <li><a href="#10009">EventCoreFields</a></li>
+    
+      <li><a href="#10010">EventExtendedFields</a></li>
+    
+      <li><a href="#10011">SampleEvent</a></li>
+    
+  </ul>
+</div>
+
+<div class="content">
+
+  <div class="namespace-box">
+    <h3>Namespaces Used</h3>
+    <ul>
+      
+        <li><code>brick:</code> https://brickschema.org/schema/Brick#</li>
+      
+        <li><code>csvw:</code> http://www.w3.org/ns/csvw#</li>
+      
+        <li><code>dc:</code> http://purl.org/dc/elements/1.1/</li>
+      
+        <li><code>dcat:</code> http://www.w3.org/ns/dcat#</li>
+      
+        <li><code>dcmitype:</code> http://purl.org/dc/dcmitype/</li>
+      
+        <li><code>dcam:</code> http://purl.org/dc/dcam/</li>
+      
+        <li><code>doap:</code> http://usefulinc.com/ns/doap#</li>
+      
+        <li><code>foaf:</code> http://xmlns.com/foaf/0.1/</li>
+      
+        <li><code>geo:</code> http://www.opengis.net/ont/geosparql#</li>
+      
+        <li><code>odrl:</code> http://www.w3.org/ns/odrl/2/</li>
+      
+        <li><code>org:</code> http://www.w3.org/ns/org#</li>
+      
+        <li><code>prof:</code> http://www.w3.org/ns/dx/prof/</li>
+      
+        <li><code>prov:</code> http://www.w3.org/ns/prov#</li>
+      
+        <li><code>qb:</code> http://purl.org/linked-data/cube#</li>
+      
+        <li><code>schema:</code> https://schema.org/</li>
+      
+        <li><code>sh:</code> http://www.w3.org/ns/shacl#</li>
+      
+        <li><code>skos:</code> http://www.w3.org/2004/02/skos/core#</li>
+      
+        <li><code>sosa:</code> http://www.w3.org/ns/sosa/</li>
+      
+        <li><code>ssn:</code> http://www.w3.org/ns/ssn/</li>
+      
+        <li><code>time:</code> http://www.w3.org/2006/time#</li>
+      
+        <li><code>vann:</code> http://purl.org/vocab/vann/</li>
+      
+        <li><code>void:</code> http://rdfs.org/ns/void#</li>
+      
+        <li><code>wgs:</code> https://www.w3.org/2003/01/geo/wgs84_pos#</li>
+      
+        <li><code>owl:</code> http://www.w3.org/2002/07/owl#</li>
+      
+        <li><code>rdf:</code> http://www.w3.org/1999/02/22-rdf-syntax-ns#</li>
+      
+        <li><code>rdfs:</code> http://www.w3.org/2000/01/rdf-schema#</li>
+      
+        <li><code>xsd:</code> http://www.w3.org/2001/XMLSchema#</li>
+      
+        <li><code>xml:</code> http://www.w3.org/XML/1998/namespace</li>
+      
+        <li><code>dct:</code> http://purl.org/dc/terms/</li>
+      
+        <li><code>doap1:</code> file:///home/runner/work/eLTER_DRF/eLTER_DRF/usefulinc.com/ns/doap#</li>
+      
+        <li><code>drf:</code> http://vocabs.lter-europe.net/elter_drf/</li>
+      
+        <li><code>dwc:</code> http://rs.tdwg.org/dwc/terms/</li>
+      
+        <li><code>et:</code> http://vocabs.lter-europe.net/EnvThes/</li>
+      
+        <li><code>euvoc:</code> http://publications.europa.eu/ontology/euvoc#</li>
+      
+        <li><code>gen:</code> http://purl.org/zonmw/generic/</li>
+      
+        <li><code>iop:</code> https://w3id.org/iadopt/ont/</li>
+      
+        <li><code>omv:</code> http://omv.ontoware.org/2005/05/ontology</li>
+      
+        <li><code>pav:</code> http://purl.org/pav/</li>
+      
+        <li><code>puv:</code> https://w3id.org/env/puv#</li>
+      
+        <li><code>qudt:</code> http://qudt.org/vocab/</li>
+      
+        <li><code>schema1:</code> http://schema.org/</li>
+      
+        <li><code>skosthes:</code> http://purl.org/iso25964/skos-thes#</li>
+      
+        <li><code>skosxl:</code> http://www.w3.org/2008/05/skos-xl#</li>
+      
+        <li><code>unit:</code> http://qudt.org/vocab/unit/</li>
+      
+        <li><code>vaof:</code> http://purl.org/vocommons/voaf#</li>
+      
+    </ul>
+  </div>
+
+  
+    <div class="concept-class" id="10001">
+      <h2>StationCoreFields</h2>
+
+      
+    </div>
+  
+    <div class="concept-class" id="10002">
+      <h2>StationExtendedFields</h2>
+
+      
+    </div>
+  
+    <div class="concept-class" id="10003">
+      <h2>MethodCoreFields</h2>
+
+      
+    </div>
+  
+    <div class="concept-class" id="10004">
+      <h2>MpthodExtendedfileds</h2>
+
+      
+    </div>
+  
+    <div class="concept-class" id="10005">
+      <h2>DataMeasurements</h2>
+
+      
+    </div>
+  
+    <div class="concept-class" id="10006">
+      <h2>DataMapping</h2>
+
+      
+    </div>
+  
+    <div class="concept-class" id="10007">
+      <h2>DataExtendedFields</h2>
+
+      
+    </div>
+  
+    <div class="concept-class" id="10008">
+      <h2>ReferenceCoreFields</h2>
+
+      
+    </div>
+  
+    <div class="concept-class" id="10009">
+      <h2>EventCoreFields</h2>
+
+      
+    </div>
+  
+    <div class="concept-class" id="10010">
+      <h2>EventExtendedFields</h2>
+
+      
+    </div>
+  
+    <div class="concept-class" id="10011">
+      <h2>SampleEvent</h2>
+
+      
+    </div>
+  
+
+</div>
+
+<script>
+
+switchLang("en");
+
+</script>
+
+</body>
+</html>
