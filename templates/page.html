@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>{{ scheme_title }}</title>
+
+<style>
+  body {
+    font-family: "Inter", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f7fa;
+    color: #2b3c4d;
+    line-height: 1.6;
+  }
+
+  header {
+    background: #002e5d;
+    color: #fff;
+    padding: 40px;
+    border-bottom: 4px solid #00a0dc;
+  }
+
+  header h1 {
+    margin-top: 0;
+    font-size: 32px;
+  }
+
+  .metadata-block p { margin: 6px 0; }
+
+  .lang-switch button {
+    padding: 6px 12px;
+    margin-right: 6px;
+    border: 1px solid #00a0dc;
+    background: white;
+    color: #004b8d;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .lang-switch button.active {
+    background: #00a0dc;
+    color: white;
+  }
+
+  .toc {
+    background: #ffffff;
+    padding: 20px;
+    border-left: 4px solid #00a0dc;
+    margin: 20px;
+    border-radius: 6px;
+  }
+
+  .content { padding: 0 40px 60px; }
+
+  .namespace-box {
+    background: #eef3f8;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 6px;
+    border-left: 4px solid #00a0dc;
+  }
+
+  .concept-class h2 {
+    border-bottom: 3px solid #00a0dc;
+    padding-bottom: 5px;
+    margin-top: 50px;
+  }
+
+  .concept {
+    background: #ffffff;
+    padding: 15px;
+    border-left: 4px solid #002e5d;
+    margin-top: 20px;
+    border-radius: 6px;
+  }
+
+  .concept h3 { margin-top: 0; }
+
+  .copy-btn {
+    padding: 4px 8px;
+    margin-left: 10px;
+    font-size: 12px;
+    background: #00a0dc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: #008bbd; }
+
+  .breadcrumb {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 12px;
+  }
+
+  .breadcrumb a {
+    color: #0077cc;
+    text-decoration: none;
+  }
+
+</style>
+
+<script>
+// ====== LANGUAGE SWITCH ======
+function switchLang(lang) {
+  document.querySelectorAll("[data-label]").forEach(el => {
+    el.style.display = el.getAttribute("data-label") === lang ? "inline" : "none";
+  });
+  document.querySelectorAll(".lang-switch button").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.lang === lang);
+  });
+}
+
+// ====== COPY URI ======
+function copyURI(uri) {
+  navigator.clipboard.writeText(uri);
+  alert("Copied:\n" + uri);
+}
+</script>
+
+</head>
+<body>
+
+<header>
+  <h1>{{ scheme_title }}</h1>
+
+  <div class="metadata-block">
+    {% if scheme_desc %}<p><strong>Description:</strong> {{ scheme_desc }}</p>{% endif %}
+    {% if version %}<p><strong>Version:</strong> {{ version }}</p>{% endif %}
+    {% if creators %}<p><strong>Creators:</strong> {{ creators }}</p>{% endif %}
+    {% if contributors %}<p><strong>Contributors:</strong> {{ contributors }}</p>{% endif %}
+    {% if created %}<p><strong>Created:</strong> {{ created }}</p>{% endif %}
+    {% if modified %}<p><strong>Last modified:</strong> {{ modified }}</p>{% endif %}
+  </div>
+
+  {% if languages %}
+  <div class="lang-switch">
+    {% for lang in languages %}
+      <button onclick="switchLang('{{ lang }}')" data-lang="{{ lang }}" class="{{ 'active' if loop.first else '' }}">
+        {{ lang }}
+      </button>
+    {% endfor %}
+  </div>
+  {% endif %}
+</header>
+
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ul>
+    {% for cls in classes %}
+      <li><a href="#{{ cls.id }}">{{ cls.label }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="content">
+
+  <div class="namespace-box">
+    <h3>Namespaces Used</h3>
+    <ul>
+      {% for ns, val in namespaces.items() %}
+        <li><code>{{ ns }}:</code> {{ val }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {% for cls in classes %}
+    <div class="concept-class" id="{{ cls.id }}">
+      <h2>{{ cls.label }}</h2>
+
+      {% for c in concepts if c.top == cls.uri %}
+        <div class="concept">
+
+          {% if c.breadcrumb %}
+          <div class="breadcrumb">
+            {% for step in c.breadcrumb %}
+              {% if not loop.last %}
+                <a href="#{{ step.id }}">{{ step.label }}</a> ›
+              {% else %}
+                {{ step.label }}
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <h3>
+            {{ c.label }}
+            <button class="copy-btn" onclick="copyURI('{{ c.uri }}')">Copy URI</button>
+          </h3>
+
+          <p><strong>URI:</strong> <a href="{{ c.uri }}">{{ c.uri }}</a></p>
+
+          {% if c.definition %}<p><strong>Description:</strong> {{ c.definition }}</p>{% endif %}
+          {% if c.example %}<p><strong>Example:</strong> {{ c.example }}</p>{% endif %}
+          {% if c.unit %}<p><strong>Unit:</strong> {{ c.unit }}</p>{% endif %}
+
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+
+</div>
+
+<script>
+{% if languages %}
+switchLang("{{ languages[0] }}");
+{% endif %}
+</script>
+
+</body>
+</html>
