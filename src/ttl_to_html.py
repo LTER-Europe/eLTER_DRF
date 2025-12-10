@@ -52,19 +52,17 @@ top_concepts = set()
 top_concepts.update(g.objects(scheme, SKOS.hasTopConcept))
 top_concepts.update(g.subjects(SKOS.topConceptOf, scheme))
 
-# Sorted list for deterministic HTML output
+# --- Top concepts (classes) ---
 classes = []
-for cls in sorted(top_concepts):
+for cls in g.objects(scheme, SKOS.hasTopConcept):
     label = next(g.objects(cls, SKOS.prefLabel))
     classes.append({
         "id": str(cls).split("/")[-1],
         "uri": str(cls),
-        "label": str(label)
+        "label": str(label),
     })
 
-# ----------------------------------------------------
-# Helper: Build breadcrumb
-# ----------------------------------------------------
+# --- Helper: breadcrumb ---
 def build_breadcrumb(concept):
     breadcrumb = []
     current = concept
@@ -81,40 +79,29 @@ def build_breadcrumb(concept):
     breadcrumb.reverse()
     return breadcrumb
 
-# ----------------------------------------------------
-# Helper: recursively build hierarchical structure
-# ----------------------------------------------------
-def build_tree(parent):
-    items = []
-    children = list(g.subjects(SKOS.broader, parent))
-    for c in sorted(children):
-        label = next(g.objects(c, SKOS.prefLabel))
-        definition = g.value(c, SKOS.definition)
-        example = g.value(c, SKOS.example)
-        unit = g.value(c, SCHEMA.unitCode) or g.value(c, POV.unit)
+# --- All concepts ---
+concepts = []
+for c in g.subjects(RDF.type, SKOS.Concept):
+    label = next(g.objects(c, SKOS.prefLabel))
+    definition = g.value(c, SKOS.definition)
+    example = g.value(c, SKOS.example)
+    unit = g.value(c, SCHEMA.unitCode) or g.value(c, POV.unit)
+    top = g.value(c, SKOS.topConceptOf)
 
-        items.append({
-            "id": str(c).split("/")[-1],
-            "uri": str(c),
-            "label": str(label),
-            "definition": str(definition or ""),
-            "example": str(example or ""),
-            "unit": str(unit or ""),
-            "children": build_tree(c),
-            "breadcrumb": build_breadcrumb(c)
-        })
+    breadcrumb = build_breadcrumb(c)
 
-    return items
+    concepts.append({
+        "id": str(c).split("/")[-1],
+        "uri": str(c),
+        "label": str(label),
+        "definition": str(definition or ""),
+        "example": str(example or ""),
+        "unit": str(unit or ""),
+        "top": str(top) if top else None,
+        "breadcrumb": breadcrumb
+    })
 
-# ----------------------------------------------------
-# Build hierarchical structure for each class
-# ----------------------------------------------------
-class_trees = {}
-
-for cls in top_concepts:
-    class_trees[str(cls).split("/")[-1]] = build_tree(cls)
-
-# --- Build a mapping: class_id → list of its concepts ---
+# --- Build mapping class → concepts ---
 class_map = {c["id"]: [] for c in classes}
 
 for concept in concepts:
@@ -122,21 +109,18 @@ for concept in concepts:
     if not breadcrumb:
         continue
 
-    # First item in breadcrumb = the top concept class
+    # first breadcrumb element = class
     top = breadcrumb[0]["id"]
 
-    # If this class exists in the map, attach the concept
     if top in class_map:
         class_map[top].append(concept)
 
-# Attach each list of concepts to the class entries
+# attach concepts to class objects
 for c in classes:
-    c_id = c["id"]
-    c["concepts"] = class_map.get(c_id, [])
+    cid = c["id"]
+    c["concepts"] = class_map.get(cid, [])
 
-# ----------------------------------------------------
-# Render HTML
-# ----------------------------------------------------
+# --- Render HTML ---
 html = template.render(
     scheme_title=str(scheme_title),
     scheme_desc=str(scheme_desc or ""),
@@ -147,8 +131,8 @@ html = template.render(
     modified=str(modified or ""),
     languages=langs,
     namespaces=namespaces,
-    classes=classes,
-    trees=class_trees
+    classes=classes,   # now includes "concepts"
+    concepts=concepts  # optional if needed elsewhere
 )
 
 with open(OUTPUT, "w") as f:
