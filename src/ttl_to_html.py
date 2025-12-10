@@ -171,8 +171,8 @@ html = template.render(
     modified=str(modified or ""),
     languages=langs,
     namespaces=namespaces,
-    classes=classes,   # now includes "concepts"
-    concepts=concepts  # optional if needed elsewhere
+    classes=classes,       # NEW
+    vocabulary=vocabulary  # NEW
 )
 
 with open(OUTPUT, "w") as f:
