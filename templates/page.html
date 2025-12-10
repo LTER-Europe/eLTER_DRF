@@ -18,15 +18,8 @@
         padding: 30px 40px;
     }
 
-    header h1 {
-        margin: 0;
-        font-size: 2.2rem;
-    }
-
-    header p {
-        margin: 6px 0;
-        font-size: 1rem;
-    }
+    header h1 { margin: 0; font-size: 2.2rem; }
+    header p { margin: 6px 0; font-size: 1rem; }
 
     .lang-badge {
         display: inline-block;
@@ -44,9 +37,7 @@
         background: white;
     }
 
-    h2, h3 {
-        color: #0b2e59;
-    }
+    h2, h3 { color: #0b2e59; }
 
     h2 {
         margin-top: 50px;
@@ -54,18 +45,8 @@
         padding-bottom: 8px;
     }
 
-    a {
-        color: #003d9e;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    ul {
-        margin-top: 5px;
-    }
+    a { color: #003d9e; }
+    a:hover { text-decoration: underline; }
 
     .term-block {
         margin-bottom: 40px;
@@ -83,7 +64,6 @@
 
     th {
         background: #e9ecef;
-        text-align: left;
         width: 180px;
         padding: 8px;
         border-bottom: 1px solid #cbd3da;
@@ -94,18 +74,9 @@
         border-bottom: 1px solid #cbd3da;
     }
 
-    .toc ul {
-        list-style: none;
-        padding-left: 0;
-    }
-
-    .toc li {
-        margin-bottom: 4px;
-    }
-
-    .toc li ul {
-        margin-left: 20px;
-    }
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin-bottom: 4px; }
+    .toc li ul { margin-left: 25px; }
 
 </style>
 </head>
@@ -129,9 +100,9 @@
 
 <div class="container">
 
-    <!-- ========================================================= -->
+    <!-- ============================ -->
     <!-- TABLE OF CONTENTS -->
-    <!-- ========================================================= -->
+    <!-- ============================ -->
 
     <div class="toc">
         <h2>Table of Contents</h2>
@@ -142,7 +113,11 @@
                 <a href="#classes">2 Classes</a>
                 <ul>
                 {% for cls in classes %}
-                    <li><a href="#class-{{ cls.id }}">2.{{ loop.index }} {{ cls.label }}</a></li>
+                    <li>
+                        <a href="#class-{{ cls.id }}">
+                            2.{{ loop.index }} {{ cls.label }}
+                        </a>
+                    </li>
                 {% endfor %}
                 </ul>
             </li>
@@ -151,10 +126,9 @@
         </ul>
     </div>
 
-
-    <!-- ========================================================= -->
+    <!-- ============================ -->
     <!-- METADATA -->
-    <!-- ========================================================= -->
+    <!-- ============================ -->
 
     <h2 id="metadata">1 Metadata</h2>
 
@@ -165,33 +139,33 @@
         {% endfor %}
     </ul>
 
-
-    <!-- ========================================================= -->
-    <!-- CLASSES -->
-    <!-- ========================================================= -->
+    <!-- ============================ -->
+    <!-- CLASSES + CONCEPTS -->
+    <!-- ============================ -->
 
     <h2 id="classes">2 Classes</h2>
 
     {% for cls in classes %}
         <h3 id="class-{{ cls.id }}">{{ cls.label }}</h3>
 
-        {% if cls.terms %}
+        {% if cls.concepts %}
             <ul>
-                {% for term in cls.terms %}
+                {% for term in cls.concepts %}
                     <li>
-                        <a href="#term-{{ term.id }}">{{ term.label }}</a> ({{ term.id }})
+                        <a href="#term-{{ term.id }}">{{ term.label }}</a>
+                        ({{ term.id }})
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
             <p><em>No terms listed for this class.</em></p>
         {% endif %}
+
     {% endfor %}
 
-
-    <!-- ========================================================= -->
+    <!-- ============================ -->
     <!-- VOCABULARY SECTION -->
-    <!-- ========================================================= -->
+    <!-- ============================ -->
 
     <h2 id="vocabulary">3 Vocabulary</h2>
 
