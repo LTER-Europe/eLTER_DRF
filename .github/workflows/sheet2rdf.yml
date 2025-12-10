@@ -232,7 +232,7 @@ jobs:
           git add README.md
           git diff-index --quiet HEAD || git commit -m "docs: update README with version $VERSION"
           git push
-          
+
   generate_html:
     needs: sheet2rdf
     runs-on: ubuntu-latest
@@ -240,7 +240,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # Needed so git pull works
+          fetch-depth: 0
 
       - name: Install Python
         run: |
@@ -254,6 +254,15 @@ jobs:
         run: |
           python3 ./src/ttl_to_html.py "${FILE_NAME}.ttl" "./docs/index.html"
 
+      # ➜ CREATE PUBLIC FOLDER for GitHub Pages
+      - name: Prepare public folder
+        run: |
+          mkdir -p public
+          cp docs/index.html public/index.html
+          echo "Content of public/:"
+          ls -l public
+
+      # Commit docs/index.html into repo
       - name: Configure Git identity
         run: |
           git config user.name "github-actions"
@@ -274,18 +283,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Download repo to get generated files
-        uses: actions/checkout@v4
-
-      - name: Upload GitHub Pages artifact
+      - name: Upload public folder as GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
 
   publish_page:
-    needs: generate_html
+    needs: upload_pages_artifact
     runs-on: ubuntu-latest
 
     permissions:
@@ -302,12 +306,6 @@ jobs:
       cancel-in-progress: true
 
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: ./public
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
