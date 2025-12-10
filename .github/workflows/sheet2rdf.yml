@@ -281,9 +281,18 @@ jobs:
   upload_pages_artifact:
     needs: generate_html
     runs-on: ubuntu-latest
-
+  
     steps:
-      - name: Upload public folder as GitHub Pages artifact
+      - uses: actions/checkout@v4
+  
+      - name: Ensure public folder exists
+        run: |
+          mkdir -p public
+          cp docs/index.html public/index.html
+          echo "Public folder content:"
+          ls -l public
+  
+      - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
