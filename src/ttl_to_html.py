@@ -12,11 +12,15 @@ SCHEMA = rdflib.Namespace("http://schema.org/")
 POV = rdflib.Namespace("https://w3id.org/pov/")
 OWL = rdflib.Namespace("http://www.w3.org/2002/07/owl#")
 
+# ----------------------------------------------------
 # Load HTML template
+# ----------------------------------------------------
 with open("templates/page.html", "r") as f:
     template = Template(f.read())
 
-# Extract ConceptScheme
+# ----------------------------------------------------
+# Extract ConceptScheme metadata
+# ----------------------------------------------------
 scheme = next(g.subjects(RDF.type, SKOS.ConceptScheme))
 
 scheme_title = next(g.objects(scheme, SKOS.prefLabel))
@@ -27,19 +31,30 @@ contributors = [str(c) for c in g.objects(scheme, DCTERMS.contributor)]
 created = g.value(scheme, DCTERMS.created)
 modified = g.value(scheme, DCTERMS.modified)
 
+# ----------------------------------------------------
 # Languages detected
+# ----------------------------------------------------
 langs = sorted({
     label.language
     for _, _, label in g.triples((None, SKOS.prefLabel, None))
     if label.language
 })
 
+# ----------------------------------------------------
 # Namespaces
+# ----------------------------------------------------
 namespaces = {p: str(u) for p, u in g.namespaces()}
 
-# Top concepts (Classes)
+# ----------------------------------------------------
+# Extract top concepts (classes)
+# ----------------------------------------------------
+top_concepts = set()
+top_concepts.update(g.objects(scheme, SKOS.hasTopConcept))
+top_concepts.update(g.subjects(SKOS.topConceptOf, scheme))
+
+# Sorted list for deterministic HTML output
 classes = []
-for cls in g.objects(scheme, SKOS.hasTopConcept):
+for cls in sorted(top_concepts):
     label = next(g.objects(cls, SKOS.prefLabel))
     classes.append({
         "id": str(cls).split("/")[-1],
@@ -47,7 +62,9 @@ for cls in g.objects(scheme, SKOS.hasTopConcept):
         "label": str(label)
     })
 
-# Helper: build breadcrumb
+# ----------------------------------------------------
+# Helper: Build breadcrumb
+# ----------------------------------------------------
 def build_breadcrumb(concept):
     breadcrumb = []
     current = concept
@@ -64,28 +81,42 @@ def build_breadcrumb(concept):
     breadcrumb.reverse()
     return breadcrumb
 
-# All concepts
-concepts = []
-for c in g.subjects(RDF.type, SKOS.Concept):
-    label = next(g.objects(c, SKOS.prefLabel))
-    definition = g.value(c, SKOS.definition)
-    example = g.value(c, SKOS.example)
-    unit = g.value(c, SCHEMA.unitText) or g.value(c, POV.unit)
-    top = g.value(c, SKOS.topConceptOf)
+# ----------------------------------------------------
+# Helper: recursively build hierarchical structure
+# ----------------------------------------------------
+def build_tree(parent):
+    items = []
+    children = list(g.subjects(SKOS.broader, parent))
+    for c in sorted(children):
+        label = next(g.objects(c, SKOS.prefLabel))
+        definition = g.value(c, SKOS.definition)
+        example = g.value(c, SKOS.example)
+        unit = g.value(c, SCHEMA.unitCode) or g.value(c, POV.unit)
 
-    breadcrumb = build_breadcrumb(c)
+        items.append({
+            "id": str(c).split("/")[-1],
+            "uri": str(c),
+            "label": str(label),
+            "definition": str(definition or ""),
+            "example": str(example or ""),
+            "unit": str(unit or ""),
+            "children": build_tree(c),
+            "breadcrumb": build_breadcrumb(c)
+        })
 
-    concepts.append({
-        "id": str(c).split("/")[-1],
-        "uri": str(c),
-        "label": str(label),
-        "definition": str(definition or ""),
-        "example": str(example or ""),
-        "unit": str(unit or ""),
-        "top": str(top) if top else None,
-        "breadcrumb": breadcrumb
-    })
+    return items
 
+# ----------------------------------------------------
+# Build hierarchical structure for each class
+# ----------------------------------------------------
+class_trees = {}
+
+for cls in top_concepts:
+    class_trees[str(cls).split("/")[-1]] = build_tree(cls)
+
+# ----------------------------------------------------
+# Render HTML
+# ----------------------------------------------------
 html = template.render(
     scheme_title=str(scheme_title),
     scheme_desc=str(scheme_desc or ""),
@@ -97,7 +128,7 @@ html = template.render(
     languages=langs,
     namespaces=namespaces,
     classes=classes,
-    concepts=concepts
+    trees=class_trees
 )
 
 with open(OUTPUT, "w") as f:
