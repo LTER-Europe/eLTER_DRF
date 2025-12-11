@@ -109,36 +109,55 @@ for c in g.subjects(RDF.type, SKOS.Concept):
     label = next(g.objects(c, SKOS.prefLabel))
     definition = g.value(c, SKOS.definition)
     example = g.value(c, SKOS.example)
-    broader = g.value(c, SKOS.broader)
     unit = g.value(c, SCHEMA.unitCode) or g.value(c, POV.unit)
     creat = g.value(c, DCTERMS.created)
     modif = g.value(c, DCTERMS.modified)
     match = g.value(c, SKOS.closeMatch)
 
+    # ------------------------------------------
+    # Broader concept (URI + link interno)
+    # ------------------------------------------
+    broader_node = g.value(c, SKOS.broader)
+
+    if broader_node:
+        broader_label = localname(broader_node)
+        broader_uri = str(broader_node)
+        broader_anchor = f"#class-{broader_label}"
+    else:
+        broader_label = "-"
+        broader_uri = "-"
+        broader_anchor = "-"
+
+    # ------------------------------------------
+    # Breadcrumb HTML
+    # ------------------------------------------
     breadcrumb = build_breadcrumb(c)
 
-    # Build broader anchor link
-    broader_local = localname(broader) if broader else "-"
-    broader_anchor = f"#class-{broader_local}" if broader else "-"
-
-    # Build breadcrumb HTML
     breadcrumb_html = " / ".join(
         f'<a href="#class-{item["id"]}">{item["label"]}</a>'
         for item in breadcrumb
     )
-    
+
+    # ------------------------------------------
+    # Append concept object
+    # ------------------------------------------
     all_concepts.append({
         "id": localname(c),
         "uri": str(c),
         "label": str(label),
         "definition": str(definition or "-"),
         "example": str(example or "-"),
-        "broader": broader_anchor,
-        "broader_label": broader_local,
         "unit": str(unit or "-"),
         "creat": str(creat or "-"),
         "modif": str(modif or "-"),
         "match": str(match or "-"),
+
+        # NEW broader fields
+        "broader_label": broader_label,
+        "broader_uri": broader_uri,
+        "broader_anchor": broader_anchor,
+
+        # breadcrumb
         "breadcrumb_html": breadcrumb_html
     })
 
