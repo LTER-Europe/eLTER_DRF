@@ -250,9 +250,11 @@ td {
             <tr>
                 <th>Broader</th>
                 <td>
-                    {% if t.broader_label != "-" %}
-                        <a href="#class-{{ t.broader_label }}">{{ t.broader_label }}</a>
-                    {% else %}-{% endif %}
+                    {% if t.broader_uri != "-" %}
+                        <a href="{{ t.broader_anchor }}">{{ t.broader_uri }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
                 </td>
             </tr>
     
