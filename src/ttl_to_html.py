@@ -167,7 +167,7 @@ for c in g.subjects(RDF.type, SKOS.Concept):
 # Attach to classes
 for cls in classes:
     cls_id = cls["id"]
-    cls["concepts"] = sorted(class_map.get(cls_id, []), key=lambda x: x["label"].lower())
+    cls["concepts"] = class_map.get(cls_id, [])
 
 
 # ----------------------------------------------------
@@ -177,7 +177,6 @@ for cls in classes:
 # "Classes" = top concepts
 vocabulary_classes = []
 for cls in classes:
-    cnode = next(g.subjects(SKOS.prefLabel, rdflib.Literal(cls["label"])))
     definition = g.value(cnode, SKOS.definition)
     match = g.value(cnode, SKOS.closeMatch)
 
@@ -196,7 +195,7 @@ vocabulary_concepts = [
 ]
 
 # Sort both lists
-vocabulary_classes = sorted(vocabulary_classes, key=lambda x: x["label"].lower())
+vocabulary_classes = classes
 vocabulary_concepts = sorted(vocabulary_concepts, key=lambda x: x["label"].lower())
 
 # ----------------------------------------------------
