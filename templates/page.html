@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>{{ scheme_title }}</title>
 <style>
-
     body {
         font-family: Arial, sans-serif;
         line-height: 1.6;
@@ -31,21 +30,54 @@
     }
 
     .container {
-        padding: 40px;
-        max-width: 1100px;
+        padding: 30px 40px 40px;
+        max-width: 1300px;
         margin: auto;
         background: white;
+    }
+
+    .layout {
+        display: flex;
+        align-items: flex-start;
+        gap: 32px;
+    }
+
+    .content {
+        flex: 3;
+        min-width: 0;
+    }
+
+    .sidebar {
+        flex: 1;
+        max-width: 260px;
+        position: sticky;
+        top: 20px;
+        align-self: flex-start;
+        background: #f5f7fb;
+        border-left: 3px solid #0b2e59;
+        padding: 16px 16px 16px 20px;
+        font-size: 0.9rem;
+    }
+
+    .sidebar h2 {
+        margin-top: 0;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #cbd3da;
+        padding-bottom: 6px;
     }
 
     h2, h3 { color: #0b2e59; }
 
     h2 {
-        margin-top: 50px;
+        margin-top: 40px;
         border-bottom: 2px solid #0b2e59;
         padding-bottom: 8px;
     }
 
-    a { color: #003d9e; }
+    a {
+        color: #003d9e;
+        text-decoration: none;
+    }
     a:hover { text-decoration: underline; }
 
     .term-block {
@@ -67,6 +99,7 @@
         width: 180px;
         padding: 8px;
         border-bottom: 1px solid #cbd3da;
+        text-align: left;
     }
 
     td {
@@ -74,10 +107,45 @@
         border-bottom: 1px solid #cbd3da;
     }
 
-    .toc ul { list-style: none; padding-left: 0; }
-    .toc li { margin-bottom: 4px; }
-    .toc li ul { margin-left: 25px; }
+    .toc ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
 
+    .toc li {
+        margin-bottom: 4px;
+    }
+
+    .toc li ul {
+        margin-left: 18px;
+        margin-top: 2px;
+    }
+
+    .class-terms {
+        margin-top: 6px;
+        margin-bottom: 24px;
+    }
+
+    .search-box {
+        margin: 16px 0 20px;
+        padding: 10px 12px;
+        background: #f1f4f7;
+        border-left: 3px solid #0b2e59;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 6px 8px;
+        font-size: 0.95rem;
+        border: 1px solid #cbd3da;
+        border-radius: 4px;
+    }
+
+    .muted {
+        color: #666;
+        font-size: 0.95rem;
+    }
 </style>
 </head>
 
@@ -86,7 +154,7 @@
 <header id="top">
     <h1>{{ scheme_title }}</h1>
     <p><strong>Description:</strong> {{ scheme_desc }}</p>
-    <p><strong>Version:</strong> {{ version }}</p>
+    <p><strong>Current version:</strong> {{ version }}</p>
     <p><strong>Creators:</strong> {{ creators }}</p>
     <p><strong>Contributors:</strong> {{ contributors }}</p>
     <p><strong>Created:</strong> {{ created }}</p>
@@ -97,95 +165,174 @@
     {% endfor %}
 </header>
 
-
 <div class="container">
-
+  <div class="layout">
     <!-- ============================ -->
-    <!-- TABLE OF CONTENTS -->
+    <!-- MAIN CONTENT -->
     <!-- ============================ -->
+    <main class="content">
 
-    <div class="toc">
-        <h2>Table of Contents</h2>
-        <ul>
-            <li><a href="#metadata">1 Metadata</a></li>
+      <!-- ============================ -->
+      <!-- 1. INTRODUCTION -->
+      <!-- ============================ -->
+      <h2 id="introduction">1 Introduction</h2>
+      <p class="muted">
+        <!-- Breve testo introduttivo – per ora lasciato volutamente generico -->
+        This document describes the eLTER Data Reporting Format (DRF) vocabulary,
+        organising its terms into logical groups and providing human-readable
+        descriptions for each field.
+      </p>
 
-            <li>
-                <a href="#classes">2 Classes</a>
-                <ul>
-                {% for cls in classes %}
-                    <li>
-                        <a href="#class-{{ cls.id }}">
-                            2.{{ loop.index }} {{ cls.label }}
-                        </a>
-                    </li>
-                {% endfor %}
-                </ul>
-            </li>
-
-            <li><a href="#vocabulary">3 Vocabulary</a></li>
-        </ul>
-    </div>
-
-    <!-- ============================ -->
-    <!-- METADATA -->
-    <!-- ============================ -->
-
-    <h2 id="metadata">1 Metadata</h2>
-
-    <h3>Namespaces</h3>
-    <ul>
+      <!-- 1.1 Namespaces -->
+      <h3 id="namespaces">1.1 Namespaces</h3>
+      <ul>
         {% for prefix, ns in namespaces.items() %}
-            <li><strong>{{ prefix }}:</strong> {{ ns }}</li>
+          <li><strong>{{ prefix }}:</strong> {{ ns }}</li>
         {% endfor %}
-    </ul>
+      </ul>
 
-    <!-- ============================ -->
-    <!-- CLASSES + CONCEPTS -->
-    <!-- ============================ -->
+      <!-- ============================ -->
+      <!-- 2. LIST OF TERMS (per class) -->
+      <!-- ============================ -->
+      <h2 id="classes">2 List of terms</h2>
 
-    <h2 id="classes">2 Classes</h2>
-
-    {% for cls in classes %}
+      {% for cls in classes %}
         <h3 id="class-{{ cls.id }}">{{ cls.label }}</h3>
 
         {% if cls.concepts %}
-            <ul>
-                {% for term in cls.concepts %}
-                    <li>
-                        <a href="#term-{{ term.id }}">{{ term.label }}</a>
-                        ({{ term.id }})
-                    </li>
-                {% endfor %}
-            </ul>
+          <p class="class-terms">
+            {% for term in cls.concepts %}
+              <a href="#term-{{ term.id }}">{{ term.label }}</a>
+              (drf:{{ term.id }}){% if not loop.last %} | {% endif %}
+            {% endfor %}
+          </p>
         {% else %}
-            <p><em>No terms listed for this class.</em></p>
+          <p><em>No terms listed for this class.</em></p>
         {% endif %}
+      {% endfor %}
 
-    {% endfor %}
+      <!-- ============================ -->
+      <!-- 3. VOCABULARY SECTION -->
+      <!-- ============================ -->
+      <h2 id="vocabulary">3 Vocabulary</h2>
 
-    <!-- ============================ -->
-    <!-- VOCABULARY SECTION -->
-    <!-- ============================ -->
+      <div class="search-box">
+        <label for="termSearch"><strong>Search terms:</strong></label><br>
+        <input id="termSearch" type="text"
+               placeholder="Type to filter by label, drf:id, definition…">
+      </div>
 
-    <h2 id="vocabulary">3 Vocabulary</h2>
-
-    {% for t in vocabulary %}
-    <div class="term-block" id="term-{{ t.id }}">
-        <h3>{{ t.label }} ({{ t.id }})</h3>
+      {% for t in vocabulary %}
+      <div class="term-block" id="term-{{ t.id }}">
+        <h3>{{ t.label }} (drf:{{ t.id }})</h3>
 
         <table>
-            <tr><th>IRI</th><td>{{ t.uri }}</td></tr>
-            <tr><th>Definition</th><td>{{ t.definition }}</td></tr>
-            <tr><th>Example</th><td>{{ t.example }}</td></tr>
-            <tr><th>Unit</th><td>{{ t.unit }}</td></tr>
-            <tr><th>Broader</th><td>{{ t.broader }}</td></tr>
+          <tr>
+            <th>URI</th>
+            <td>
+              {% if t.uri %}
+                <a href="{{ t.uri }}" target="_blank" rel="noopener">{{ t.uri }}</a>
+              {% else %}-{% endif %}
+            </td>
+          </tr>
+
+          <tr>
+            <th>Definition</th>
+            <td>{{ t.definition or "-" }}</td>
+          </tr>
+
+          <tr>
+            <th>Example</th>
+            <td>{{ t.example or "-" }}</td>
+          </tr>
+
+          <tr>
+            <th>Unit</th>
+            <td>
+              {% if t.unit %}
+                <a href="{{ t.unit }}" target="_blank" rel="noopener">{{ t.unit }}</a>
+              {% else %}-{% endif %}
+            </td>
+          </tr>
+
+          <tr>
+            <th>Broader</th>
+            <td>
+              {% if t.broader %}
+                <a href="{{ t.broader }}" target="_blank" rel="noopener">{{ t.broader }}</a>
+              {% else %}-{% endif %}
+            </td>
+          </tr>
+
+          <tr>
+            <th>Created</th>
+            <td>{{ t.created or "-" }}</td>
+          </tr>
+
+          <tr>
+            <th>Modified</th>
+            <td>{{ t.modified or "-" }}</td>
+          </tr>
+
+          <tr>
+            <th>DwC term match</th>
+            <td>
+              {% if t.match %}
+                <a href="{{ t.match }}" target="_blank" rel="noopener">{{ t.match }}</a>
+              {% else %}-{% endif %}
+            </td>
+          </tr>
         </table>
 
         <p><a href="#top">↑ back to top</a></p>
-    </div>
-    {% endfor %}
+      </div>
+      {% endfor %}
 
-</div>
+    </main>
+
+    <!-- ============================ -->
+    <!-- SIDEBAR TOC (sticky) -->
+    <!-- ============================ -->
+    <aside class="sidebar toc">
+      <h2>On this page</h2>
+      <ul>
+        <li><a href="#introduction">1 Introduction</a>
+          <ul>
+            <li><a href="#namespaces">1.1 Namespaces</a></li>
+          </ul>
+        </li>
+
+        <li><a href="#classes">2 List of terms</a>
+          <ul>
+          {% for cls in classes %}
+            <li><a href="#class-{{ cls.id }}">2.{{ loop.index }} {{ cls.label }}</a></li>
+          {% endfor %}
+          </ul>
+        </li>
+
+        <li><a href="#vocabulary">3 Vocabulary</a></li>
+      </ul>
+    </aside>
+
+  </div> <!-- /.layout -->
+</div> <!-- /.container -->
+
+<script>
+  // Simple client-side term search
+  const searchInput = document.getElementById('termSearch');
+  const termBlocks = document.querySelectorAll('.term-block');
+
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      const q = this.value.toLowerCase();
+
+      termBlocks.forEach(block => {
+        const text = block.textContent.toLowerCase();
+        block.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+  }
+</script>
 
 </body>
 </html>
