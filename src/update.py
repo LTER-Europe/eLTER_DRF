@@ -14,6 +14,7 @@ RENDERING_UPDATE = """@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix schema: <http://schema.org/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 puv:uom
   a owl:ObjectProperty ;
