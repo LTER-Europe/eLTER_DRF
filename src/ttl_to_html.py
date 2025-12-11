@@ -56,7 +56,19 @@ langs = sorted({
 # ----------------------------------------------------
 # Namespaces
 # ----------------------------------------------------
-namespaces = {p: str(u) for p, u in g.namespaces()}
+namespaces = {
+    "schema": "https://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dct": "http://purl.org/dc/terms/",
+    "dwc": "http://rs.tdwg.org/dwc/terms/",
+    "omv": "http://omv.ontoware.org/2005/05/ontology",
+    "puv": "https://w3id.org/env/puv#",
+    "qudt": "http://qudt.org/vocab/",
+    "unit": "http://qudt.org/vocab/unit/"
+}
 
 # ----------------------------------------------------
 # Extract classes (SKOS top concepts) — IN ORDER OF APPEARANCE
@@ -114,8 +126,10 @@ for c in g.subjects(RDF.type, SKOS.Concept):
     broaders = []
     for b in broader_nodes:
         broaders.append({
-            "id": localname(b),
-            "uri": str(b)
+            "id": bid,
+            "label": label,
+            "uri": uri,
+            "anchor": f"#vclass-{bid}"
         })
 
     # Breadcrumb HTML
