@@ -65,19 +65,60 @@ namespaces = {p: str(u) for p, u in g.namespaces()}
 
 
 # ----------------------------------------------------
-# Extract classes (SKOS top concepts)
+# Extract top concepts IN TTL ORDER
 # ----------------------------------------------------
+
+# 1. Read TTL as raw text
+with open(TTL_FILE, "r") as f:
+    ttl_raw = f.read()
+
+import re
+
+# 2. Regex to extract hasTopConcept URIs in correct order
+pattern = r"skos:hasTopConcept\s+([^.;]+)"
+matches = re.findall(pattern, ttl_raw)
+
+top_concepts_ordered = []
+
+for m in matches:
+    # split by comma if multiple entries
+    uris = re.findall(r"[\w:\/#.-]+", m)
+    for u in uris:
+        if u not in top_concepts_ordered:
+            top_concepts_ordered.append(u)
+
+# 3. Convert URIs or QNames to rdflib nodes
+def resolve_node(u):
+    try:
+        return g.namespace_manager.compute_qname(u)[1]
+    except:
+        return rdflib.URIRef(u)
+
+top_nodes = []
+for item in top_concepts_ordered:
+    if ":" in item and not item.startswith("http"):
+        prefix, name = item.split(":")
+        ns = dict(namespaces).get(prefix)
+        if ns:
+            top_nodes.append(rdflib.URIRef(ns + name))
+        else:
+            top_nodes.append(rdflib.URIRef(item))
+    else:
+        top_nodes.append(rdflib.URIRef(item))
+
+# 4. Build class objects in this EXACT order
 classes = []
-for cls in g.objects(scheme, SKOS.hasTopConcept):
-    label = next(g.objects(cls, SKOS.prefLabel))
-    classes.append({
-        "id": localname(cls),
-        "uri": str(cls),
-        "label": str(label),
-        "concepts": [],
-        "definition": str(g.value(cls, SKOS.definition) or "-"),
-        "match": str(g.value(cls, SKOS.closeMatch) or "-")
-    })
+for cls in top_nodes:
+    if (cls, RDF.type, SKOS.Concept) in g:
+        label = next(g.objects(cls, SKOS.prefLabel))
+        classes.append({
+            "id": localname(cls),
+            "uri": str(cls),
+            "label": str(label),
+            "concepts": [],
+            "definition": str(g.value(cls, SKOS.definition) or "-"),
+            "match": str(g.value(cls, SKOS.closeMatch) or "-")
+        })
 
 
 # ----------------------------------------------------
