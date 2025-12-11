@@ -40,8 +40,19 @@ sed -i.bak \
 # Remove demo vocabularies (UNESCO and STW)
 sed -i.bak -e '/^:unesco /,/^ *\.$/d' -e '/^:stw /,/^ *\.$/d' skosmos-src/dockerfiles/config/config-docker-compose.ttl
 
-# Append your vocabulary block
-cat "$VOCAB_BLOCK" >> skosmos-src/dockerfiles/config/config-docker-compose.ttl
+# Append the vocabulary definition
+cat <<EOF >> skosmos-src/dockerfiles/config/config-docker-compose.ttl
+
+:elter_drf a skosmos:Vocabulary ;
+    skosmos:shortName "drf" ;
+    skosmos:language "en" ;
+    skosmos:fullName "eLTER Data Reporting Format" ;
+    skosmos:uriSpace "http://vocabs.lter-europe.net/elter_drf/" ;
+    skosmos:sparqlGraph <http://example.org/graph/dev> ;
+    skosmos:defaultLanguage "en" ;
+    skosmos:showTopConcepts "true" ;
+.
+EOF
 
 # --- Ensure Docker is ready ---------------------------------------------------
 ensure_docker() {
