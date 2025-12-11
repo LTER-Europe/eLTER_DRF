@@ -65,60 +65,41 @@ namespaces = {p: str(u) for p, u in g.namespaces()}
 
 
 # ----------------------------------------------------
-# Extract top concepts IN TTL ORDER
+# Extract CLASSES = SKOS:Collection in TTL ORDER
 # ----------------------------------------------------
 
-# 1. Read TTL as raw text
+# Read TTL raw to preserve order
 with open(TTL_FILE, "r") as f:
     ttl_raw = f.read()
 
 import re
 
-# 2. Regex to extract hasTopConcept URIs in correct order
-pattern = r"skos:hasTopConcept\s+([^.;]+)"
-matches = re.findall(pattern, ttl_raw)
+# Find all SKOS:Collection declarations in TTL order
+collection_pattern = r"(\w+:\w+)\s+a\s+skos:Collection"
+collections_in_order = re.findall(collection_pattern, ttl_raw)
 
-top_concepts_ordered = []
-
-for m in matches:
-    # split by comma if multiple entries
-    uris = re.findall(r"[\w:\/#.-]+", m)
-    for u in uris:
-        if u not in top_concepts_ordered:
-            top_concepts_ordered.append(u)
-
-# 3. Convert URIs or QNames to rdflib nodes
-def resolve_node(u):
-    try:
-        return g.namespace_manager.compute_qname(u)[1]
-    except:
-        return rdflib.URIRef(u)
-
-top_nodes = []
-for item in top_concepts_ordered:
-    if ":" in item and not item.startswith("http"):
-        prefix, name = item.split(":")
-        ns = dict(namespaces).get(prefix)
-        if ns:
-            top_nodes.append(rdflib.URIRef(ns + name))
-        else:
-            top_nodes.append(rdflib.URIRef(item))
-    else:
-        top_nodes.append(rdflib.URIRef(item))
-
-# 4. Build class objects in this EXACT order
 classes = []
-for cls in top_nodes:
-    if (cls, RDF.type, SKOS.Concept) in g:
-        label = next(g.objects(cls, SKOS.prefLabel))
-        classes.append({
-            "id": localname(cls),
-            "uri": str(cls),
-            "label": str(label),
-            "concepts": [],
-            "definition": str(g.value(cls, SKOS.definition) or "-"),
-            "match": str(g.value(cls, SKOS.closeMatch) or "-")
-        })
+
+for qname in collections_in_order:
+    prefix, name = qname.split(":")
+    ns = dict(namespaces).get(prefix)
+    if not ns:
+        continue
+
+    uri = rdflib.URIRef(ns + name)
+
+    label = g.value(uri, SKOS.prefLabel)
+    definition = g.value(uri, SKOS.definition)
+    match = g.value(uri, SKOS.closeMatch)
+
+    classes.append({
+        "id": name,
+        "uri": str(uri),
+        "label": str(label or name),
+        "definition": str(definition or "-"),
+        "match": str(match or "-"),
+        "concepts": []
+    })
 
 
 # ----------------------------------------------------
@@ -190,58 +171,44 @@ for c in g.subjects(RDF.type, SKOS.Concept):
 
 
 # ----------------------------------------------------
-# Map concepts to each class (first breadcrumb element)
+# Map concepts to SKOS:Collections via skos:broader
 # ----------------------------------------------------
 
-class_map = {c["id"]: [] for c in classes}
+# Create mapping class_id → list of concepts
+class_map = {cls["id"]: [] for cls in classes}
 
 for c in g.subjects(RDF.type, SKOS.Concept):
 
-    breadcrumb = build_breadcrumb(c)
-    if not breadcrumb:
-        continue
-
-    top = breadcrumb[0]["id"]  # id della classe (top concept)
-
-    # Trova il record del concept dentro all_concepts
     cid = localname(c)
     concept_rec = next((x for x in all_concepts if x["id"] == cid), None)
+    if not concept_rec:
+        continue
 
-    if concept_rec and top in class_map:
-        class_map[top].append(concept_rec)
+    # For each broader, check if it's a class
+    for b in g.objects(c, SKOS.broader):
+        bid = localname(b)
+        if bid in class_map:
+            class_map[bid].append(concept_rec)
 
-# Attach to classes
+# Attach concepts to class objects
 for cls in classes:
-    cls_id = cls["id"]
-    cls["concepts"] = class_map.get(cls_id, [])
+    cls["concepts"] = class_map.get(cls["id"], [])
 
 
 # ----------------------------------------------------
-# Organize vocabulary into Classes and Concepts
+# Organize vocabulary
 # ----------------------------------------------------
 
-# "Classes" = top concepts
-vocabulary_classes = []
-for cls in classes:
-    definition = g.value(cnode, SKOS.definition)
-    match = g.value(cnode, SKOS.closeMatch)
+vocabulary_classes = classes
 
-    vocabulary_classes.append({
-        "id": cls["id"],
-        "uri": cls["uri"],
-        "label": cls["label"],
-        "definition": str(definition or "-"),
-        "match": str(match or "-")
-    })
+# Concepts = all SKOS:Concept NOT classes
+class_ids = {cls["id"] for cls in classes}
 
-# "Concepts" = all_concepts except classes
 vocabulary_concepts = [
-    c for c in all_concepts
-    if c["id"] not in {cls["id"] for cls in classes}
+    c for c in all_concepts if c["id"] not in class_ids
 ]
 
-# Sort both lists
-vocabulary_classes = classes
+# Sort concepts alphabetically
 vocabulary_concepts = sorted(vocabulary_concepts, key=lambda x: x["label"].lower())
 
 # ----------------------------------------------------
