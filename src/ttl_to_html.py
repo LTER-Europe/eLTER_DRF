@@ -162,14 +162,36 @@ for cls in classes:
 
 
 # ----------------------------------------------------
-# Vocabulary (concepts + classes)
+# Organize vocabulary into Classes and Concepts
 # ----------------------------------------------------
-vocabulary_classes = sorted(classes, key=lambda x: x["label"].lower())
-vocabulary_concepts = sorted(all_concepts, key=lambda x: x["label"].lower())
 
+# "Classes" = top concepts
+vocabulary_classes = []
+for cls in classes:
+    cnode = next(g.subjects(SKOS.prefLabel, rdflib.Literal(cls["label"])))
+    definition = g.value(cnode, SKOS.definition)
+    match = g.value(cnode, SKOS.closeMatch)
+
+    vocabulary_classes.append({
+        "id": cls["id"],
+        "uri": cls["uri"],
+        "label": cls["label"],
+        "definition": str(definition or "-"),
+        "match": str(match or "-")
+    })
+
+# "Concepts" = all_concepts except classes
+vocabulary_concepts = [
+    c for c in all_concepts
+    if c["id"] not in {cls["id"] for cls in classes}
+]
+
+# Sort both lists
+vocabulary_classes = sorted(vocabulary_classes, key=lambda x: x["label"].lower())
+vocabulary_concepts = sorted(vocabulary_concepts, key=lambda x: x["label"].lower())
 
 # ----------------------------------------------------
-# Render
+# Render page
 # ----------------------------------------------------
 html = template.render(
     scheme_title=str(scheme_title),
