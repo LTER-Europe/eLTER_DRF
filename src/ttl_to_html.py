@@ -11,30 +11,27 @@ g.parse(TTL_FILE, format="turtle")
 SCHEMA = rdflib.Namespace("http://schema.org/")
 POV = rdflib.Namespace("https://w3id.org/pov/")
 OWL = rdflib.Namespace("http://www.w3.org/2002/07/owl#")
-DWC = rdflib.Namespace("http://rs.tdwg.org/dwc/terms/")
 
-# ----------------------------------------------------
-# Extract localname robustly from URI
-# ----------------------------------------------------
+# ---------------------------------------------
+# Utility: extract local name
+# ---------------------------------------------
 def localname(uri):
     uri = str(uri)
     if "#" in uri:
         return uri.split("#")[-1]
     if "/" in uri:
         return uri.split("/")[-1]
-    if ":" in uri:
-        return uri.split(":")[-1]
     return uri
 
-# ----------------------------------------------------
+# ---------------------------------------------
 # Load HTML template
-# ----------------------------------------------------
+# ---------------------------------------------
 with open("templates/page.html", "r") as f:
     template = Template(f.read())
 
-# ----------------------------------------------------
+# ---------------------------------------------
 # ConceptScheme metadata
-# ----------------------------------------------------
+# ---------------------------------------------
 scheme = next(g.subjects(RDF.type, SKOS.ConceptScheme))
 scheme_title = next(g.objects(scheme, SKOS.prefLabel))
 scheme_desc = g.value(scheme, DCTERMS.description)
@@ -44,18 +41,9 @@ contributors = [str(c) for c in g.objects(scheme, DCTERMS.contributor)]
 created = g.value(scheme, DCTERMS.created)
 modified = g.value(scheme, DCTERMS.modified)
 
-# ----------------------------------------------------
-# Languages
-# ----------------------------------------------------
-langs = sorted({
-    label.language
-    for _, _, label in g.triples((None, SKOS.prefLabel, None))
-    if label.language
-})
-
-# ----------------------------------------------------
-# Namespaces
-# ----------------------------------------------------
+# ---------------------------------------------
+# Namespaces — FIXED LIST
+# ---------------------------------------------
 namespaces = {
     "schema": "https://schema.org/",
     "skos": "http://www.w3.org/2004/02/skos/core#",
@@ -70,79 +58,48 @@ namespaces = {
     "unit": "http://qudt.org/vocab/unit/"
 }
 
-# ----------------------------------------------------
-# Extract classes (SKOS top concepts) — IN ORDER OF APPEARANCE
-# ----------------------------------------------------
+# ---------------------------------------------
+# CLASSES = skos:Collection (ORDER OF APPEARANCE)
+# ---------------------------------------------
 classes = []
-for cls in g.objects(scheme, SKOS.hasTopConcept):
-    label = next(g.objects(cls, SKOS.prefLabel))
+
+for cls in g.subjects(RDF.type, SKOS.Collection):
+    label = g.value(cls, SKOS.prefLabel)
+    definition = g.value(cls, SKOS.definition)
+    match = g.value(cls, SKOS.closeMatch)
+
     classes.append({
         "id": localname(cls),
         "uri": str(cls),
         "label": str(label),
-        "definition": str(g.value(cls, SKOS.definition) or "-"),
-        "match": str(g.value(cls, SKOS.closeMatch) or "-"),
+        "definition": str(definition or "-"),
+        "match": str(match or "-"),
         "concepts": []
     })
 
-# ----------------------------------------------------
-# Breadcrumb builder
-# ----------------------------------------------------
-def build_breadcrumb(concept):
-    breadcrumb = []
-    current = concept
-    while True:
-        label = next(g.objects(current, SKOS.prefLabel))
-        breadcrumb.append({
-            "id": localname(current),
-            "label": str(label)
-        })
-        broader = list(g.objects(current, SKOS.broader))
-        if not broader:
-            break
-        current = broader[0]
-    breadcrumb.reverse()
-    return breadcrumb
-
-# ----------------------------------------------------
-# Extract all concepts (supporting multi-broader)
-# ----------------------------------------------------
+# ---------------------------------------------
+# Extract concepts
+# ---------------------------------------------
 all_concepts = []
 
 for c in g.subjects(RDF.type, SKOS.Concept):
 
-    label = next(g.objects(c, SKOS.prefLabel))
+    label = g.value(c, SKOS.prefLabel)
     definition = g.value(c, SKOS.definition)
     example = g.value(c, SKOS.example)
     creat = g.value(c, DCTERMS.created)
     modif = g.value(c, DCTERMS.modified)
-    unit = g.value(c, SCHEMA.unitCode) or g.value(c, POV.unit)
     match = g.value(c, SKOS.closeMatch)
+    unit = g.value(c, SCHEMA.unitCode) or g.value(c, POV.unit)
 
-    breadcrumb = build_breadcrumb(c)
-
-    # -------- MULTI-BROADER SUPPORT --------
+    # Multi-broader
     broader_nodes = list(g.objects(c, SKOS.broader))
-    broaders = []
-    
-    for b in broader_nodes:
-        bid = localname(b)
-        blabel = g.value(b, SKOS.prefLabel)
-        buri = str(b)
-    
-        broaders.append({
-            "id": bid,
-            "label": str(blabel or bid),
-            "uri": buri,
-            "anchor": f"#vclass-{bid}"
-        })
-   
-
-    # Breadcrumb HTML
-    breadcrumb_html = " / ".join(
-        f'<a href="#class-{item["id"]}">{item["label"]}</a>'
-        for item in breadcrumb
-    )
+    broaders = [{
+        "id": localname(b),
+        "label": localname(b),
+        "uri": str(b),
+        "anchor": f"#vclass-{localname(b)}"
+    } for b in broader_nodes]
 
     all_concepts.append({
         "id": localname(c),
@@ -154,40 +111,37 @@ for c in g.subjects(RDF.type, SKOS.Concept):
         "creat": str(creat or "-"),
         "modif": str(modif or "-"),
         "match": str(match or "-"),
-        "breadcrumb_html": breadcrumb_html,
         "broaders": broaders
     })
 
-# ----------------------------------------------------
-# Map concepts to each class (first breadcrumb element)
-# ----------------------------------------------------
-class_map = {c["id"]: [] for c in classes}
+# ---------------------------------------------
+# Assign concepts to classes (via skos:narrower)
+# ---------------------------------------------
+class_dict = {cls["id"]: cls for cls in classes}
 
-for concept in all_concepts:
-    top = concept["breadcrumb_html"].split('">')[1].split("<")[0] \
-          if concept["breadcrumb_html"] else None
-
-    # top = first breadcrumb element id
-    if concept["broaders"]:
-        # NO: broader ≠ class membership
-        pass
-
-    if concept["breadcrumb_html"]:
-        first_id = concept["breadcrumb_html"].split('href="#class-')[1].split('"')[0]
-        if first_id in class_map:
-            class_map[first_id].append(concept)
-
-# Apply sorted concepts to classes
 for cls in classes:
-    cls["concepts"] = sorted(class_map.get(cls["id"], []), key=lambda x: x["label"].lower())
+    cls_uri = rdflib.URIRef(cls["uri"])
 
+    for narrower in g.objects(cls_uri, SKOS.narrower):
+        nid = localname(narrower)
+
+        for concept in all_concepts:
+            if concept["id"] == nid:
+                cls["concepts"].append(concept)
+
+# keep class order, keep insertion order of concepts
+for cls in classes:
+    cls["concepts"].sort(key=lambda x: x["label"].lower())
+
+# ---------------------------------------------
 # Vocabulary lists
+# ---------------------------------------------
 vocabulary_classes = classes
 vocabulary_concepts = sorted(all_concepts, key=lambda x: x["label"].lower())
 
-# ----------------------------------------------------
+# ---------------------------------------------
 # Render HTML
-# ----------------------------------------------------
+# ---------------------------------------------
 html = template.render(
     scheme_title=str(scheme_title),
     scheme_desc=str(scheme_desc or ""),
@@ -196,7 +150,6 @@ html = template.render(
     contributors=", ".join(contributors),
     created=str(created or ""),
     modified=str(modified or ""),
-    languages=langs,
     namespaces=namespaces,
     classes=classes,
     vocabulary_classes=vocabulary_classes,
