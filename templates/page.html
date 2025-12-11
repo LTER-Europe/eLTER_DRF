@@ -49,6 +49,16 @@ header p  { margin: 6px 0; font-size: 1rem; }
     padding-left: 0;
 }
 
+.sidebar ul ul {
+    margin-left: 15px;
+    padding-left: 10px;
+    border-left: 2px solid #c0c7ce;
+}
+
+.sidebar ul ul li a {
+    font-size: 0.95rem;
+}
+
 .sidebar a { text-decoration: none; color: #003d9e; }
 
 /* ---------------- Main container ---------------- */
@@ -117,12 +127,14 @@ td {
         <li><a href="#intro">1 Introduction</a></li>
         <li><a href="#namespaces">1.1 Namespaces</a></li>
 
-        <li><a href="#classes">2 List of terms</a></li>
-        <ul>
-        {% for cls in classes %}
-            <li><a href="#class-{{ cls.id }}">{{ cls.label }}</a></li>
-        {% endfor %}
-        </ul>
+        <li>
+            <a href="#classes">2 List of terms</a>
+            <ul class="toc-sub">
+                {% for cls in classes %}
+                    <li><a href="#class-{{ cls.id }}">{{ cls.label }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
 
         <li><a href="#vocabulary">3 Vocabulary</a></li>
         <ul>
