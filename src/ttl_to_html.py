@@ -146,14 +146,23 @@ for c in g.subjects(RDF.type, SKOS.Concept):
 # ----------------------------------------------------
 # Map concepts to each class (first breadcrumb element)
 # ----------------------------------------------------
+
 class_map = {c["id"]: [] for c in classes}
 
-for concept in all_concepts:
-    if not concept["breadcrumb"]:
+for c in g.subjects(RDF.type, SKOS.Concept):
+
+    breadcrumb = build_breadcrumb(c)
+    if not breadcrumb:
         continue
-    top = concept["breadcrumb"][0]["id"]
-    if top in class_map:
-        class_map[top].append(concept)
+
+    top = breadcrumb[0]["id"]  # id della classe (top concept)
+
+    # Trova il record del concept dentro all_concepts
+    cid = localname(c)
+    concept_rec = next((x for x in all_concepts if x["id"] == cid), None)
+
+    if concept_rec and top in class_map:
+        class_map[top].append(concept_rec)
 
 # Attach to classes
 for cls in classes:
