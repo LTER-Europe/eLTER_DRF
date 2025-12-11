@@ -260,7 +260,7 @@ button.copy-btn {
                 <td>
                     {% if t.broaders %}
                         {% for b in t.broaders %}
-                            <a href="#vclass-{{ cl.id }}">drf:{{ b.id }}</a>
+                            <a href="#vclass-{{ b.id }}">drf:{{ b.id }}</a>
                             {% if not loop.last %} | {% endif %}
                         {% endfor %}
                     {% else %}-{% endif %}
