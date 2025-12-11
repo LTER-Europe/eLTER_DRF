@@ -4,16 +4,6 @@ import requests
 FILE_NAME = os.environ['FILE_NAME']
 
 RENDERING_UPDATE = """@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix schema: <http://schema.org/>.
-@prefix iop:   <https://w3id.org/iadopt/ont/> .
-@prefix puv: <https://w3id.org/env/puv#> .
-@prefix sosa: <http://www.w3.org/ns/sosa/> .
-@prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
-@prefix unit: <http://qudt.org/vocab/unit/> .
-@prefix qudt: <http://qudt.org/vocab/> .
-@prefix drf: <http://vocabs.lter-europe.net/elter_drf/> .
 
 puv:uom
   a owl:ObjectProperty ;
