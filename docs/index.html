@@ -273,8 +273,6 @@ td {
         <h3>ABS_POSITION (drf:ABS_POSITION)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-ABS_POSITION">ABS_POSITION</a></p>
-        
     
         <table>
             <tr>
@@ -285,7 +283,9 @@ td {
                 </td>
             </tr>
     
-            <tr><th>Definition</th><td>Absolute 3D coordinates [decimal number] expressed in decimal degree [dec °] WGS84 using at least 6-digits after the decimal separator of a single observation within the site or station. When a specific location is available in the dataset record (e.g. if the STATION is an area and many observations/records are available within that area, the absolute position is that of the single record).</td></tr>
+            <tr><th>Definition</th><td>Absolute 3D coordinates [decimal number] expressed in decimal degree [dec °] WGS84 using at least 6-digits after the decimal separator of a single observation within the site or station. When a specific location is available in the dataset record (e.g. if the STATION is an area and many observations/records are available within that area, the absolute position is that of the single record). 
+Condition 1: if a ABSOLUTE_POSITION is provided the STATION normally is left empty. 
+Condition 2: if an ABSOLUTE POSITION is provided the HORIZONTAL OFFSET is left blank.</td></tr>
     
             <tr>
                 <th>Example</th>
@@ -307,7 +307,13 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -318,7 +324,9 @@ td {
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/day" target="_blank">http://rs.tdwg.org/dwc/terms/day</a>
+                    
                 </td>
             </tr>
     
@@ -330,8 +338,6 @@ td {
     <div class="term-block" id="term-AGG_METHOD">
         <h3>AGG_METHOD (drf:AGG_METHOD)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-MethodExtendedfileds">MethodExtendedfileds</a> / <a href="#class-AGG_METHOD">AGG_METHOD</a></p>
         
     
         <table>
@@ -365,7 +371,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-MethodExtendedfileds">http://vocabs.lter-europe.net/elter_drf/MethodExtendedfileds</a>
+                        
+                            <a href="#class-MethodExtendedfileds">MethodExtendedfileds</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -376,7 +385,9 @@ td {
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/ownerInstitutionCode" target="_blank">http://rs.tdwg.org/dwc/terms/ownerInstitutionCode</a>
+                    
                 </td>
             </tr>
     
@@ -388,8 +399,6 @@ td {
     <div class="term-block" id="term-ALTITUDE">
         <h3>ALTITUDE (drf:ALTITUDE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationCoreFields">StationCoreFields</a> / <a href="#class-ALTITUDE">ALTITUDE</a></p>
         
     
         <table>
@@ -426,7 +435,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationCoreFields">http://vocabs.lter-europe.net/elter_drf/StationCoreFields</a>
+                        
+                            <a href="#class-StationCoreFields">StationCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -438,7 +450,7 @@ td {
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/verbatimElevation" target="_blank">http://rs.tdwg.org/dwc/terms/verbatimElevation</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/countryCode" target="_blank">http://rs.tdwg.org/dwc/terms/countryCode</a>
                     
                 </td>
             </tr>
@@ -451,8 +463,6 @@ td {
     <div class="term-block" id="term-altitudeMax">
         <h3>altitudeMax (drf:altitudeMax)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-altitudeMax">altitudeMax</a></p>
         
     
         <table>
@@ -488,7 +498,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -500,7 +513,7 @@ td {
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/maximumElevationInMeters" target="_blank">http://rs.tdwg.org/dwc/terms/maximumElevationInMeters</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/measurementUnit" target="_blank">http://rs.tdwg.org/dwc/terms/measurementUnit</a>
                     
                 </td>
             </tr>
@@ -513,8 +526,6 @@ td {
     <div class="term-block" id="term-altitudeMin">
         <h3>altitudeMin (drf:altitudeMin)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-altitudeMin">altitudeMin</a></p>
         
     
         <table>
@@ -550,7 +561,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -562,7 +576,7 @@ td {
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/minimumElevationInMeters" target="_blank">http://rs.tdwg.org/dwc/terms/minimumElevationInMeters</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/measurementMethod" target="_blank">http://rs.tdwg.org/dwc/terms/measurementMethod</a>
                     
                 </td>
             </tr>
@@ -575,8 +589,6 @@ td {
     <div class="term-block" id="term-CODE">
         <h3>CODE (drf:CODE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a> / <a href="#class-CODE">CODE</a></p>
         
     
         <table>
@@ -610,7 +622,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-ReferenceCoreFields">http://vocabs.lter-europe.net/elter_drf/ReferenceCoreFields</a>
+                        
+                            <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -621,7 +636,9 @@ td {
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/fieldNotes" target="_blank">http://rs.tdwg.org/dwc/terms/fieldNotes</a>
+                    
                 </td>
             </tr>
     
@@ -633,8 +650,6 @@ td {
     <div class="term-block" id="term-CODE_URL">
         <h3>CODE_URL (drf:CODE_URL)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a> / <a href="#class-CODE_URL">CODE_URL</a></p>
         
     
         <table>
@@ -668,7 +683,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-ReferenceCoreFields">http://vocabs.lter-europe.net/elter_drf/ReferenceCoreFields</a>
+                        
+                            <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -691,8 +709,6 @@ td {
     <div class="term-block" id="term-COMMENT">
         <h3>COMMENT (drf:COMMENT)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationCoreFields">StationCoreFields</a> / <a href="#class-COMMENT">COMMENT</a></p>
         
     
         <table>
@@ -724,7 +740,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationCoreFields">http://vocabs.lter-europe.net/elter_drf/StationCoreFields</a>
+                        
+                            <a href="#class-StationCoreFields">StationCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -735,9 +754,7 @@ td {
             <tr>
                 <th>DwC match</th>
                 <td>
-                    
-                        <a href="http://rs.tdwg.org/dwc/terms/locationRemarks" target="_blank">http://rs.tdwg.org/dwc/terms/locationRemarks</a>
-                    
+                    -
                 </td>
             </tr>
     
@@ -749,8 +766,6 @@ td {
     <div class="term-block" id="term-Country">
         <h3>Country (drf:Country)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-Country">Country</a></p>
         
     
         <table>
@@ -784,7 +799,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -796,7 +814,7 @@ td {
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/countryCode" target="_blank">http://rs.tdwg.org/dwc/terms/countryCode</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/samplingProtocol" target="_blank">http://rs.tdwg.org/dwc/terms/samplingProtocol</a>
                     
                 </td>
             </tr>
@@ -809,8 +827,6 @@ td {
     <div class="term-block" id="term-DAY">
         <h3>DAY (drf:DAY)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-DAY">DAY</a></p>
         
     
         <table>
@@ -844,7 +860,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -855,7 +874,9 @@ td {
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/scientificName" target="_blank">http://rs.tdwg.org/dwc/terms/scientificName</a>
+                    
                 </td>
             </tr>
     
@@ -867,8 +888,6 @@ td {
     <div class="term-block" id="term-DEFINITON">
         <h3>DEFINITON (drf:DEFINITON)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a> / <a href="#class-DEFINITON">DEFINITON</a></p>
         
     
         <table>
@@ -902,7 +921,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-ReferenceCoreFields">http://vocabs.lter-europe.net/elter_drf/ReferenceCoreFields</a>
+                        
+                            <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -913,7 +935,9 @@ td {
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/samplingEffort" target="_blank">http://rs.tdwg.org/dwc/terms/samplingEffort</a>
+                    
                 </td>
             </tr>
     
@@ -925,8 +949,6 @@ td {
     <div class="term-block" id="term-eastBoundingCoordinate">
         <h3>eastBoundingCoordinate (drf:eastBoundingCoordinate)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-eastBoundingCoordinate">eastBoundingCoordinate</a></p>
         
     
         <table>
@@ -962,7 +984,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -973,9 +998,7 @@ td {
             <tr>
                 <th>DwC match</th>
                 <td>
-                    
-                        <a href="http://rs.tdwg.org/dwc/terms/decimalLongitude" target="_blank">http://rs.tdwg.org/dwc/terms/decimalLongitude</a>
-                    
+                    -
                 </td>
             </tr>
     
@@ -987,8 +1010,6 @@ td {
     <div class="term-block" id="term-EUNIS_Habitat_Type">
         <h3>EUNIS_Habitat_Type (drf:EUNIS_Habitat_Type)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-EUNIS_Habitat_Type">EUNIS_Habitat_Type</a></p>
         
     
         <table>
@@ -1022,7 +1043,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1033,7 +1057,9 @@ td {
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/eventDate" target="_blank">http://rs.tdwg.org/dwc/terms/eventDate</a>
+                    
                 </td>
             </tr>
     
@@ -1045,8 +1071,6 @@ td {
     <div class="term-block" id="term-EVENT_EFFORT">
         <h3>EVENT_EFFORT (drf:EVENT_EFFORT)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-EventCoreFields">EventCoreFields</a> / <a href="#class-EVENT_EFFORT">EVENT_EFFORT</a></p>
         
     
         <table>
@@ -1080,7 +1104,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-EventCoreFields">http://vocabs.lter-europe.net/elter_drf/EventCoreFields</a>
+                        
+                            <a href="#class-EventCoreFields">EventCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1104,8 +1131,6 @@ td {
         <h3>EVENT_ID (drf:EVENT_ID)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-EVENT_ID">EVENT_ID</a></p>
-        
     
         <table>
             <tr>
@@ -1124,7 +1149,7 @@ td {
                 <th>Example</th>
                 <td>
                     
-                        <pre>P20200912-EA-456</pre>
+                        <pre>SW0045ZOE_20200912 or VegRel_45_20200912</pre>
                     
                 </td>
             </tr>
@@ -1140,7 +1165,19 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                             | 
+                        
+                            <a href="#class-EventCoreFields">EventCoreFields</a>
+                             | 
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1151,7 +1188,9 @@ td {
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/materialSample" target="_blank">http://rs.tdwg.org/dwc/terms/materialSample</a>
+                    
                 </td>
             </tr>
     
@@ -1163,8 +1202,6 @@ td {
     <div class="term-block" id="term-FIELD_METHOD">
         <h3>FIELD_METHOD (drf:FIELD_METHOD)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-MethodExtendedfileds">MethodExtendedfileds</a> / <a href="#class-FIELD_METHOD">FIELD_METHOD</a></p>
         
     
         <table>
@@ -1198,7 +1235,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-MethodExtendedfileds">http://vocabs.lter-europe.net/elter_drf/MethodExtendedfileds</a>
+                        
+                            <a href="#class-MethodExtendedfileds">MethodExtendedfileds</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1221,8 +1261,6 @@ td {
     <div class="term-block" id="term-FIELD_NAME">
         <h3>FIELD_NAME (drf:FIELD_NAME)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a> / <a href="#class-FIELD_NAME">FIELD_NAME</a></p>
         
     
         <table>
@@ -1256,7 +1294,10 @@ td {
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-ReferenceCoreFields">http://vocabs.lter-europe.net/elter_drf/ReferenceCoreFields</a>
+                        
+                            <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1267,7 +1308,9 @@ td {
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/materialSampleID" target="_blank">http://rs.tdwg.org/dwc/terms/materialSampleID</a>
+                    
                 </td>
             </tr>
     
@@ -1280,8 +1323,6 @@ td {
         <h3>FLAGQUA (drf:FLAGQUA)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-FLAGQUA">FLAGQUA</a></p>
-        
     
         <table>
             <tr>
@@ -1293,6 +1334,10 @@ td {
             </tr>
     
             <tr><th>Definition</th><td>Quality flag [UTF-8 character encoding] for the data values based on the applied data quality control procedure as provided by the local system. 
+Examples:
+- Q quality controlled value 
+- L less than detection limit 
+- E estimated from measured value 
 Additional values can be defined or quality measures according to the local procedure (e.g. % of valid values for aggregation) can be used, but need to be documented in the REFERENCE.</td></tr>
     
             <tr>
@@ -1313,7 +1358,13 @@ Additional values can be defined or quality measures according to the local proc
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1337,8 +1388,6 @@ Additional values can be defined or quality measures according to the local proc
         <h3>FLAGSTA (drf:FLAGSTA)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-FLAGSTA">FLAGSTA</a></p>
-        
     
         <table>
             <tr>
@@ -1357,9 +1406,9 @@ Additional values can be defined or quality measures according to the local proc
 - W Weighted mean 
 - XA average monthly minimum 
 - XZ average monthly maximum 
-- SZ maximum daily sum
-- M Mode
-Additional values need to be defined in the REFERENCE.</td></tr>
+- SZ maximum daily sum 
+- M Mode 
+Additional values can be defined, but need to be documented in the REFERENCE.</td></tr>
     
             <tr>
                 <th>Example</th>
@@ -1381,7 +1430,13 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1392,7 +1447,9 @@ Additional values need to be defined in the REFERENCE.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/year" target="_blank">http://rs.tdwg.org/dwc/terms/year</a>
+                    
                 </td>
             </tr>
     
@@ -1404,8 +1461,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-GEOSPAT_FEATURE">
         <h3>GEOSPAT_FEATURE (drf:GEOSPAT_FEATURE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationCoreFields">StationCoreFields</a> / <a href="#class-GEOSPAT_FEATURE">GEOSPAT_FEATURE</a></p>
         
     
         <table>
@@ -1437,7 +1492,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationCoreFields">http://vocabs.lter-europe.net/elter_drf/StationCoreFields</a>
+                        
+                            <a href="#class-StationCoreFields">StationCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1448,9 +1506,7 @@ Additional values need to be defined in the REFERENCE.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    
-                        <a href="http://rs.tdwg.org/dwc/terms/footprintWKT" target="_blank">http://rs.tdwg.org/dwc/terms/footprintWKT</a>
-                    
+                    -
                 </td>
             </tr>
     
@@ -1462,8 +1518,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-HABITAT_TYPE">
         <h3>HABITAT_TYPE (drf:HABITAT_TYPE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-EventExtendedFields">EventExtendedFields</a> / <a href="#class-HABITAT_TYPE">HABITAT_TYPE</a></p>
         
     
         <table>
@@ -1497,7 +1551,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-EventExtendedFields">http://vocabs.lter-europe.net/elter_drf/EventExtendedFields</a>
+                        
+                            <a href="#class-EventExtendedFields">EventExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1520,8 +1577,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-HORI_OFFSET">
         <h3>HORI_OFFSET (drf:HORI_OFFSET)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-HORI_OFFSET">HORI_OFFSET</a></p>
         
     
         <table>
@@ -1557,7 +1612,13 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1580,8 +1641,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-HOUR">
         <h3>HOUR (drf:HOUR)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-HOUR">HOUR</a></p>
         
     
         <table>
@@ -1615,7 +1674,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1638,8 +1700,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-InstHeight">
         <h3>InstHeight (drf:InstHeight)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-InstHeight">InstHeight</a></p>
         
     
         <table>
@@ -1673,7 +1733,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1698,8 +1761,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-LAB_METHOD">
         <h3>LAB_METHOD (drf:LAB_METHOD)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-MethodExtendedfileds">MethodExtendedfileds</a> / <a href="#class-LAB_METHOD">LAB_METHOD</a></p>
         
     
         <table>
@@ -1733,7 +1794,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-MethodExtendedfileds">http://vocabs.lter-europe.net/elter_drf/MethodExtendedfileds</a>
+                        
+                            <a href="#class-MethodExtendedfileds">MethodExtendedfileds</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1744,7 +1808,9 @@ Additional values need to be defined in the REFERENCE.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/scientificName" target="_blank">http://rs.tdwg.org/dwc/terms/scientificName</a>
+                    
                 </td>
             </tr>
     
@@ -1756,8 +1822,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-LAT">
         <h3>LAT (drf:LAT)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationCoreFields">StationCoreFields</a> / <a href="#class-LAT">LAT</a></p>
         
     
         <table>
@@ -1798,7 +1862,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationCoreFields">http://vocabs.lter-europe.net/elter_drf/StationCoreFields</a>
+                        
+                            <a href="#class-StationCoreFields">StationCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1810,7 +1877,7 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/decimalLatitude" target="_blank">http://rs.tdwg.org/dwc/terms/decimalLatitude</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/minimumElevationInMeters" target="_blank">http://rs.tdwg.org/dwc/terms/minimumElevationInMeters</a>
                     
                 </td>
             </tr>
@@ -1823,8 +1890,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-LAYER">
         <h3>LAYER (drf:LAYER)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-LAYER">LAYER</a></p>
         
     
         <table>
@@ -1867,7 +1932,10 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1890,8 +1958,6 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
     <div class="term-block" id="term-LIST_CODE">
         <h3>LIST_CODE (drf:LIST_CODE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a> / <a href="#class-LIST_CODE">LIST_CODE</a></p>
         
     
         <table>
@@ -1925,7 +1991,10 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-ReferenceCoreFields">http://vocabs.lter-europe.net/elter_drf/ReferenceCoreFields</a>
+                        
+                            <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -1936,7 +2005,9 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/habitat" target="_blank">http://rs.tdwg.org/dwc/terms/habitat</a>
+                    
                 </td>
             </tr>
     
@@ -1948,8 +2019,6 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
     <div class="term-block" id="term-LISTMED">
         <h3>LISTMED (drf:LISTMED)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-LISTMED">LISTMED</a></p>
         
     
         <table>
@@ -1983,7 +2052,10 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2006,8 +2078,6 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
     <div class="term-block" id="term-LISTSUB">
         <h3>LISTSUB (drf:LISTSUB)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-LISTSUB">LISTSUB</a></p>
         
     
         <table>
@@ -2041,7 +2111,10 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2052,7 +2125,9 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/samplingEffort" target="_blank">http://rs.tdwg.org/dwc/terms/samplingEffort</a>
+                    
                 </td>
             </tr>
     
@@ -2064,8 +2139,6 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
     <div class="term-block" id="term-LISTTAXA">
         <h3>LISTTAXA (drf:LISTTAXA)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-LISTTAXA">LISTTAXA</a></p>
         
     
         <table>
@@ -2099,7 +2172,10 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2122,8 +2198,6 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
     <div class="term-block" id="term-Local_Habitat_Type">
         <h3>Local_Habitat_Type (drf:Local_Habitat_Type)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-Local_Habitat_Type">Local_Habitat_Type</a></p>
         
     
         <table>
@@ -2157,7 +2231,10 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2168,9 +2245,7 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
             <tr>
                 <th>DwC match</th>
                 <td>
-                    
-                        <a href="http://rs.tdwg.org/dwc/terms/habitat" target="_blank">http://rs.tdwg.org/dwc/terms/habitat</a>
-                    
+                    -
                 </td>
             </tr>
     
@@ -2182,8 +2257,6 @@ If alternative codings are used, this needs to be specified in the REFERENCE.</t
     <div class="term-block" id="term-LON">
         <h3>LON (drf:LON)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationCoreFields">StationCoreFields</a> / <a href="#class-LON">LON</a></p>
         
     
         <table>
@@ -2224,7 +2297,10 @@ Note: The definition of the reference point depends on the STYPE:
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationCoreFields">http://vocabs.lter-europe.net/elter_drf/StationCoreFields</a>
+                        
+                            <a href="#class-StationCoreFields">StationCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2236,7 +2312,7 @@ Note: The definition of the reference point depends on the STYPE:
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/decimalLongitude" target="_blank">http://rs.tdwg.org/dwc/terms/decimalLongitude</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/maximumElevationInMeters" target="_blank">http://rs.tdwg.org/dwc/terms/maximumElevationInMeters</a>
                     
                 </td>
             </tr>
@@ -2249,8 +2325,6 @@ Note: The definition of the reference point depends on the STYPE:
     <div class="term-block" id="term-MAX_LEVEL">
         <h3>MAX_LEVEL (drf:MAX_LEVEL)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-MAX_LEVEL">MAX_LEVEL</a></p>
         
     
         <table>
@@ -2286,7 +2360,10 @@ Note: The definition of the reference point depends on the STYPE:
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2310,8 +2387,6 @@ Note: The definition of the reference point depends on the STYPE:
         <h3>MEDIUM (drf:MEDIUM)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-MEDIUM">MEDIUM</a></p>
-        
     
         <table>
             <tr>
@@ -2322,23 +2397,23 @@ Note: The definition of the reference point depends on the STYPE:
                 </td>
             </tr>
     
-            <tr><th>Definition</th><td>Medium [UTF-8 character encoding] – as the code for the sampled medium (feature of interest) in the observation procedure, e.g. 
- AIR air including meteorology 
- SOIL soil 
- SOILWAT soil water
-WATER runoff and groundwater
-SEDIMENT sediments in aquatic environments
-LITTER litter fall
-BIOCOM biological communities
-HUMPOP human population
-SITECHAR site characteristics (as habitat or landscape structure)
+            <tr><th>Definition</th><td>Sampled medium [UTF-8 character encoding] – as the code for the sampled medium in the observation procedure 
+- AIR air including meteorology 
+- SOIL soil 
+- SOILWAT soil water 
+- WATER runoff and groundwater 
+- SEDIMENT sediments in aquatic environments 
+- LITTER litter fall 
+- BIOCOM biological communities 
+- HUMPOP human population 
+- SITECHAR site characteristics (as habitat or landscape structure) 
 Additional values need to be defined in the REFERENCE.</td></tr>
     
             <tr>
                 <th>Example</th>
                 <td>
                     
-                        <pre>AIR</pre>
+                        <pre>SOILWAT</pre>
                     
                 </td>
             </tr>
@@ -2354,7 +2429,13 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                             | 
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2377,8 +2458,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-METH_DESCR">
         <h3>METH_DESCR (drf:METH_DESCR)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-EventCoreFields">EventCoreFields</a> / <a href="#class-METH_DESCR">METH_DESCR</a></p>
         
     
         <table>
@@ -2412,7 +2491,73 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-EventCoreFields">http://vocabs.lter-europe.net/elter_drf/EventCoreFields</a>
+                        
+                            <a href="#class-MethodCoreFields">MethodCoreFields</a>
+                            
+                        
+                    
+                </td>
+            </tr>
+    
+            <tr><th>Created</th><td>2025-12-04</td></tr>
+            <tr><th>Modified</th><td>2025-12-11</td></tr>
+    
+            <tr>
+                <th>DwC match</th>
+                <td>
+                    -
+                </td>
+            </tr>
+    
+        </table>
+    
+        <p><a href="#top">↑ back to top</a></p>
+    </div>
+    
+    <div class="term-block" id="term-METH_DESCR_Event">
+        <h3>METH_DESCR_Event (drf:METH_DESCR_Event)</h3>
+    
+        
+    
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                    <a href="http://vocabs.lter-europe.net/elter_drf/METH_DESCR_Event" target="_blank">http://vocabs.lter-europe.net/elter_drf/METH_DESCR_Event</a>
+                    <button onclick="copyToClipboard('http://vocabs.lter-europe.net/elter_drf/METH_DESCR_Event')">Copy URI</button>
+                </td>
+            </tr>
+    
+            <tr><th>Definition</th><td>Short description of the method [UTF-8 character encoding] applied in the sampling campaign, e.g. on how the plots were selected from the total population (selection of plots, observation points, etc.) and the observation was done 
+ Condition: Please provide, if not contained in METHOD.</td></tr>
+    
+            <tr>
+                <th>Example</th>
+                <td>
+                    
+                        <pre>Random sampling of spruce stands in the entire area of the site; 5 regularly spaced (10 m) positions on a transect; etc.</pre>
+                    
+                </td>
+            </tr>
+    
+            <tr>
+                <th>Unit</th>
+                <td>
+                    -
+                </td>
+            </tr>
+    
+            <tr>
+                <th>Broader</th>
+                <td>
+                    
+                        
+                            <a href="#class-EventCoreFields">EventCoreFields</a>
+                             | 
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2435,8 +2580,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-MIN_LEVEL">
         <h3>MIN_LEVEL (drf:MIN_LEVEL)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-MIN_LEVEL">MIN_LEVEL</a></p>
         
     
         <table>
@@ -2472,7 +2615,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2495,8 +2641,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-MINUTE">
         <h3>MINUTE (drf:MINUTE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-MINUTE">MINUTE</a></p>
         
     
         <table>
@@ -2530,7 +2674,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2553,8 +2700,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-MONTH">
         <h3>MONTH (drf:MONTH)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-MONTH">MONTH</a></p>
         
     
         <table>
@@ -2588,7 +2733,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2599,7 +2747,9 @@ Additional values need to be defined in the REFERENCE.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/nomenclaturalCode" target="_blank">http://rs.tdwg.org/dwc/terms/nomenclaturalCode</a>
+                    
                 </td>
             </tr>
     
@@ -2611,8 +2761,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-NAME">
         <h3>NAME (drf:NAME)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a> / <a href="#class-NAME">NAME</a></p>
         
     
         <table>
@@ -2646,7 +2794,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-ReferenceCoreFields">http://vocabs.lter-europe.net/elter_drf/ReferenceCoreFields</a>
+                        
+                            <a href="#class-ReferenceCoreFields">ReferenceCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2657,7 +2808,9 @@ Additional values need to be defined in the REFERENCE.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/eventID" target="_blank">http://rs.tdwg.org/dwc/terms/eventID</a>
+                    
                 </td>
             </tr>
     
@@ -2669,8 +2822,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-northBoundingCoordinate">
         <h3>northBoundingCoordinate (drf:northBoundingCoordinate)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-northBoundingCoordinate">northBoundingCoordinate</a></p>
         
     
         <table>
@@ -2706,7 +2857,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2717,9 +2871,7 @@ Additional values need to be defined in the REFERENCE.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    
-                        <a href="http://rs.tdwg.org/dwc/terms/decimalLatitude" target="_blank">http://rs.tdwg.org/dwc/terms/decimalLatitude</a>
-                    
+                    -
                 </td>
             </tr>
     
@@ -2731,8 +2883,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-NOTES">
         <h3>NOTES (drf:NOTES)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-EventCoreFields">EventCoreFields</a> / <a href="#class-NOTES">NOTES</a></p>
         
     
         <table>
@@ -2764,7 +2914,13 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-EventCoreFields">http://vocabs.lter-europe.net/elter_drf/EventCoreFields</a>
+                        
+                            <a href="#class-EventCoreFields">EventCoreFields</a>
+                             | 
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2787,8 +2943,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-numberOfSampleUnit">
         <h3>numberOfSampleUnit (drf:numberOfSampleUnit)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-numberOfSampleUnit">numberOfSampleUnit</a></p>
         
     
         <table>
@@ -2820,7 +2974,10 @@ Additional values need to be defined in the REFERENCE.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2831,7 +2988,9 @@ Additional values need to be defined in the REFERENCE.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/dataGeneralizations" target="_blank">http://rs.tdwg.org/dwc/terms/dataGeneralizations</a>
+                    
                 </td>
             </tr>
     
@@ -2843,8 +3002,6 @@ Additional values need to be defined in the REFERENCE.</td></tr>
     <div class="term-block" id="term-OperationPeriodSince">
         <h3>OperationPeriodSince (drf:OperationPeriodSince)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-OperationPeriodSince">OperationPeriodSince</a></p>
         
     
         <table>
@@ -2882,7 +3039,10 @@ Any time information
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2893,7 +3053,9 @@ Any time information
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/measurementMethod" target="_blank">http://rs.tdwg.org/dwc/terms/measurementMethod</a>
+                    
                 </td>
             </tr>
     
@@ -2905,8 +3067,6 @@ Any time information
     <div class="term-block" id="term-ORG_NAME">
         <h3>ORG_NAME (drf:ORG_NAME)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-ORG_NAME">ORG_NAME</a></p>
         
     
         <table>
@@ -2940,7 +3100,10 @@ Any time information
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -2963,8 +3126,6 @@ Any time information
     <div class="term-block" id="term-PARENT_EVENT_ID">
         <h3>PARENT_EVENT_ID (drf:PARENT_EVENT_ID)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-EventExtendedFields">EventExtendedFields</a> / <a href="#class-PARENT_EVENT_ID">PARENT_EVENT_ID</a></p>
         
     
         <table>
@@ -3000,7 +3161,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-EventExtendedFields">http://vocabs.lter-europe.net/elter_drf/EventExtendedFields</a>
+                        
+                            <a href="#class-EventExtendedFields">EventExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3023,8 +3187,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-PHYS_SAMPLE">
         <h3>PHYS_SAMPLE (drf:PHYS_SAMPLE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-EventCoreFields">EventCoreFields</a> / <a href="#class-PHYS_SAMPLE">PHYS_SAMPLE</a></p>
         
     
         <table>
@@ -3059,7 +3221,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-EventCoreFields">http://vocabs.lter-europe.net/elter_drf/EventCoreFields</a>
+                        
+                            <a href="#class-EventCoreFields">EventCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3082,8 +3247,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-plotDimension">
         <h3>plotDimension (drf:plotDimension)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-plotDimension">plotDimension</a></p>
         
     
         <table>
@@ -3117,7 +3280,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3128,7 +3294,9 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/measurementMethod" target="_blank">http://rs.tdwg.org/dwc/terms/measurementMethod</a>
+                    
                 </td>
             </tr>
     
@@ -3140,8 +3308,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-PLOTSIZE">
         <h3>PLOTSIZE (drf:PLOTSIZE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationCoreFields">StationCoreFields</a> / <a href="#class-PLOTSIZE">PLOTSIZE</a></p>
         
     
         <table>
@@ -3177,7 +3343,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationCoreFields">http://vocabs.lter-europe.net/elter_drf/StationCoreFields</a>
+                        
+                            <a href="#class-StationCoreFields">StationCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3188,9 +3357,7 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
             <tr>
                 <th>DwC match</th>
                 <td>
-                    
-                        <a href="http://rs.tdwg.org/dwc/terms/totalAreaSampledValue" target="_blank">http://rs.tdwg.org/dwc/terms/totalAreaSampledValue</a>
-                    
+                    -
                 </td>
             </tr>
     
@@ -3202,8 +3369,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-Potential_natural_vegetation">
         <h3>Potential_natural_vegetation (drf:Potential_natural_vegetation)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-Potential_natural_vegetation">Potential_natural_vegetation</a></p>
         
     
         <table>
@@ -3237,7 +3402,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3260,8 +3428,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-SAMP_EFFORT">
         <h3>SAMP_EFFORT (drf:SAMP_EFFORT)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-EventExtendedFields">EventExtendedFields</a> / <a href="#class-SAMP_EFFORT">SAMP_EFFORT</a></p>
         
     
         <table>
@@ -3295,7 +3461,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-EventExtendedFields">http://vocabs.lter-europe.net/elter_drf/EventExtendedFields</a>
+                        
+                            <a href="#class-EventExtendedFields">EventExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3318,8 +3487,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-SAMP_SIZE">
         <h3>SAMP_SIZE (drf:SAMP_SIZE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-SampleEvent">SampleEvent</a> / <a href="#class-SAMP_SIZE">SAMP_SIZE</a></p>
         
     
         <table>
@@ -3353,7 +3520,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-SampleEvent">http://vocabs.lter-europe.net/elter_drf/SampleEvent</a>
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3377,8 +3547,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
         <h3>SAMPLE_ID (drf:SAMPLE_ID)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-SAMPLE_ID">SAMPLE_ID</a></p>
-        
     
         <table>
             <tr>
@@ -3390,7 +3558,7 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
             </tr>
     
             <tr><th>Definition</th><td>Reference to the Sample-ID [UTF-8 character encoding] as defined in SAMPLE 
- Condition: only used, if a sample is taken and analysed and information on the sample is relevant and provided</td></tr>
+Condition: only used, if a sample is taken and analysed and information on the sample is relevant and provided</td></tr>
     
             <tr>
                 <th>Example</th>
@@ -3412,7 +3580,16 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                             | 
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3423,7 +3600,9 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/month" target="_blank">http://rs.tdwg.org/dwc/terms/month</a>
+                    
                 </td>
             </tr>
     
@@ -3435,8 +3614,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-SAMPLING_DESIGN">
         <h3>SAMPLING_DESIGN (drf:SAMPLING_DESIGN)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-MethodExtendedfileds">MethodExtendedfileds</a> / <a href="#class-SAMPLING_DESIGN">SAMPLING_DESIGN</a></p>
         
     
         <table>
@@ -3470,7 +3647,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-MethodExtendedfileds">http://vocabs.lter-europe.net/elter_drf/MethodExtendedfileds</a>
+                        
+                            <a href="#class-MethodExtendedfileds">MethodExtendedfileds</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3481,7 +3661,9 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/verbatimCoordinates" target="_blank">http://rs.tdwg.org/dwc/terms/verbatimCoordinates</a>
+                    
                 </td>
             </tr>
     
@@ -3493,8 +3675,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-SECOND">
         <h3>SECOND (drf:SECOND)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-SECOND">SECOND</a></p>
         
     
         <table>
@@ -3528,7 +3708,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3552,8 +3735,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
         <h3>SITE_CODE (drf:SITE_CODE)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-SITE_CODE">SITE_CODE</a></p>
-        
     
         <table>
             <tr>
@@ -3570,7 +3751,7 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Example</th>
                 <td>
                     
-                        <pre>https://deims.org/0ce0d289-9ef9-4232-a981-8f34869db76d</pre>
+                        <pre>https://deims.org/site/0ce0d289-9ef9-4232-a981-8f34869db76d</pre>
                     
                 </td>
             </tr>
@@ -3586,7 +3767,22 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                             | 
+                        
+                            <a href="#class-EventCoreFields">EventCoreFields</a>
+                             | 
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                             | 
+                        
+                            <a href="#class-StationCoreFields">StationCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3598,7 +3794,7 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/institutionID" target="_blank">http://rs.tdwg.org/dwc/terms/institutionID</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/decimalLongitude" target="_blank">http://rs.tdwg.org/dwc/terms/decimalLongitude</a>
                     
                 </td>
             </tr>
@@ -3611,8 +3807,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-SIZE">
         <h3>SIZE (drf:SIZE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-SIZE">SIZE</a></p>
         
     
         <table>
@@ -3648,7 +3842,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3671,8 +3868,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-SNAME">
         <h3>SNAME (drf:SNAME)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-SNAME">SNAME</a></p>
         
     
         <table>
@@ -3706,7 +3901,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3718,7 +3916,7 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/locality" target="_blank">http://rs.tdwg.org/dwc/terms/locality</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/minimumDistanceAboveSurfaceInMeters" target="_blank">http://rs.tdwg.org/dwc/terms/minimumDistanceAboveSurfaceInMeters</a>
                     
                 </td>
             </tr>
@@ -3731,8 +3929,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-SOIL_TYPE">
         <h3>SOIL_TYPE (drf:SOIL_TYPE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-EventExtendedFields">EventExtendedFields</a> / <a href="#class-SOIL_TYPE">SOIL_TYPE</a></p>
         
     
         <table>
@@ -3764,7 +3960,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-EventExtendedFields">http://vocabs.lter-europe.net/elter_drf/EventExtendedFields</a>
+                        
+                            <a href="#class-EventExtendedFields">EventExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3787,8 +3986,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-southBoundingCoordinate">
         <h3>southBoundingCoordinate (drf:southBoundingCoordinate)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-southBoundingCoordinate">southBoundingCoordinate</a></p>
         
     
         <table>
@@ -3824,7 +4021,10 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3836,7 +4036,7 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/decimalLatitude" target="_blank">http://rs.tdwg.org/dwc/terms/decimalLatitude</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/measurementType" target="_blank">http://rs.tdwg.org/dwc/terms/measurementType</a>
                     
                 </td>
             </tr>
@@ -3849,8 +4049,6 @@ Note: reference to the location (STATION_CODE) is given in the data and is not r
     <div class="term-block" id="term-SPOOL">
         <h3>SPOOL (drf:SPOOL)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-SPOOL">SPOOL</a></p>
         
     
         <table>
@@ -3885,7 +4083,10 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3896,7 +4097,9 @@ If not relevant or described in METHOD, leave blank.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/eventID" target="_blank">http://rs.tdwg.org/dwc/terms/eventID</a>
+                    
                 </td>
             </tr>
     
@@ -3909,8 +4112,6 @@ If not relevant or described in METHOD, leave blank.</td></tr>
         <h3>STATION_CODE (drf:STATION_CODE)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-STATION_CODE">STATION_CODE</a></p>
-        
     
         <table>
             <tr>
@@ -3921,7 +4122,8 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 </td>
             </tr>
     
-            <tr><th>Definition</th><td>Station code [UTF-8 character encoding] – as reference to the observation location (=station) defined in the table STATION</td></tr>
+            <tr><th>Definition</th><td>Station code or Station identifier (ID) [UTF-8 character encoding] - Code for the station within the site in UTF-8 character encoding for the text. Special characters should be avoided. 
+ A station is any measuring enitity, such as a sampling point, permanent plot, observation plot or a meteorological station, to name just a few. If the station equals the site, meaning that only one station is used within the site, only the site identifier is provided in the data recording sheet. If external identification systems (e.g. WMO Station ID) are existing, this identifier could be used to reference the station. If a DEIMS-SDR UUID for the station exists, this need to be used. Otherwise use the identification of the station within your site</td></tr>
     
             <tr>
                 <th>Example</th>
@@ -3943,7 +4145,22 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                             | 
+                        
+                            <a href="#class-EventCoreFields">EventCoreFields</a>
+                             | 
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                             | 
+                        
+                            <a href="#class-StationCoreFields">StationCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -3955,7 +4172,7 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/locationID" target="_blank">http://rs.tdwg.org/dwc/terms/locationID</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/decimalLatitude" target="_blank">http://rs.tdwg.org/dwc/terms/decimalLatitude</a>
                     
                 </td>
             </tr>
@@ -3968,8 +4185,6 @@ If not relevant or described in METHOD, leave blank.</td></tr>
     <div class="term-block" id="term-STYPE">
         <h3>STYPE (drf:STYPE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationCoreFields">StationCoreFields</a> / <a href="#class-STYPE">STYPE</a></p>
         
     
         <table>
@@ -4008,7 +4223,10 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationCoreFields">http://vocabs.lter-europe.net/elter_drf/StationCoreFields</a>
+                        
+                            <a href="#class-StationCoreFields">StationCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4020,7 +4238,7 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/footprintWKT" target="_blank">http://rs.tdwg.org/dwc/terms/footprintWKT</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/decimalLatitude" target="_blank">http://rs.tdwg.org/dwc/terms/decimalLatitude</a>
                     
                 </td>
             </tr>
@@ -4033,8 +4251,6 @@ If not relevant or described in METHOD, leave blank.</td></tr>
     <div class="term-block" id="term-SUBPROG">
         <h3>SUBPROG (drf:SUBPROG)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-SUBPROG">SUBPROG</a></p>
         
     
         <table>
@@ -4073,7 +4289,10 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4096,8 +4315,6 @@ If not relevant or described in METHOD, leave blank.</td></tr>
     <div class="term-block" id="term-TAXA">
         <h3>TAXA (drf:TAXA)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-TAXA">TAXA</a></p>
         
     
         <table>
@@ -4132,7 +4349,10 @@ In case of using letter codes or number codes the definition needs to be provide
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4156,8 +4376,6 @@ In case of using letter codes or number codes the definition needs to be provide
         <h3>TIME (drf:TIME)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-TIME">TIME</a></p>
-        
     
         <table>
             <tr>
@@ -4169,7 +4387,11 @@ In case of using letter codes or number codes the definition needs to be provide
             </tr>
     
             <tr><th>Definition</th><td>timestamp of measurement [ISO date] (according to ISO 8601): calendar dates as YYYY-MM-DD, time as HH:MM:SS in UTC plus offset; combined date and time as YYYY-MM-DDTHH:MMOffset, e.g. 2007-04-05T12:30:00-02:00 Any time information in converted to UTC time (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z) or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00) 
-Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE, SECOND are omitted</td></tr>
+If aggregations are provided the timestamp is provided as the following 
+- annual aggregation – provide only the year as YYYY 
+- monthly aggregations – provide only the month as YYYY-MM 
+- daily aggregations – provide the day as YYYY-MM-DD 
+ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE, SECOND are omitted</td></tr>
     
             <tr>
                 <th>Example</th>
@@ -4191,7 +4413,13 @@ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4202,7 +4430,9 @@ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/maximumDistanceAboveSurfaceInMeters" target="_blank">http://rs.tdwg.org/dwc/terms/maximumDistanceAboveSurfaceInMeters</a>
+                    
                 </td>
             </tr>
     
@@ -4214,8 +4444,6 @@ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE
     <div class="term-block" id="term-TIME_FROM">
         <h3>TIME_FROM (drf:TIME_FROM)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-EventCoreFields">EventCoreFields</a> / <a href="#class-TIME_FROM">TIME_FROM</a></p>
         
     
         <table>
@@ -4249,7 +4477,13 @@ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-EventCoreFields">http://vocabs.lter-europe.net/elter_drf/EventCoreFields</a>
+                        
+                            <a href="#class-EventCoreFields">EventCoreFields</a>
+                             | 
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4260,7 +4494,9 @@ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/sampleSizeValue" target="_blank">http://rs.tdwg.org/dwc/terms/sampleSizeValue</a>
+                    
                 </td>
             </tr>
     
@@ -4273,8 +4509,6 @@ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE
         <h3>TIME_TO (drf:TIME_TO)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-EventCoreFields">EventCoreFields</a> / <a href="#class-TIME_TO">TIME_TO</a></p>
-        
     
         <table>
             <tr>
@@ -4285,7 +4519,7 @@ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE
                 </td>
             </tr>
     
-            <tr><th>Definition</th><td>timestamp end time when sample was taken [ISO date] (according to ISO 8601): calendar dates as YYYY-MM-DD, time as HH:MM:SS in UTC plus offset; combined date and time as YYYY-MM-DDTHH:MMOffset, e.g. 2007-04-05T12:30:00-02:00 Any time information in converted to UTC time (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z) or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00)</td></tr>
+            <tr><th>Definition</th><td>timestamp of ending the event [ISO date] (according to ISO 8601): calendar dates as YYYY-MM-DD, time as HH:MM:SS in UTC plus offset; combined date and time as YYYY-MM-DDTHH:MMOffset, e.g. 2007-04-05T12:30:00-02:00 Any time information in converted to UTC time (e.g. 2017-03-03T11:00+00:00 or 2017-03-03T11:00UTC or 2017-03-03T11:00Z) or local times, if the UTC offset is provided (e.g. 2017-03-03T13:00+02:00)</td></tr>
     
             <tr>
                 <th>Example</th>
@@ -4307,7 +4541,13 @@ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-EventCoreFields">http://vocabs.lter-europe.net/elter_drf/EventCoreFields</a>
+                        
+                            <a href="#class-EventCoreFields">EventCoreFields</a>
+                             | 
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4330,8 +4570,6 @@ Condition: if the field TIME is used, the columns YEAR, MONTH, DAY, HOUR, MINUTE
     <div class="term-block" id="term-TLEVEL">
         <h3>TLEVEL (drf:TLEVEL)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-TLEVEL">TLEVEL</a></p>
         
     
         <table>
@@ -4371,7 +4609,10 @@ Additional values can be defined, but need to be documented in the REFERENCE.</t
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4382,7 +4623,9 @@ Additional values can be defined, but need to be documented in the REFERENCE.</t
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/eventDate / eventTime" target="_blank">http://rs.tdwg.org/dwc/terms/eventDate / eventTime</a>
+                    
                 </td>
             </tr>
     
@@ -4394,8 +4637,6 @@ Additional values can be defined, but need to be documented in the REFERENCE.</t
     <div class="term-block" id="term-TPOOL">
         <h3>TPOOL (drf:TPOOL)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-TPOOL">TPOOL</a></p>
         
     
         <table>
@@ -4430,7 +4671,10 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4441,7 +4685,9 @@ If not relevant or described in METHOD, leave blank.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/eventDate / eventTime" target="_blank">http://rs.tdwg.org/dwc/terms/eventDate / eventTime</a>
+                    
                 </td>
             </tr>
     
@@ -4454,8 +4700,6 @@ If not relevant or described in METHOD, leave blank.</td></tr>
         <h3>UNIT (drf:UNIT)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-UNIT">UNIT</a></p>
-        
     
         <table>
             <tr>
@@ -4466,13 +4710,13 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 </td>
             </tr>
     
-            <tr><th>Definition</th><td>Unit [UTF-8 character encoding] of variable of the sampling effort. For the units the SI units (https://physics.nist.gov/cuu/Units/units.html) are used.</td></tr>
+            <tr><th>Definition</th><td>Unit of variable observed [UTF-8 character encoding]. This information needs to be provided together with the methods, if not provided together with the DATA. For the units the SI units (https://physics.nist.gov/cuu/Units/units.html) are used.</td></tr>
     
             <tr>
                 <th>Example</th>
                 <td>
                     
-                        <pre>dimles</pre>
+                        <pre>mg/l</pre>
                     
                 </td>
             </tr>
@@ -4488,7 +4732,22 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                             | 
+                        
+                            <a href="#class-EventCoreFields">EventCoreFields</a>
+                             | 
+                        
+                            <a href="#class-MethodCoreFields">MethodCoreFields</a>
+                             | 
+                        
+                            <a href="#class-SampleEvent">SampleEvent</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4499,7 +4758,9 @@ If not relevant or described in METHOD, leave blank.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/materialSampleID" target="_blank">http://rs.tdwg.org/dwc/terms/materialSampleID</a>
+                    
                 </td>
             </tr>
     
@@ -4511,8 +4772,6 @@ If not relevant or described in METHOD, leave blank.</td></tr>
     <div class="term-block" id="term-VALUE">
         <h3>VALUE (drf:VALUE)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-VALUE">VALUE</a></p>
         
     
         <table>
@@ -4546,7 +4805,13 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4557,7 +4822,9 @@ If not relevant or described in METHOD, leave blank.</td></tr>
             <tr>
                 <th>DwC match</th>
                 <td>
-                    -
+                    
+                        <a href="http://rs.tdwg.org/dwc/terms/minimumDistanceAboveSurfaceInMeters" target="_blank">http://rs.tdwg.org/dwc/terms/minimumDistanceAboveSurfaceInMeters</a>
+                    
                 </td>
             </tr>
     
@@ -4570,8 +4837,6 @@ If not relevant or described in METHOD, leave blank.</td></tr>
         <h3>VARIABLE (drf:VARIABLE)</h3>
     
         
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-VARIABLE">VARIABLE</a></p>
-        
     
         <table>
             <tr>
@@ -4582,20 +4847,17 @@ If not relevant or described in METHOD, leave blank.</td></tr>
                 </td>
             </tr>
     
-            <tr><th>Definition</th><td>Code for Variable observed [UTF-8 character encoding] described in the METHOD for the variable / parameter name as abbreviation 
-- LISTSUB VARIABLE Name 
-- IM ABUND Abundance of species 
-- IM COVE_T species cover tree layer 
-- IM COVE_S species cover shrub layer 
-- IM COVE_F species cover field layer 
-- IM COVE_B species cover bottom layer COVER cover in % AREA area (e.g. in ha – see unit) 
-If possible, use standard encodings for the variable names (e.g. ICP Integrated Monitoring). Additional values can be defined, but need to be documented in the REFERENCE</td></tr>
+            <tr><th>Definition</th><td>Variable [UTF-8 character encoding] – the observed phenomenon during the observation. The variable/parameter name normally is given as abbreviation e.g. LISTSUB VARIABLE Name 
+- DB ALK Alkalinity 
+- DB BOD Biochemical oxygen demand 
+- DB TC Total carbon
+If possible, use standard encodings for the variable names (e.g. ICP Integrated Monitoring). Additional variable codes can be defined, but need to be documented in the REFERENCE.</td></tr>
     
             <tr>
                 <th>Example</th>
                 <td>
                     
-                        <pre>ABUND</pre>
+                        <pre>COVE_F</pre>
                     
                 </td>
             </tr>
@@ -4611,7 +4873,16 @@ If possible, use standard encodings for the variable names (e.g. ICP Integrated 
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                             | 
+                        
+                            <a href="#class-MethodCoreFields">MethodCoreFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4634,8 +4905,6 @@ If possible, use standard encodings for the variable names (e.g. ICP Integrated 
     <div class="term-block" id="term-VERT_OFFSET">
         <h3>VERT_OFFSET (drf:VERT_OFFSET)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataMapping">DataMapping</a> / <a href="#class-VERT_OFFSET">VERT_OFFSET</a></p>
         
     
         <table>
@@ -4671,7 +4940,13 @@ If possible, use standard encodings for the variable names (e.g. ICP Integrated 
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataMapping">http://vocabs.lter-europe.net/elter_drf/DataMapping</a>
+                        
+                            <a href="#class-DataMapping">DataMapping</a>
+                             | 
+                        
+                            <a href="#class-DataMeasurements">DataMeasurements</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4694,8 +4969,6 @@ If possible, use standard encodings for the variable names (e.g. ICP Integrated 
     <div class="term-block" id="term-westBoundingCoordinate">
         <h3>westBoundingCoordinate (drf:westBoundingCoordinate)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-StationExtendedFields">StationExtendedFields</a> / <a href="#class-westBoundingCoordinate">westBoundingCoordinate</a></p>
         
     
         <table>
@@ -4731,7 +5004,10 @@ If possible, use standard encodings for the variable names (e.g. ICP Integrated 
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-StationExtendedFields">http://vocabs.lter-europe.net/elter_drf/StationExtendedFields</a>
+                        
+                            <a href="#class-StationExtendedFields">StationExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
@@ -4743,7 +5019,7 @@ If possible, use standard encodings for the variable names (e.g. ICP Integrated 
                 <th>DwC match</th>
                 <td>
                     
-                        <a href="http://rs.tdwg.org/dwc/terms/decimalLongitude" target="_blank">http://rs.tdwg.org/dwc/terms/decimalLongitude</a>
+                        <a href="http://rs.tdwg.org/dwc/terms/habitat" target="_blank">http://rs.tdwg.org/dwc/terms/habitat</a>
                     
                 </td>
             </tr>
@@ -4756,8 +5032,6 @@ If possible, use standard encodings for the variable names (e.g. ICP Integrated 
     <div class="term-block" id="term-YEAR">
         <h3>YEAR (drf:YEAR)</h3>
     
-        
-            <p><strong>Path:</strong> <a href="#class-DataExtendedFields">DataExtendedFields</a> / <a href="#class-YEAR">YEAR</a></p>
         
     
         <table>
@@ -4796,7 +5070,10 @@ Any time information
                 <th>Broader</th>
                 <td>
                     
-                        <a href="#class-DataExtendedFields">http://vocabs.lter-europe.net/elter_drf/DataExtendedFields</a>
+                        
+                            <a href="#class-DataExtendedFields">DataExtendedFields</a>
+                            
+                        
                     
                 </td>
             </tr>
