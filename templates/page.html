@@ -46,20 +46,12 @@ header p  { margin: 6px 0; font-size: 1rem; }
 
 .sidebar ul {
     list-style: none;
-    padding-left: 0;
-}
-
-.sidebar ul ul {
-    margin-left: 15px;
     padding-left: 10px;
-    border-left: 2px solid #c0c7ce;
-}
-
-.sidebar ul ul li a {
-    font-size: 0.95rem;
 }
 
 .sidebar a { text-decoration: none; color: #003d9e; }
+.sidebar li { margin-bottom: 6px; }
+.sidebar li.sub { margin-left: 12px; }
 
 /* ---------------- Main container ---------------- */
 
@@ -103,6 +95,17 @@ td {
     border-bottom: 1px solid #cbd3da;
 }
 
+pre {
+    background: #e8eef4;
+    padding: 8px;
+}
+
+button.copy-btn {
+    margin-left: 10px;
+    padding: 2px 6px;
+    cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -125,22 +128,16 @@ td {
     <h2>Contents</h2>
     <ul>
         <li><a href="#intro">1 Introduction</a></li>
-        <li><a href="#namespaces">1.1 Namespaces</a></li>
+        <li class="sub"><a href="#namespaces">1.1 Namespaces</a></li>
 
-        <li>
-            <a href="#classes">2 List of terms</a>
-            <ul class="toc-sub">
-                {% for cls in classes %}
-                    <li><a href="#class-{{ cls.id }}">{{ cls.label }}</a></li>
-                {% endfor %}
-            </ul>
-        </li>
+        <li><a href="#classes">2 List of terms</a></li>
+        {% for cls in classes %}
+            <li class="sub"><a href="#class-{{ cls.id }}">{{ cls.label }}</a></li>
+        {% endfor %}
 
         <li><a href="#vocabulary">3 Vocabulary</a></li>
-        <ul>
-            <li><a href="#vocab-classes">3.1 Classes</a></li>
-            <li><a href="#vocab-concepts">3.2 Concepts</a></li>
-        </ul>
+        <li class="sub"><a href="#vocabulary-classes">3.1 Classes</a></li>
+        <li class="sub"><a href="#vocabulary-concepts">3.2 Concepts</a></li>
     </ul>
 </div>
 
@@ -179,33 +176,31 @@ td {
         {% endif %}
     {% endfor %}
 
+
     <!-- Vocabulary -->
-    <h2 id="vocabulary">3 Vocabulary</h2>
+    <h2 id="vocabulary">3. Vocabulary</h2>
 
     <!-- ============================ -->
     <!-- 3.1 CLASSES -->
     <!-- ============================ -->
-    
+
     <h3 id="vocabulary-classes">3.1 Classes</h3>
-    
+
     {% for cl in vocabulary_classes %}
     <div class="term-block" id="vclass-{{ cl.id }}">
         <h3>{{ cl.label }} (drf:{{ cl.id }})</h3>
-    
+
         <table>
             <tr>
                 <th>URI</th>
                 <td>
                     <a href="{{ cl.uri }}" target="_blank">{{ cl.uri }}</a>
-                    <button onclick="copyToClipboard('{{ cl.uri }}')">Copy URI</button>
+                    <button class="copy-btn" onclick="copyToClipboard('{{ cl.uri }}')">Copy URI</button>
                 </td>
             </tr>
+            <tr><th>Definition</th><td>{{ cl.definition }}</td></tr>
             <tr>
-                <th>Definition</th>
-                <td>{{ cl.definition }}</td>
-            </tr>
-            <tr>
-                <th>DwC term match</th>
+                <th>DwC Match</th>
                 <td>
                     {% if cl.match != "-" %}
                         <a href="{{ cl.match }}" target="_blank">{{ cl.match }}</a>
@@ -215,36 +210,33 @@ td {
         </table>
     </div>
     {% endfor %}
-    
+
+
     <!-- ============================ -->
     <!-- 3.2 CONCEPTS -->
     <!-- ============================ -->
-    
+
     <h3 id="vocabulary-concepts">3.2 Concepts</h3>
-    
+
     {% for t in vocabulary_concepts %}
     <div class="term-block" id="term-{{ t.id }}">
         <h3>{{ t.label }} (drf:{{ t.id }})</h3>
-    
-        {% if t.breadcrumbs %}
-            <p><strong>Paths:</strong><br>
-            {% for bc in t.breadcrumbs %}
-                {{ bc | safe }}<br>
-            {% endfor %}
-            </p>
+
+        {% if t.breadcrumb_html %}
+            <p><strong>Path:</strong> {{ t.breadcrumb_html | safe }}</p>
         {% endif %}
-    
+
         <table>
             <tr>
                 <th>URI</th>
                 <td>
                     <a href="{{ t.uri }}" target="_blank">{{ t.uri }}</a>
-                    <button onclick="copyToClipboard('{{ t.uri }}')">Copy URI</button>
+                    <button class="copy-btn" onclick="copyToClipboard('{{ t.uri }}')">Copy URI</button>
                 </td>
             </tr>
-    
+
             <tr><th>Definition</th><td>{{ t.definition }}</td></tr>
-    
+
             <tr>
                 <th>Example</th>
                 <td>
@@ -253,7 +245,7 @@ td {
                     {% else %}-{% endif %}
                 </td>
             </tr>
-    
+
             <tr>
                 <th>Unit</th>
                 <td>
@@ -262,7 +254,7 @@ td {
                     {% else %}-{% endif %}
                 </td>
             </tr>
-    
+
             <tr>
                 <th>Broader</th>
                 <td>
@@ -271,15 +263,13 @@ td {
                             <a href="#vclass-{{ b.id }}">drf:{{ b.id }}</a>
                             {% if not loop.last %} | {% endif %}
                         {% endfor %}
-                    {% else %}
-                        -
-                    {% endif %}
+                    {% else %}-{% endif %}
                 </td>
             </tr>
-    
+
             <tr><th>Created</th><td>{{ t.creat }}</td></tr>
             <tr><th>Modified</th><td>{{ t.modif }}</td></tr>
-    
+
             <tr>
                 <th>DwC match</th>
                 <td>
@@ -288,19 +278,21 @@ td {
                     {% else %}-{% endif %}
                 </td>
             </tr>
-    
+
         </table>
-    
+
         <p><a href="#top">↑ back to top</a></p>
     </div>
     {% endfor %}
 
 </div>
+
 <script>
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text);
     alert("Copied: " + text);
 }
 </script>
+
 </body>
 </html>
