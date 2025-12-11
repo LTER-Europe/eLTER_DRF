@@ -145,6 +145,7 @@ def build_breadcrumb(concept):
 # Extract all concepts
 # ----------------------------------------------------
 all_concepts = []
+
 for c in g.subjects(RDF.type, SKOS.Concept):
 
     label = next(g.objects(c, SKOS.prefLabel))
@@ -155,33 +156,23 @@ for c in g.subjects(RDF.type, SKOS.Concept):
     modif = g.value(c, DCTERMS.modified)
     match = g.value(c, SKOS.closeMatch)
 
-    # ------------------------------------------
-    # Broader concept (URI + link interno)
-    # ------------------------------------------
-    broader_node = g.value(c, SKOS.broader)
+    # MULTI-BROADER SUPPORT
+    broaders = []
+    for b in g.objects(c, SKOS.broader):
+        b_id = localname(b)
+        broaders.append({
+            "id": b_id,
+            "uri": str(b),
+            "anchor": f"#class-{b_id}"
+        })
 
-    if broader_node:
-        broader_label = localname(broader_node)
-        broader_uri = str(broader_node)
-        broader_anchor = f"#class-{broader_label}"
-    else:
-        broader_label = "-"
-        broader_uri = "-"
-        broader_anchor = "-"
-
-    # ------------------------------------------
-    # Breadcrumb HTML
-    # ------------------------------------------
+    # Breadcrumb
     breadcrumb = build_breadcrumb(c)
-
     breadcrumb_html = " / ".join(
         f'<a href="#class-{item["id"]}">{item["label"]}</a>'
         for item in breadcrumb
     )
 
-    # ------------------------------------------
-    # Append concept object
-    # ------------------------------------------
     all_concepts.append({
         "id": localname(c),
         "uri": str(c),
@@ -192,14 +183,9 @@ for c in g.subjects(RDF.type, SKOS.Concept):
         "creat": str(creat or "-"),
         "modif": str(modif or "-"),
         "match": str(match or "-"),
-
-        # NEW broader fields
-        "broader_label": broader_label,
-        "broader_uri": broader_uri,
-        "broader_anchor": broader_anchor,
-
-        # breadcrumb
-        "breadcrumb_html": breadcrumb_html
+        "broaders": broaders,
+        "breadcrumb_html": breadcrumb_html,
+        "breadcrumb": breadcrumb
     })
 
 
