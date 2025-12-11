@@ -226,8 +226,12 @@ td {
     <div class="term-block" id="term-{{ t.id }}">
         <h3>{{ t.label }} (drf:{{ t.id }})</h3>
     
-        {% if t.breadcrumb_html %}
-            <p><strong>Path:</strong> {{ t.breadcrumb_html | safe }}</p>
+        {% if t.breadcrumbs %}
+            <p><strong>Paths:</strong><br>
+            {% for bc in t.breadcrumbs %}
+                {{ bc | safe }}<br>
+            {% endfor %}
+            </p>
         {% endif %}
     
         <table>
@@ -262,8 +266,11 @@ td {
             <tr>
                 <th>Broader</th>
                 <td>
-                    {% if t.broader_uri != "-" %}
-                        <a href="{{ t.broader_anchor }}">{{ t.broader_uri }}</a>
+                    {% if t.broaders %}
+                        {% for b in t.broaders %}
+                            <a href="{{ b.anchor }}">{{ b.id }}</a>
+                            {% if not loop.last %} | {% endif %}
+                        {% endfor %}
                     {% else %}
                         -
                     {% endif %}
