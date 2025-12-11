@@ -121,6 +121,12 @@ for c in g.subjects(RDF.type, SKOS.Concept):
     broader_local = localname(broader) if broader else "-"
     broader_anchor = f"#class-{broader_local}" if broader else "-"
 
+    # Build breadcrumb HTML
+    breadcrumb_html = " / ".join(
+        f'<a href="#class-{item["id"]}">{item["label"]}</a>'
+        for item in breadcrumb
+    )
+    
     all_concepts.append({
         "id": localname(c),
         "uri": str(c),
@@ -133,7 +139,7 @@ for c in g.subjects(RDF.type, SKOS.Concept):
         "creat": str(creat or "-"),
         "modif": str(modif or "-"),
         "match": str(match or "-"),
-        "breadcrumb": breadcrumb
+        "breadcrumb_html": breadcrumb_html
     })
 
 
