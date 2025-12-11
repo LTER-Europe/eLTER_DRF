@@ -37,10 +37,10 @@ This workflow extends [**excel2rdf**](https://github.com/fair-data-collective/ex
 | File | Description |
 |------|--------------|
 | [elter_drf.ttl](https://github.com/LTER-Europe/eLTER_DRF/blob/main/elter_drf.ttl) | RDF (Turtle) representation of the eLTER Field Specification Vocabulary for the Data Reporting Format |
-| [elter_cl.xlsx](https://github.com/LTER-Europe/eLTER_DRF/blob/main/elter_drf.xlsx) | Source spreadsheet fetched from Google Sheets |
-| [elter_cl.csv](https://github.com/LTER-Europe/eLTER_DRF/blob/main/elter_drf.csv) | CSV export of the vocabulary |
+| [elter_drf.xlsx](https://github.com/LTER-Europe/eLTER_DRF/blob/main/elter_drf.xlsx) | Source spreadsheet fetched from Google Sheets |
+| [elter_drf.csv](https://github.com/LTER-Europe/eLTER_DRF/blob/main/elter_drf.csv) | CSV export of the vocabulary |
 | [logs/](https://github.com/LTER-Europe/eLTER_DRF/tree/main/logs) | Conversion logs produced during RDF generation |
-| [.github/workflows/sheet2rdf.yml](https://github.com/LTER-Europe/eLTER_CL/blob/main/.github/workflows/sheet2rdf.yml) | GitHub Action workflow automating the FAIR publication process |
+| [.github/workflows/sheet2rdf.yml](https://github.com/LTER-Europe/eLTER_DRF/blob/main/.github/workflows/sheet2rdf.yml) | GitHub Action workflow automating the FAIR publication process |
 
 ---
 
