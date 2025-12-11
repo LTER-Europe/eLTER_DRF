@@ -124,13 +124,19 @@ for c in g.subjects(RDF.type, SKOS.Concept):
     # -------- MULTI-BROADER SUPPORT --------
     broader_nodes = list(g.objects(c, SKOS.broader))
     broaders = []
+    
     for b in broader_nodes:
+        bid = localname(b)
+        blabel = g.value(b, SKOS.prefLabel)
+        buri = str(b)
+    
         broaders.append({
             "id": bid,
-            "label": label,
-            "uri": uri,
+            "label": str(blabel or bid),
+            "uri": buri,
             "anchor": f"#vclass-{bid}"
         })
+   
 
     # Breadcrumb HTML
     breadcrumb_html = " / ".join(
