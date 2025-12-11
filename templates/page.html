@@ -188,12 +188,34 @@ td {
         <div class="term-block" id="term-{{ t.id }}">
             <h3>{{ t.label }} (drf:{{ t.id }})</h3>
 
+            {% if t.breadcrumb_html %}
+                <p><strong>Path: </strong>{{ t.breadcrumb_html | safe }}</p>
+            {% endif %}
+
             <table>
-                <tr><th>URI</th>
-                    <td><a href="{{ t.uri }}" target="_blank">{{ t.uri }}</a></td></tr>
+                <tr>
+                    <th>URI</th>
+                    <td>
+                        <a href="{{ t.uri }}" target="_blank">{{ t.uri }}</a>
+                        &nbsp;
+                        <button onclick="copyToClipboard('{{ t.uri }}')"
+                                style="padding:3px 6px; font-size:0.8rem; cursor:pointer;">
+                            Copy URI
+                        </button>
+                    </td>
+                </tr>
 
                 <tr><th>Definition</th><td>{{ t.definition }}</td></tr>
-                <tr><th>Example</th><td>{{ t.example }}</td></tr>
+                <tr>
+                    <th>Example</th>
+                    <td>
+                        {% if t.example != "-" %}
+                            <pre style="background:#eee; padding:8px; border-radius:5px;">{{ t.example }}</pre>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
 
                 <tr><th>Unit</th>
                     <td>
@@ -226,6 +248,11 @@ td {
     {% endfor %}
 
 </div>
-
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+    alert("Copied: " + text);
+}
+</script>
 </body>
 </html>
